@@ -1,10 +1,10 @@
 /**
- *Submitted for verification at Etherscan.io on 2020-08-20
+ *Submitted for verification at Etherscan.io on 2021-04-17
 */
 
 // File: @openzeppelin/contracts/math/SafeMath.sol
 
-// License: MIT
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.0;
 
@@ -178,8 +178,6 @@ library SafeMath {
 
 // File: @openzeppelin/contracts/token/ERC20/IERC20.sol
 
-// License: MIT
-
 pragma solidity ^0.6.0;
 
 /**
@@ -272,8 +270,6 @@ interface IERC20 {
 // File: contracts/v1/AbstractFiatTokenV1.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -314,8 +310,6 @@ abstract contract AbstractFiatTokenV1 is IERC20 {
 // File: contracts/v1/Ownable.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018 zOS Global Limited.
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
@@ -406,8 +400,6 @@ contract Ownable {
 // File: contracts/v1/Pausable.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2016 Smart Contract Solutions, Inc.
  * Copyright (c) 2018-2020 CENTRE SECZ0
  *
@@ -501,8 +493,6 @@ contract Pausable is Ownable {
 // File: contracts/v1/Blacklistable.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -600,7 +590,6 @@ contract Blacklistable is Ownable {
 // File: contracts/v1/FiatTokenV1.sol
 
 /**
- * License: MIT
  *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
@@ -967,8 +956,6 @@ contract FiatTokenV1 is AbstractFiatTokenV1, Ownable, Pausable, Blacklistable {
 
 // File: @openzeppelin/contracts/utils/Address.sol
 
-// License: MIT
-
 pragma solidity ^0.6.2;
 
 /**
@@ -1153,8 +1140,6 @@ library Address {
 
 // File: @openzeppelin/contracts/token/ERC20/SafeERC20.sol
 
-// License: MIT
-
 pragma solidity ^0.6.0;
 
 /**
@@ -1285,8 +1270,6 @@ library SafeERC20 {
 // File: contracts/v1.1/Rescuable.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1364,8 +1347,6 @@ contract Rescuable is Ownable {
 // File: contracts/v1.1/FiatTokenV1_1.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1400,8 +1381,6 @@ contract FiatTokenV1_1 is FiatTokenV1, Rescuable {
 // File: contracts/v2/AbstractFiatTokenV2.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1442,8 +1421,6 @@ abstract contract AbstractFiatTokenV2 is AbstractFiatTokenV1 {
 // File: contracts/util/ECRecover.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2016-2019 zOS Global Limited
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
@@ -1520,8 +1497,6 @@ library ECRecover {
 // File: contracts/util/EIP712.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1568,8 +1543,8 @@ library EIP712 {
         return
             keccak256(
                 abi.encode(
+                    // keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
                     0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f,
-                    // = keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
                     keccak256(bytes(name)),
                     keccak256(bytes(version)),
                     chainId,
@@ -1608,8 +1583,6 @@ library EIP712 {
 // File: contracts/v2/EIP712Domain.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1643,11 +1616,9 @@ contract EIP712Domain {
     bytes32 public DOMAIN_SEPARATOR;
 }
 
-// File: contracts/v2/GasAbstraction.sol
+// File: contracts/v2/EIP3009.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1672,36 +1643,28 @@ contract EIP712Domain {
 pragma solidity 0.6.12;
 
 /**
- * @title Gas Abstraction
- * @notice Provide internal implementation for gas-abstracted transfers and
- * approvals
+ * @title EIP-3009
+ * @notice Provide internal implementation for gas-abstracted transfers
  * @dev Contracts that inherit from this must wrap these with publicly
  * accessible functions, optionally adding modifiers where necessary
  */
-abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
+abstract contract EIP3009 is AbstractFiatTokenV2, EIP712Domain {
+    // keccak256("TransferWithAuthorization(address from,address to,uint256 value,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
     bytes32
         public constant TRANSFER_WITH_AUTHORIZATION_TYPEHASH = 0x7c7c6cdb67a18743f49ec6fa9b35f50d52ed05cbed4cc592e13b44501c1a2267;
-    // = keccak256("TransferWithAuthorization(address from,address to,uint256 value,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
+
+    // keccak256("ReceiveWithAuthorization(address from,address to,uint256 value,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
     bytes32
-        public constant APPROVE_WITH_AUTHORIZATION_TYPEHASH = 0x808c10407a796f3ef2c7ea38c0638ea9d2b8a1c63e3ca9e1f56ce84ae59df73c;
-    // = keccak256("ApproveWithAuthorization(address owner,address spender,uint256 value,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
-    bytes32
-        public constant INCREASE_ALLOWANCE_WITH_AUTHORIZATION_TYPEHASH = 0x424222bb050a1f7f14017232a5671f2680a2d3420f504bd565cf03035c53198a;
-    // = keccak256("IncreaseAllowanceWithAuthorization(address owner,address spender,uint256 increment,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
-    bytes32
-        public constant DECREASE_ALLOWANCE_WITH_AUTHORIZATION_TYPEHASH = 0xb70559e94cbda91958ebec07f9b65b3b490097c8d25c8dacd71105df1015b6d8;
-    // = keccak256("DecreaseAllowanceWithAuthorization(address owner,address spender,uint256 decrement,uint256 validAfter,uint256 validBefore,bytes32 nonce)")
+        public constant RECEIVE_WITH_AUTHORIZATION_TYPEHASH = 0xd099cc98ef71107a616c4f0f941f04c322d8e254fe26b3c6668db87aae413de8;
+
+    // keccak256("CancelAuthorization(address authorizer,bytes32 nonce)")
     bytes32
         public constant CANCEL_AUTHORIZATION_TYPEHASH = 0x158b0a9edf7a828aad02f63cd515c68ef2f50ba807396f6d12842833a1597429;
-    // = keccak256("CancelAuthorization(address authorizer,bytes32 nonce)")
-
-    enum AuthorizationState { Unused, Used, Canceled }
 
     /**
-     * @dev authorizer address => nonce => authorization state
+     * @dev authorizer address => nonce => bool (true if nonce is used)
      */
-    mapping(address => mapping(bytes32 => AuthorizationState))
-        private _authorizationStates;
+    mapping(address => mapping(bytes32 => bool)) private _authorizationStates;
 
     event AuthorizationUsed(address indexed authorizer, bytes32 indexed nonce);
     event AuthorizationCanceled(
@@ -1711,20 +1674,22 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
 
     /**
      * @notice Returns the state of an authorization
+     * @dev Nonces are randomly generated 32-byte data unique to the
+     * authorizer's address
      * @param authorizer    Authorizer's address
      * @param nonce         Nonce of the authorization
-     * @return Authorization state
+     * @return True if the nonce is used
      */
     function authorizationState(address authorizer, bytes32 nonce)
         external
         view
-        returns (AuthorizationState)
+        returns (bool)
     {
         return _authorizationStates[authorizer][nonce];
     }
 
     /**
-     * @notice Verify a signed transfer authorization and execute if valid
+     * @notice Execute a transfer with a signed authorization
      * @param from          Payer's address (Authorizer)
      * @param to            Payee's address
      * @param value         Amount to be transferred
@@ -1767,11 +1732,12 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
     }
 
     /**
-     * @notice Verify a signed authorization for an increase in the allowance
-     * granted to the spender and execute if valid
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param increment     Amount of increase in allowance
+     * @notice Receive a transfer with a signed authorization from the payer
+     * @dev This has an additional check to ensure that the payee's address
+     * matches the caller of this function to prevent front-running attacks.
+     * @param from          Payer's address (Authorizer)
+     * @param to            Payee's address
+     * @param value         Amount to be transferred
      * @param validAfter    The time after which this is valid (unix time)
      * @param validBefore   The time before which this is valid (unix time)
      * @param nonce         Unique nonce
@@ -1779,96 +1745,9 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
      * @param r             r of the signature
      * @param s             s of the signature
      */
-    function _increaseAllowanceWithAuthorization(
-        address owner,
-        address spender,
-        uint256 increment,
-        uint256 validAfter,
-        uint256 validBefore,
-        bytes32 nonce,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) internal {
-        _requireValidAuthorization(owner, nonce, validAfter, validBefore);
-
-        bytes memory data = abi.encode(
-            INCREASE_ALLOWANCE_WITH_AUTHORIZATION_TYPEHASH,
-            owner,
-            spender,
-            increment,
-            validAfter,
-            validBefore,
-            nonce
-        );
-        require(
-            EIP712.recover(DOMAIN_SEPARATOR, v, r, s, data) == owner,
-            "FiatTokenV2: invalid signature"
-        );
-
-        _markAuthorizationAsUsed(owner, nonce);
-        _increaseAllowance(owner, spender, increment);
-    }
-
-    /**
-     * @notice Verify a signed authorization for a decrease in the allowance
-     * granted to the spender and execute if valid
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param decrement     Amount of decrease in allowance
-     * @param validAfter    The time after which this is valid (unix time)
-     * @param validBefore   The time before which this is valid (unix time)
-     * @param nonce         Unique nonce
-     * @param v             v of the signature
-     * @param r             r of the signature
-     * @param s             s of the signature
-     */
-    function _decreaseAllowanceWithAuthorization(
-        address owner,
-        address spender,
-        uint256 decrement,
-        uint256 validAfter,
-        uint256 validBefore,
-        bytes32 nonce,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) internal {
-        _requireValidAuthorization(owner, nonce, validAfter, validBefore);
-
-        bytes memory data = abi.encode(
-            DECREASE_ALLOWANCE_WITH_AUTHORIZATION_TYPEHASH,
-            owner,
-            spender,
-            decrement,
-            validAfter,
-            validBefore,
-            nonce
-        );
-        require(
-            EIP712.recover(DOMAIN_SEPARATOR, v, r, s, data) == owner,
-            "FiatTokenV2: invalid signature"
-        );
-
-        _markAuthorizationAsUsed(owner, nonce);
-        _decreaseAllowance(owner, spender, decrement);
-    }
-
-    /**
-     * @notice Verify a signed approval authorization and execute if valid
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param value         Amount of allowance
-     * @param validAfter    The time after which this is valid (unix time)
-     * @param validBefore   The time before which this is valid (unix time)
-     * @param nonce         Unique nonce
-     * @param v             v of the signature
-     * @param r             r of the signature
-     * @param s             s of the signature
-     */
-    function _approveWithAuthorization(
-        address owner,
-        address spender,
+    function _receiveWithAuthorization(
+        address from,
+        address to,
         uint256 value,
         uint256 validAfter,
         uint256 validBefore,
@@ -1877,24 +1756,25 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
         bytes32 r,
         bytes32 s
     ) internal {
-        _requireValidAuthorization(owner, nonce, validAfter, validBefore);
+        require(to == msg.sender, "FiatTokenV2: caller must be the payee");
+        _requireValidAuthorization(from, nonce, validAfter, validBefore);
 
         bytes memory data = abi.encode(
-            APPROVE_WITH_AUTHORIZATION_TYPEHASH,
-            owner,
-            spender,
+            RECEIVE_WITH_AUTHORIZATION_TYPEHASH,
+            from,
+            to,
             value,
             validAfter,
             validBefore,
             nonce
         );
         require(
-            EIP712.recover(DOMAIN_SEPARATOR, v, r, s, data) == owner,
+            EIP712.recover(DOMAIN_SEPARATOR, v, r, s, data) == from,
             "FiatTokenV2: invalid signature"
         );
 
-        _markAuthorizationAsUsed(owner, nonce);
-        _approve(owner, spender, value);
+        _markAuthorizationAsUsed(from, nonce);
+        _transfer(from, to, value);
     }
 
     /**
@@ -1924,7 +1804,7 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
             "FiatTokenV2: invalid signature"
         );
 
-        _authorizationStates[authorizer][nonce] = AuthorizationState.Canceled;
+        _authorizationStates[authorizer][nonce] = true;
         emit AuthorizationCanceled(authorizer, nonce);
     }
 
@@ -1938,8 +1818,7 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
         view
     {
         require(
-            _authorizationStates[authorizer][nonce] ==
-                AuthorizationState.Unused,
+            !_authorizationStates[authorizer][nonce],
             "FiatTokenV2: authorization is used or canceled"
         );
     }
@@ -1973,16 +1852,14 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
     function _markAuthorizationAsUsed(address authorizer, bytes32 nonce)
         private
     {
-        _authorizationStates[authorizer][nonce] = AuthorizationState.Used;
+        _authorizationStates[authorizer][nonce] = true;
         emit AuthorizationUsed(authorizer, nonce);
     }
 }
 
-// File: contracts/v2/Permit.sol
+// File: contracts/v2/EIP2612.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2007,20 +1884,13 @@ abstract contract GasAbstraction is AbstractFiatTokenV2, EIP712Domain {
 pragma solidity 0.6.12;
 
 /**
- * @title Permit
- * @notice An alternative to approveWithAuthorization, provided for
- * compatibility with the draft EIP2612 proposed by Uniswap.
- * @dev Differences:
- * - Uses sequential nonce, which restricts transaction submission to one at a
- *   time, or else it will revert
- * - Has deadline (= validBefore - 1) but does not have validAfter
- * - Doesn't have a way to change allowance atomically to prevent ERC20 multiple
- *   withdrawal attacks
+ * @title EIP-2612
+ * @notice Provide internal implementation for gas-abstracted approvals
  */
-abstract contract Permit is AbstractFiatTokenV2, EIP712Domain {
+abstract contract EIP2612 is AbstractFiatTokenV2, EIP712Domain {
+    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)")
     bytes32
         public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
-    // = keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)")
 
     mapping(address => uint256) private _permitNonces;
 
@@ -2064,7 +1934,7 @@ abstract contract Permit is AbstractFiatTokenV2, EIP712Domain {
         );
         require(
             EIP712.recover(DOMAIN_SEPARATOR, v, r, s, data) == owner,
-            "FiatTokenV2: invalid signature"
+            "EIP2612: invalid signature"
         );
 
         _approve(owner, spender, value);
@@ -2074,8 +1944,6 @@ abstract contract Permit is AbstractFiatTokenV2, EIP712Domain {
 // File: contracts/v2/FiatTokenV2.sol
 
 /**
- * License: MIT
- *
  * Copyright (c) 2018-2020 CENTRE SECZ
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2103,24 +1971,19 @@ pragma solidity 0.6.12;
  * @title FiatToken V2
  * @notice ERC20 Token backed by fiat reserves, version 2
  */
-contract FiatTokenV2 is FiatTokenV1_1, GasAbstraction, Permit {
-    bool internal _initializedV2;
+contract FiatTokenV2 is FiatTokenV1_1, EIP3009, EIP2612 {
+    uint8 internal _initializedVersion;
 
     /**
-     * @notice Initialize V2 contract
-     * @dev When upgrading to V2, this function must also be invoked by using
-     * upgradeToAndCall instead of upgradeTo, or by calling both from a contract
-     * in a single transaction.
+     * @notice Initialize v2
      * @param newName   New token name
      */
     function initializeV2(string calldata newName) external {
-        require(
-            !_initializedV2,
-            "FiatTokenV2: contract is already initialized"
-        );
+        // solhint-disable-next-line reason-string
+        require(initialized && _initializedVersion == 0);
         name = newName;
         DOMAIN_SEPARATOR = EIP712.makeDomainSeparator(newName, "2");
-        _initializedV2 = true;
+        _initializedVersion = 1;
     }
 
     /**
@@ -2194,10 +2057,12 @@ contract FiatTokenV2 is FiatTokenV1_1, GasAbstraction, Permit {
     }
 
     /**
-     * @notice Update allowance with a signed authorization
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param value         Amount of allowance
+     * @notice Receive a transfer with a signed authorization from the payer
+     * @dev This has an additional check to ensure that the payee's address
+     * matches the caller of this function to prevent front-running attacks.
+     * @param from          Payer's address (Authorizer)
+     * @param to            Payee's address
+     * @param value         Amount to be transferred
      * @param validAfter    The time after which this is valid (unix time)
      * @param validBefore   The time before which this is valid (unix time)
      * @param nonce         Unique nonce
@@ -2205,9 +2070,9 @@ contract FiatTokenV2 is FiatTokenV1_1, GasAbstraction, Permit {
      * @param r             r of the signature
      * @param s             s of the signature
      */
-    function approveWithAuthorization(
-        address owner,
-        address spender,
+    function receiveWithAuthorization(
+        address from,
+        address to,
         uint256 value,
         uint256 validAfter,
         uint256 validBefore,
@@ -2215,83 +2080,11 @@ contract FiatTokenV2 is FiatTokenV1_1, GasAbstraction, Permit {
         uint8 v,
         bytes32 r,
         bytes32 s
-    ) external whenNotPaused notBlacklisted(owner) notBlacklisted(spender) {
-        _approveWithAuthorization(
-            owner,
-            spender,
+    ) external whenNotPaused notBlacklisted(from) notBlacklisted(to) {
+        _receiveWithAuthorization(
+            from,
+            to,
             value,
-            validAfter,
-            validBefore,
-            nonce,
-            v,
-            r,
-            s
-        );
-    }
-
-    /**
-     * @notice Increase allowance with a signed authorization
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param increment     Amount of increase in allowance
-     * @param validAfter    The time after which this is valid (unix time)
-     * @param validBefore   The time before which this is valid (unix time)
-     * @param nonce         Unique nonce
-     * @param v             v of the signature
-     * @param r             r of the signature
-     * @param s             s of the signature
-     */
-    function increaseAllowanceWithAuthorization(
-        address owner,
-        address spender,
-        uint256 increment,
-        uint256 validAfter,
-        uint256 validBefore,
-        bytes32 nonce,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external whenNotPaused notBlacklisted(owner) notBlacklisted(spender) {
-        _increaseAllowanceWithAuthorization(
-            owner,
-            spender,
-            increment,
-            validAfter,
-            validBefore,
-            nonce,
-            v,
-            r,
-            s
-        );
-    }
-
-    /**
-     * @notice Decrease allowance with a signed authorization
-     * @param owner         Token owner's address (Authorizer)
-     * @param spender       Spender's address
-     * @param decrement     Amount of decrease in allowance
-     * @param validAfter    The time after which this is valid (unix time)
-     * @param validBefore   The time before which this is valid (unix time)
-     * @param nonce         Unique nonce
-     * @param v             v of the signature
-     * @param r             r of the signature
-     * @param s             s of the signature
-     */
-    function decreaseAllowanceWithAuthorization(
-        address owner,
-        address spender,
-        uint256 decrement,
-        uint256 validAfter,
-        uint256 validBefore,
-        bytes32 nonce,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external whenNotPaused notBlacklisted(owner) notBlacklisted(spender) {
-        _decreaseAllowanceWithAuthorization(
-            owner,
-            spender,
-            decrement,
             validAfter,
             validBefore,
             nonce,
@@ -2375,5 +2168,64 @@ contract FiatTokenV2 is FiatTokenV1_1, GasAbstraction, Permit {
                 "ERC20: decreased allowance below zero"
             )
         );
+    }
+}
+
+// File: contracts/v2/FiatTokenV2_1.sol
+
+/**
+ * Copyright (c) 2018-2020 CENTRE SECZ
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+pragma solidity 0.6.12;
+
+// solhint-disable func-name-mixedcase
+
+/**
+ * @title FiatToken V2.1
+ * @notice ERC20 Token backed by fiat reserves, version 2.1
+ */
+contract FiatTokenV2_1 is FiatTokenV2 {
+    /**
+     * @notice Initialize v2.1
+     * @param lostAndFound  The address to which the locked funds are sent
+     */
+    function initializeV2_1(address lostAndFound) external {
+        // solhint-disable-next-line reason-string
+        require(_initializedVersion == 1);
+
+        uint256 lockedAmount = balances[address(this)];
+        if (lockedAmount > 0) {
+            _transfer(address(this), lostAndFound, lockedAmount);
+        }
+        blacklisted[address(this)] = true;
+
+        _initializedVersion = 2;
+    }
+
+    /**
+     * @notice Version string for the EIP712 domain separator
+     * @return Version string
+     */
+    function version() external view returns (string memory) {
+        return "2";
     }
 }
