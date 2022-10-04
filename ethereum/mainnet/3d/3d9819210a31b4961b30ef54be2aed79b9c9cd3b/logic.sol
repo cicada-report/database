@@ -1868,7 +1868,7 @@ import "./Governance/Comp.sol";
  * @title Compound's Comptroller Contract
  * @author Compound
  */
-contract Comptroller is ComptrollerV6Storage, ComptrollerInterface, ComptrollerErrorReporter, ExponentialNoError {
+contract Comptroller is ComptrollerV7Storage, ComptrollerInterface, ComptrollerErrorReporter, ExponentialNoError {
     /// @notice Emitted when an admin supports a market
     event MarketListed(CToken cToken);
 
@@ -1922,6 +1922,12 @@ contract Comptroller is ComptrollerV6Storage, ComptrollerInterface, ComptrollerE
 
     /// @notice Emitted when COMP is granted by admin
     event CompGranted(address recipient, uint amount);
+
+    /// @notice Emitted when COMP accrued for a user has been manually adjusted.
+    event CompAccruedAdjusted(address indexed user, uint oldCompAccrued, uint newCompAccrued);
+
+    /// @notice Emitted when COMP receivable for a user has been updated.
+    event CompReceivableUpdated(address indexed user, uint oldCompReceivable, uint newCompReceivable);
 
     /// @notice The initial COMP index for a market
     uint224 public constant compInitialIndex = 1e36;
@@ -2935,6 +2941,54 @@ contract Comptroller is ComptrollerV6Storage, ComptrollerInterface, ComptrollerE
         require(unitroller._acceptImplementation() == 0, "change not authorized");
     }
 
+    /// @notice Delete this function after proposal 65 is executed
+    function fixBadAccruals(address[] calldata affectedUsers, uint[] calldata amounts) external {
+        require(msg.sender == admin, "Only admin can call this function"); // Only the timelock can call this function
+        require(!proposal65FixExecuted, "Already executed this one-off function"); // Require that this function is only called once
+        require(affectedUsers.length == amounts.length, "Invalid input");
+
+        // Loop variables
+        address user;
+        uint currentAccrual;
+        uint amountToSubtract;
+        uint newAccrual;
+
+        // Iterate through all affected users
+        for (uint i = 0; i < affectedUsers.length; ++i) {
+            user = affectedUsers[i];
+            currentAccrual = compAccrued[user];
+
+            amountToSubtract = amounts[i];
+
+            // The case where the user has claimed and received an incorrect amount of COMP.
+            // The user has less currently accrued than the amount they incorrectly received.
+            if (amountToSubtract > currentAccrual) {
+                // Amount of COMP the user owes the protocol
+                uint accountReceivable = amountToSubtract - currentAccrual; // Underflow safe since amountToSubtract > currentAccrual
+
+                uint oldReceivable = compReceivable[user];
+                uint newReceivable = add_(oldReceivable, accountReceivable);
+
+                // Accounting: record the COMP debt for the user
+                compReceivable[user] = newReceivable;
+
+                emit CompReceivableUpdated(user, oldReceivable, newReceivable);
+
+                amountToSubtract = currentAccrual;
+            }
+            
+            if (amountToSubtract > 0) {
+                // Subtract the bad accrual amount from what they have accrued.
+                // Users will keep whatever they have correctly accrued.
+                compAccrued[user] = newAccrual = sub_(currentAccrual, amountToSubtract);
+
+                emit CompAccruedAdjusted(user, currentAccrual, newAccrual);
+            }
+        }
+
+        proposal65FixExecuted = true; // Makes it so that this function cannot be called again
+    }
+
     /**
      * @notice Checks caller is admin, or this contract is becoming the new implementation
      */
@@ -3171,18 +3225,6 @@ contract Comptroller is ComptrollerV6Storage, ComptrollerInterface, ComptrollerE
      * @return The amount of COMP which was NOT transferred to the user
      */
     function grantCompInternal(address user, uint amount) internal returns (uint) {
-        for (uint i = 0; i < allMarkets.length; ++i) {
-            address market = address(allMarkets[i]);
-
-            bool noOriginalSpeed = compBorrowSpeeds[market] == 0;
-            bool invalidSupply = noOriginalSpeed && compSupplierIndex[market][user] > 0;
-            bool invalidBorrow = noOriginalSpeed && compBorrowerIndex[market][user] > 0;
-
-            if (invalidSupply || invalidBorrow) {
-                return amount;
-            }
-        }
-
         Comp comp = Comp(getCompAddress());
         uint compRemaining = comp.balanceOf(address(this));
         if (amount > 0 && amount <= compRemaining) {
@@ -3504,6 +3546,14 @@ contract ComptrollerV6Storage is ComptrollerV5Storage {
 
     /// @notice The rate at which comp is distributed to the corresponding supply market (per block)
     mapping(address => uint) public compSupplySpeeds;
+}
+
+contract ComptrollerV7Storage is ComptrollerV6Storage {
+    /// @notice Flag indicating whether the function to fix COMP accruals has been executed (RE: proposal 62 bug)
+    bool public proposal65FixExecuted;
+
+    /// @notice Accounting storage mapping account addresses to how much COMP they owe the protocol.
+    mapping(address => uint) public compReceivable;
 }
 
 pragma solidity ^0.5.16;
