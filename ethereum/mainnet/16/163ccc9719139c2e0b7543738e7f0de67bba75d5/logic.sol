@@ -31,8 +31,8 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
         _;
     }
 
-    modifier isNFTOwner(uint256 _tokenId) {
-        require(msg.sender == ownerOf(_tokenId), "You are not nft owner");
+    modifier isNFTOwner(uint256[] calldata _tokenId) {
+        require(_ismultipleTokenIdOwner(_tokenId), "You are not nft owner");
         _;
     }
 
@@ -58,7 +58,7 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
     event withdraw(address owner, uint256 amount);
     event PriceUpdate(address owner, uint256 newPrice);
     event UpdateOwner(address oldOwner, address newOwner);
-    event BURN(address user, uint256 tokenId);
+    event BURN(address user, uint256[] tokenId);
     event UpdateBaseURI(string _newBaseURI);
     event UpdateMaxMintAmount(uint256 _newmaxMintAmount);
     event ChangeWhitelistStatus(bool status);
@@ -108,6 +108,7 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
         baseExtension = _newBaseExtension;
     }
 
+
     function setmaxMintAmount(uint256 _newmaxMintAmount) external onlyOwner {
         maxMintAmount = _newmaxMintAmount;
         emit UpdateMaxMintAmount(_newmaxMintAmount);
@@ -128,6 +129,7 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
         emit Pausable(_state);
     }
 
+
     function updatePrice(uint256 _price) external onlyOwner {
         mintPrice = _price;
         emit PriceUpdate(msg.sender, _price);
@@ -147,8 +149,10 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
         emit LordMint(_to, _quantity);
     }
 
-    function burn(uint256 _tokenId) external {
-        _burn(_tokenId);
+    function burn(uint256[] calldata _tokenId) external isNFTOwner(_tokenId) {
+        for (uint256 i = 0; i < _tokenId.length; i++) {
+            _burn(_tokenId[i]);
+        }
         emit BURN(msg.sender, _tokenId);
     }
 
@@ -234,6 +238,21 @@ contract LORD is Initializable, ERC721AUpgradeable, ReentrancyGuardUpgradeable {
 
     function _baseURI() internal view virtual override returns (string memory) {
         return baseURI;
+    }
+
+    function _ismultipleTokenIdOwner(uint256[] calldata _tokenId)
+        internal
+        view
+        returns (bool)
+    {
+        for (uint256 i = 0; i < _tokenId.length; i++) {
+            require(
+                msg.sender == ownerOf(_tokenId[i]),
+                "You are not nft owner"
+            );
+        }
+
+        return true;
     }
 }
 
