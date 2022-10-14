@@ -2301,6 +2301,7 @@ contract LiveScoreBoard is
   bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
   CountersUpgradeable.Counter private _tokenIdCounter;
   string _baseUri;
+  address public admin;
 
   /// @custom:oz-upgrades-unsafe-allow constructor
   constructor() {
@@ -2322,6 +2323,14 @@ contract LiveScoreBoard is
     
     // Set first tokenId to 1
     _tokenIdCounter.increment();
+  }
+
+  function owner() public view returns (address) {
+    return admin;
+  }
+
+  function setAdmin(address _admin) external onlyRole(UPGRADER_ROLE) {
+    admin = _admin;
   }
 
   function _baseURI() internal view override returns (string memory) {
