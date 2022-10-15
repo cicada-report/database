@@ -911,28 +911,6 @@ library Address {
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @title ERC721 token receiver interface
- * @dev Interface for any contract that wants to support safeTransfers
- * from ERC721 asset contracts.
- */
-interface IERC721Receiver {
-    /**
-     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
-     * by `operator` from `from`, this function is called.
-     *
-     * It must return its Solidity selector to confirm the token transfer.
-     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
-     *
-     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
-     */
-    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-/**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
  * checks.
  *
@@ -1170,6 +1148,98 @@ abstract contract Context {
 
 // 
 
+pragma solidity ^0.7.6;
+
+/// @dev Taken from https://github.com/f8n/fnd-protocol/tree/v2.0.3
+
+/**
+ * @title An abstraction layer for auctions.
+ * @dev This contract can be expanded with reusable calls and data as more auction types are added.
+ */
+abstract contract NFTMarketAuction {
+    /**
+     * @dev A global id for auctions of any type.
+     */
+    uint256 private nextAuctionId;
+
+    /**
+     * @notice Called once to configure the contract after the initial proxy deployment.
+     * @dev This sets the initial auction id to 1, making the first auction cheaper
+     * and id 0 represents no auction found.
+     */
+    function _initializeNFTMarketAuction() internal {
+        nextAuctionId = 1;
+    }
+
+    /**
+     * @notice Returns id to assign to the next auction.
+     */
+    function _getNextAndIncrementAuctionId() internal returns (uint256) {
+        // AuctionId cannot overflow 256 bits.
+        return nextAuctionId++;
+    }
+
+    /**
+     * @dev This empty reserved space is put in place to allow future versions to add new
+     * variables without shifting down storage in the inheritance chain.
+     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
+     */
+    uint256[1000] private __gap;
+}
+
+// 
+
+pragma solidity >=0.6.0 <0.8.0;
+
+/**
+ * @title ERC721 token receiver interface
+ * @dev Interface for any contract that wants to support safeTransfers
+ * from ERC721 asset contracts.
+ */
+interface IERC721ReceiverUpgradeable {
+    /**
+     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
+     * by `operator` from `from`, this function is called.
+     *
+     * It must return its Solidity selector to confirm the token transfer.
+     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
+     *
+     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
+     */
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
+}
+
+// 
+pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
+
+interface ITransferProxy {
+    function erc721safeTransferFrom(
+        address token,
+        address from,
+        address to,
+        uint256 tokenId
+    ) external;
+
+    function erc1155safeTransferFrom(
+        address token,
+        address from,
+        address to,
+        uint256 id,
+        uint256 value,
+        bytes calldata data
+    ) external;
+
+    function erc20safeTransferFrom(
+        address token,
+        address from,
+        address to,
+        uint256 value
+    ) external;
+}
+
+// 
+
 pragma solidity >=0.6.0 <0.8.0;
 
 /**
@@ -1248,43 +1318,24 @@ interface IERC20 {
 
 // 
 
-pragma solidity ^0.7.6;
-
-/// @dev Taken from https://github.com/f8n/fnd-protocol/tree/v2.0.3
+pragma solidity >=0.6.0 <0.8.0;
 
 /**
- * @title An abstraction layer for auctions.
- * @dev This contract can be expanded with reusable calls and data as more auction types are added.
+ * @title ERC721 token receiver interface
+ * @dev Interface for any contract that wants to support safeTransfers
+ * from ERC721 asset contracts.
  */
-abstract contract NFTMarketAuction {
+interface IERC721Receiver {
     /**
-     * @dev A global id for auctions of any type.
+     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
+     * by `operator` from `from`, this function is called.
+     *
+     * It must return its Solidity selector to confirm the token transfer.
+     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
+     *
+     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
      */
-    uint256 private nextAuctionId;
-
-    /**
-     * @notice Called once to configure the contract after the initial proxy deployment.
-     * @dev This sets the initial auction id to 1, making the first auction cheaper
-     * and id 0 represents no auction found.
-     */
-    function _initializeNFTMarketAuction() internal {
-        nextAuctionId = 1;
-    }
-
-    /**
-     * @notice Returns id to assign to the next auction.
-     */
-    function _getNextAndIncrementAuctionId() internal returns (uint256) {
-        // AuctionId cannot overflow 256 bits.
-        return nextAuctionId++;
-    }
-
-    /**
-     * @dev This empty reserved space is put in place to allow future versions to add new
-     * variables without shifting down storage in the inheritance chain.
-     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
-     */
-    uint256[1000] private __gap;
+    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
 }
 
 // 
@@ -1310,57 +1361,6 @@ interface IERC165 {
      * This function call must use less than 30 000 gas.
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-interface ITransferProxy {
-    function erc721safeTransferFrom(
-        address token,
-        address from,
-        address to,
-        uint256 tokenId
-    ) external;
-
-    function erc1155safeTransferFrom(
-        address token,
-        address from,
-        address to,
-        uint256 id,
-        uint256 value,
-        bytes calldata data
-    ) external;
-
-    function erc20safeTransferFrom(
-        address token,
-        address from,
-        address to,
-        uint256 value
-    ) external;
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-/**
- * @title ERC721 token receiver interface
- * @dev Interface for any contract that wants to support safeTransfers
- * from ERC721 asset contracts.
- */
-interface IERC721ReceiverUpgradeable {
-    /**
-     * @dev Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom}
-     * by `operator` from `from`, this function is called.
-     *
-     * It must return its Solidity selector to confirm the token transfer.
-     * If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted.
-     *
-     * The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`.
-     */
-    function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data) external returns (bytes4);
 }
 
 // 
@@ -1663,6 +1663,17 @@ library EnumerableSetUpgradeable {
 
 // 
 pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
+
+/* An ECDSA signature. */
+struct Signature {
+    uint8 v;
+    bytes32 r;
+    bytes32 s;
+}
+
+// 
+pragma solidity ^0.7.6;
 
 /**
  * @dev This implementation is similar to the OZ one but due to the fact we are using an old version
@@ -1706,13 +1717,17 @@ library AuthorizationBitmap {
 
 // 
 pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
 
-/* An ECDSA signature. */
-struct Signature {
-    uint8 v;
-    bytes32 r;
-    bytes32 s;
+library BlockchainUtils {
+    // @dev When migrating to 0.8.0 ideally we should replace this by block.chainId
+    function getChainID() internal pure returns (uint256) {
+        uint256 id;
+        //solhint-disable-next-line
+        assembly {
+            id := chainid()
+        }
+        return id;
+    }
 }
 
 // 
@@ -3176,6 +3191,143 @@ contract ERC20 is Context, IERC20 {
 
 // 
 
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+  /**
+   * @dev Implementation of the {IERC721Receiver} interface.
+   *
+   * Accepts all token transfers. 
+   * Make sure the contract is able to use its token with {IERC721-safeTransferFrom}, {IERC721-approve} or {IERC721-setApprovalForAll}.
+   */
+contract ERC721Holder is IERC721Receiver {
+
+    /**
+     * @dev See {IERC721Receiver-onERC721Received}.
+     *
+     * Always returns `IERC721Receiver.onERC721Received.selector`.
+     */
+    function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
+        return this.onERC721Received.selector;
+    }
+}
+
+// 
+
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+/**
+ * _Available since v3.1._
+ */
+interface IERC1155Receiver is IERC165 {
+
+    /**
+        @dev Handles the receipt of a single ERC1155 token type. This function is
+        called at the end of a `safeTransferFrom` after the balance has been updated.
+        To accept the transfer, this must return
+        `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))`
+        (i.e. 0xf23a6e61, or its own function selector).
+        @param operator The address which initiated the transfer (i.e. msg.sender)
+        @param from The address which previously owned the token
+        @param id The ID of the token being transferred
+        @param value The amount of tokens being transferred
+        @param data Additional data with no specified format
+        @return `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))` if transfer is allowed
+    */
+    function onERC1155Received(
+        address operator,
+        address from,
+        uint256 id,
+        uint256 value,
+        bytes calldata data
+    )
+        external
+        returns(bytes4);
+
+    /**
+        @dev Handles the receipt of a multiple ERC1155 token types. This function
+        is called at the end of a `safeBatchTransferFrom` after the balances have
+        been updated. To accept the transfer(s), this must return
+        `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
+        (i.e. 0xbc197c81, or its own function selector).
+        @param operator The address which initiated the batch transfer (i.e. msg.sender)
+        @param from The address which previously owned the token
+        @param ids An array containing ids of each token being transferred (order and length must match values array)
+        @param values An array containing amounts of each token being transferred (order and length must match ids array)
+        @param data Additional data with no specified format
+        @return `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))` if transfer is allowed
+    */
+    function onERC1155BatchReceived(
+        address operator,
+        address from,
+        uint256[] calldata ids,
+        uint256[] calldata values,
+        bytes calldata data
+    )
+        external
+        returns(bytes4);
+}
+
+// 
+
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+/**
+ * @dev Implementation of the {IERC165} interface.
+ *
+ * Contracts may inherit from this and call {_registerInterface} to declare
+ * their support of an interface.
+ */
+abstract contract ERC165 is IERC165 {
+    /*
+     * bytes4(keccak256('supportsInterface(bytes4)')) == 0x01ffc9a7
+     */
+    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
+
+    /**
+     * @dev Mapping of interface ids to whether or not it's supported.
+     */
+    mapping(bytes4 => bool) private _supportedInterfaces;
+
+    constructor () internal {
+        // Derived contracts need only register support for their own interfaces,
+        // we register support for ERC165 itself here
+        _registerInterface(_INTERFACE_ID_ERC165);
+    }
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     *
+     * Time complexity O(1), guaranteed to always use less than 30 000 gas.
+     */
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return _supportedInterfaces[interfaceId];
+    }
+
+    /**
+     * @dev Registers the contract as an implementer of the interface defined by
+     * `interfaceId`. Support of the actual ERC165 interface is automatic and
+     * registering its interface id is not required.
+     *
+     * See {IERC165-supportsInterface}.
+     *
+     * Requirements:
+     *
+     * - `interfaceId` cannot be the ERC165 invalid interface (`0xffffffff`).
+     */
+    function _registerInterface(bytes4 interfaceId) internal virtual {
+        require(interfaceId != 0xffffffff, "ERC165: invalid interface id");
+        _supportedInterfaces[interfaceId] = true;
+    }
+}
+
+// 
+
 pragma solidity >=0.6.2 <0.8.0;
 
 
@@ -3306,61 +3458,6 @@ interface IERC721 is IERC165 {
 
 // 
 
-pragma solidity >=0.6.0 <0.8.0;
-
-
-
-/**
- * @dev Implementation of the {IERC165} interface.
- *
- * Contracts may inherit from this and call {_registerInterface} to declare
- * their support of an interface.
- */
-abstract contract ERC165 is IERC165 {
-    /*
-     * bytes4(keccak256('supportsInterface(bytes4)')) == 0x01ffc9a7
-     */
-    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
-
-    /**
-     * @dev Mapping of interface ids to whether or not it's supported.
-     */
-    mapping(bytes4 => bool) private _supportedInterfaces;
-
-    constructor () internal {
-        // Derived contracts need only register support for their own interfaces,
-        // we register support for ERC165 itself here
-        _registerInterface(_INTERFACE_ID_ERC165);
-    }
-
-    /**
-     * @dev See {IERC165-supportsInterface}.
-     *
-     * Time complexity O(1), guaranteed to always use less than 30 000 gas.
-     */
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
-        return _supportedInterfaces[interfaceId];
-    }
-
-    /**
-     * @dev Registers the contract as an implementer of the interface defined by
-     * `interfaceId`. Support of the actual ERC165 interface is automatic and
-     * registering its interface id is not required.
-     *
-     * See {IERC165-supportsInterface}.
-     *
-     * Requirements:
-     *
-     * - `interfaceId` cannot be the ERC165 invalid interface (`0xffffffff`).
-     */
-    function _registerInterface(bytes4 interfaceId) internal virtual {
-        require(interfaceId != 0xffffffff, "ERC165: invalid interface id");
-        _supportedInterfaces[interfaceId] = true;
-    }
-}
-
-// 
-
 pragma solidity >=0.6.2 <0.8.0;
 
 
@@ -3461,91 +3558,6 @@ interface IERC1155 is IERC165 {
      * acceptance magic value.
      */
     function safeBatchTransferFrom(address from, address to, uint256[] calldata ids, uint256[] calldata amounts, bytes calldata data) external;
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-
-
-/**
- * _Available since v3.1._
- */
-interface IERC1155Receiver is IERC165 {
-
-    /**
-        @dev Handles the receipt of a single ERC1155 token type. This function is
-        called at the end of a `safeTransferFrom` after the balance has been updated.
-        To accept the transfer, this must return
-        `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))`
-        (i.e. 0xf23a6e61, or its own function selector).
-        @param operator The address which initiated the transfer (i.e. msg.sender)
-        @param from The address which previously owned the token
-        @param id The ID of the token being transferred
-        @param value The amount of tokens being transferred
-        @param data Additional data with no specified format
-        @return `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))` if transfer is allowed
-    */
-    function onERC1155Received(
-        address operator,
-        address from,
-        uint256 id,
-        uint256 value,
-        bytes calldata data
-    )
-        external
-        returns(bytes4);
-
-    /**
-        @dev Handles the receipt of a multiple ERC1155 token types. This function
-        is called at the end of a `safeBatchTransferFrom` after the balances have
-        been updated. To accept the transfer(s), this must return
-        `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))`
-        (i.e. 0xbc197c81, or its own function selector).
-        @param operator The address which initiated the batch transfer (i.e. msg.sender)
-        @param from The address which previously owned the token
-        @param ids An array containing ids of each token being transferred (order and length must match values array)
-        @param values An array containing amounts of each token being transferred (order and length must match ids array)
-        @param data Additional data with no specified format
-        @return `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))` if transfer is allowed
-    */
-    function onERC1155BatchReceived(
-        address operator,
-        address from,
-        uint256[] calldata ids,
-        uint256[] calldata values,
-        bytes calldata data
-    )
-        external
-        returns(bytes4);
-}
-
-// 
-pragma solidity ^0.7.6;
-
-
-
-library BlockchainUtils {
-    // @dev When migrating to 0.8.0 ideally we should replace this by block.chainId
-    function getChainID() internal pure returns (uint256) {
-        uint256 id;
-        //solhint-disable-next-line
-        assembly {
-            id := chainid()
-        }
-        return id;
-    }
-
-    function getSigner(bytes32 hash, Signature memory signature) internal pure returns (address) {
-        return
-            ecrecover(
-                keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)),
-                signature.v,
-                signature.r,
-                signature.s
-            );
-    }
 }
 
 // 
@@ -4328,6 +4340,25 @@ contract TestToken is ERC20 {
 
 // 
 
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+
+/**
+ * @dev _Available since v3.1._
+ */
+abstract contract ERC1155Receiver is ERC165, IERC1155Receiver {
+    constructor() internal {
+        _registerInterface(
+            ERC1155Receiver(address(0)).onERC1155Received.selector ^
+            ERC1155Receiver(address(0)).onERC1155BatchReceived.selector
+        );
+    }
+}
+
+// 
+
 pragma solidity >=0.6.2 <0.8.0;
 
 
@@ -4404,37 +4435,6 @@ interface IERC1155MetadataURI is IERC1155 {
      * clients with the actual token type ID.
      */
     function uri(uint256 id) external view returns (string memory);
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-
-
-
-struct PlatformFees {
-    address assetAddress;
-    uint256 tokenId;
-    uint8 buyerFeePermille;
-    uint8 sellerFeePermille;
-    Signature signature;
-}
-
-library PlatformFeesFunctions {
-    function checkValidPlatformFees(PlatformFees calldata platformFees, address owner) internal pure {
-        bytes32 hash =
-            keccak256(
-                abi.encodePacked(
-                    BlockchainUtils.getChainID(),
-                    platformFees.assetAddress,
-                    platformFees.tokenId,
-                    platformFees.buyerFeePermille,
-                    platformFees.sellerFeePermille
-                )
-            );
-        require(owner == BlockchainUtils.getSigner(hash, platformFees.signature), "fees sign verification failed");
-    }
 }
 
 // 
@@ -4758,38 +4758,6 @@ abstract contract ERC165Upgradeable is Initializable, IERC165Upgradeable {
 pragma solidity >=0.6.0 <0.8.0;
 
 
-
-
-  /**
-   * @dev Implementation of the {IERC721Receiver} interface.
-   *
-   * Accepts all token transfers. 
-   * Make sure the contract is able to use its token with {IERC721-safeTransferFrom}, {IERC721-approve} or {IERC721-setApprovalForAll}.
-   */
-contract ERC721HolderUpgradeable is Initializable, IERC721ReceiverUpgradeable {
-    function __ERC721Holder_init() internal initializer {
-        __ERC721Holder_init_unchained();
-    }
-
-    function __ERC721Holder_init_unchained() internal initializer {
-    }
-
-    /**
-     * @dev See {IERC721Receiver-onERC721Received}.
-     *
-     * Always returns `IERC721Receiver.onERC721Received.selector`.
-     */
-    function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
-        return this.onERC721Received.selector;
-    }
-    uint256[50] private __gap;
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-
 /**
  * @dev Contract module that helps prevent reentrant calls to a function.
  *
@@ -4855,6 +4823,38 @@ abstract contract ReentrancyGuardUpgradeable is Initializable {
 }
 
 // 
+
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+
+  /**
+   * @dev Implementation of the {IERC721Receiver} interface.
+   *
+   * Accepts all token transfers. 
+   * Make sure the contract is able to use its token with {IERC721-safeTransferFrom}, {IERC721-approve} or {IERC721-setApprovalForAll}.
+   */
+contract ERC721HolderUpgradeable is Initializable, IERC721ReceiverUpgradeable {
+    function __ERC721Holder_init() internal initializer {
+        __ERC721Holder_init_unchained();
+    }
+
+    function __ERC721Holder_init_unchained() internal initializer {
+    }
+
+    /**
+     * @dev See {IERC721Receiver-onERC721Received}.
+     *
+     * Always returns `IERC721Receiver.onERC721Received.selector`.
+     */
+    function onERC721Received(address, address, uint256, bytes memory) public virtual override returns (bytes4) {
+        return this.onERC721Received.selector;
+    }
+    uint256[50] private __gap;
+}
+
+// 
 pragma solidity ^0.7.6;
 
 
@@ -4862,6 +4862,25 @@ pragma solidity ^0.7.6;
 contract TransferGatekeeperBeacon is UpgradeableBeacon {
     // solhint-disable-next-line
     constructor(address implementation) public UpgradeableBeacon(implementation) {}
+}
+
+// 
+
+pragma solidity >=0.6.0 <0.8.0;
+
+
+
+/**
+ * @dev _Available since v3.1._
+ */
+contract ERC1155Holder is ERC1155Receiver {
+    function onERC1155Received(address, address, uint256, uint256, bytes memory) public virtual override returns (bytes4) {
+        return this.onERC1155Received.selector;
+    }
+
+    function onERC1155BatchReceived(address, address, uint256[] memory, uint256[] memory, bytes memory) public virtual override returns (bytes4) {
+        return this.onERC1155BatchReceived.selector;
+    }
 }
 
 // 
@@ -6487,32 +6506,6 @@ pragma solidity >=0.6.0 <0.8.0;
 
 
 
-/**
- * @dev _Available since v3.1._
- */
-abstract contract ERC1155ReceiverUpgradeable is Initializable, ERC165Upgradeable, IERC1155ReceiverUpgradeable {
-    function __ERC1155Receiver_init() internal initializer {
-        __ERC165_init_unchained();
-        __ERC1155Receiver_init_unchained();
-    }
-
-    function __ERC1155Receiver_init_unchained() internal initializer {
-        _registerInterface(
-            ERC1155ReceiverUpgradeable(address(0)).onERC1155Received.selector ^
-            ERC1155ReceiverUpgradeable(address(0)).onERC1155BatchReceived.selector
-        );
-    }
-    uint256[50] private __gap;
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-
-
-
-
 
 
 
@@ -7028,7 +7021,6 @@ pragma experimental ABIEncoderV2;
 
 
 
-
 /// @title TradeV4
 ///
 /// @dev This contract is a Transparent Upgradable based in openZeppelin v3.4.0.
@@ -7046,10 +7038,8 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
     event ExecuteBid(address indexed assetOwner, uint256 indexed tokenId, uint256 quantity, address indexed buyer);
     event TokenWithdraw(address indexed assetOwner, uint256 indexed authId, uint256 indexed tokenId, uint256 quantity);
 
-    /// @dev deprecated
-    uint8 internal _buyerFeePermille;
-    /// @dev deprecated
-    uint8 internal _sellerFeePermille;
+    uint8 internal buyerFeePermille;
+    uint8 internal sellerFeePermille;
     ITransferProxy public transferProxy;
     address public enigmaNFT721Address;
     address public enigmaNFT1155Address;
@@ -7088,11 +7078,15 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
     }
 
     function initializeTradeV4(
+        uint8 _buyerFee,
+        uint8 _sellerFee,
         ITransferProxy _transferProxy,
         address _enigmaNFT721Address,
         address _enigmaNFT1155Address,
         address _custodialAddress
     ) internal initializer {
+        buyerFeePermille = _buyerFee;
+        sellerFeePermille = _sellerFee;
         transferProxy = _transferProxy;
         enigmaNFT721Address = _enigmaNFT721Address;
         enigmaNFT1155Address = _enigmaNFT1155Address;
@@ -7101,10 +7095,40 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
         __ReentrancyGuard_init();
     }
 
+    function buyerServiceFee() external view virtual returns (uint8) {
+        return buyerFeePermille;
+    }
+
+    function sellerServiceFee() external view virtual returns (uint8) {
+        return sellerFeePermille;
+    }
+
+    function setBuyerServiceFee(uint8 _buyerFee) external onlyOwner returns (bool) {
+        buyerFeePermille = _buyerFee;
+        emit BuyerFee(buyerFeePermille);
+        return true;
+    }
+
+    function setSellerServiceFee(uint8 _sellerFee) external onlyOwner returns (bool) {
+        sellerFeePermille = _sellerFee;
+        emit SellerFee(sellerFeePermille);
+        return true;
+    }
+
     function setCustodialAddress(address _custodialAddress) external onlyOwner returns (bool) {
         emit CustodialAddressChanged(custodialAddress, _custodialAddress);
         custodialAddress = _custodialAddress;
         return true;
+    }
+
+    function getSigner(bytes32 hash, Signature memory signature) internal pure returns (address) {
+        return
+            ecrecover(
+                keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)),
+                signature.v,
+                signature.r,
+                signature.s
+            );
     }
 
     function verifySellerSignature(
@@ -7113,21 +7137,29 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
         uint256 amount,
         address paymentAssetAddress,
         address assetAddress,
-        uint8 sellerFeePermile,
         Signature memory signature
-    ) internal pure {
+    ) internal view {
         bytes32 hash =
             keccak256(
-                abi.encodePacked(
-                    BlockchainUtils.getChainID(),
-                    assetAddress,
-                    tokenId,
-                    paymentAssetAddress,
-                    amount,
-                    sellerFeePermile
-                )
+                abi.encodePacked(BlockchainUtils.getChainID(), assetAddress, tokenId, paymentAssetAddress, amount)
             );
-        require(seller == BlockchainUtils.getSigner(hash, signature), "seller sign verification failed");
+        require(seller == getSigner(hash, signature), "seller sign verification failed");
+    }
+
+    function verifyBuyerSignature(
+        address buyer,
+        uint256 tokenId,
+        uint256 amount,
+        address paymentAssetAddress,
+        address assetAddress,
+        uint256 qty,
+        Signature memory signature
+    ) internal view {
+        bytes32 hash =
+            keccak256(
+                abi.encodePacked(BlockchainUtils.getChainID(), assetAddress, tokenId, paymentAssetAddress, amount, qty)
+            );
+        require(buyer == getSigner(hash, signature), "buyer sign verification failed");
     }
 
     /**
@@ -7142,7 +7174,7 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
         address assetOwner,
         WithdrawRequest memory wr,
         Signature memory signature
-    ) internal pure {
+    ) internal view {
         bytes32 hash =
             keccak256(
                 abi.encodePacked(
@@ -7154,19 +7186,18 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
                     wr.qty
                 )
             );
-        require(assetCustodial == BlockchainUtils.getSigner(hash, signature), "withdraw sign verification failed");
+        require(assetCustodial == getSigner(hash, signature), "withdraw sign verification failed");
     }
 
     function getFees(
         uint256 paymentAmt,
         address buyingAssetAddress,
-        uint256 tokenId,
-        uint256 sellerFeePermille,
-        uint256 buyerFeePermille
+        uint256 tokenId
     ) internal view returns (Fee memory) {
         address tokenCreator;
         uint256 platformFee;
         uint256 royaltyFee;
+        uint256 assetFee;
         uint256 royaltyPermille;
         uint256 price;
         uint256 sellerFee = paymentAmt.mul(sellerFeePermille).div((1000 + buyerFeePermille));
@@ -7188,27 +7219,8 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
             tokenCreator = address(0);
             royaltyFee = 0;
         }
-        return Fee(platformFee, price.sub(royaltyFee).sub(sellerFee), royaltyFee, price, tokenCreator);
-    }
-
-    function getFees(
-        uint256 paymentAmt,
-        address buyingAssetAddress,
-        uint256 tokenId,
-        PlatformFees calldata platformFees
-    ) internal returns (Fee memory) {
-        require(tokenId == platformFees.tokenId, "TokenId mismatch");
-        require(buyingAssetAddress == platformFees.assetAddress, "Asset address mismatch");
-        PlatformFeesFunctions.checkValidPlatformFees(platformFees, owner());
-
-        return
-            getFees(
-                paymentAmt,
-                buyingAssetAddress,
-                tokenId,
-                platformFees.sellerFeePermille,
-                platformFees.buyerFeePermille
-            );
+        assetFee = price.sub(royaltyFee).sub(sellerFee);
+        return Fee(platformFee, assetFee, royaltyFee, price, tokenCreator);
     }
 
     function tradeNFT(Order memory order) internal virtual {
@@ -7226,6 +7238,18 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
         nftType == AssetType.ERC721
             ? transferProxy.erc721safeTransferFrom(nftAddress, from, to, tokenId)
             : transferProxy.erc1155safeTransferFrom(nftAddress, from, to, tokenId, qty, "");
+    }
+
+    function tradeAssetWithERC20(Order memory order, Fee memory fee) internal virtual {
+        tradeNFT(order);
+        if (fee.platformFee > 0) {
+            // TODO: review if this owner still makes sense
+            transferProxy.erc20safeTransferFrom(order.erc20Address, order.buyer, owner(), fee.platformFee);
+        }
+        if (fee.royaltyFee > 0) {
+            transferProxy.erc20safeTransferFrom(order.erc20Address, order.buyer, fee.tokenCreator, fee.royaltyFee);
+        }
+        transferProxy.erc20safeTransferFrom(order.erc20Address, order.buyer, order.seller, fee.assetFee);
     }
 
     /**
@@ -7254,28 +7278,53 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
      ** PUBLIC FUNCTIONS *
      *********************/
 
-    function buyAssetWithETH(
-        Order memory order,
-        Signature memory signature,
-        PlatformFees calldata platformFees
-    ) public payable nonReentrant returns (bool) {
-        require(order.amount == msg.value, "Paid invalid ETH amount");
-        Fee memory fee = getFees(order.amount, order.nftAddress, order.tokenId, platformFees);
+    function buyAsset(Order memory order, Signature memory signature) public returns (bool) {
+        Fee memory fee = getFees(order.amount, order.nftAddress, order.tokenId);
         require((fee.price >= order.unitPrice * order.qty), "Paid invalid amount");
-        // Using the one sent here saves some checks as we need to make sure the same seller fees
-        // where included in both singatures, no need for an extra param or assertion
         verifySellerSignature(
             order.seller,
             order.tokenId,
             order.unitPrice,
-            address(0),
+            order.erc20Address,
             order.nftAddress,
-            platformFees.sellerFeePermille,
             signature
         );
         order.buyer = msg.sender;
         emit BuyAsset(order.seller, order.tokenId, order.qty, msg.sender);
+        tradeAssetWithERC20(order, fee);
+        return true;
+    }
+
+    function buyAssetWithETH(Order memory order, Signature memory signature)
+        public
+        payable
+        nonReentrant
+        returns (bool)
+    {
+        require(order.amount == msg.value, "Paid invalid ETH amount");
+        Fee memory fee = getFees(order.amount, order.nftAddress, order.tokenId);
+        require((fee.price >= order.unitPrice * order.qty), "Paid invalid amount");
+        verifySellerSignature(order.seller, order.tokenId, order.unitPrice, address(0), order.nftAddress, signature);
+        order.buyer = msg.sender;
+        emit BuyAsset(order.seller, order.tokenId, order.qty, msg.sender);
         tradeAssetWithETH(order, fee);
+        return true;
+    }
+
+    function executeBid(Order memory order, Signature memory signature) public returns (bool) {
+        Fee memory fee = getFees(order.amount, order.nftAddress, order.tokenId);
+        verifyBuyerSignature(
+            order.buyer,
+            order.tokenId,
+            order.amount,
+            order.erc20Address,
+            order.nftAddress,
+            order.qty,
+            signature
+        );
+        order.seller = msg.sender;
+        emit ExecuteBid(msg.sender, order.tokenId, order.qty, order.buyer);
+        tradeAssetWithERC20(order, fee);
         return true;
     }
 
@@ -7296,6 +7345,114 @@ abstract contract TradeV4 is ReentrancyGuardUpgradeable, OwnableUpgradeable {
         safeTransferFrom(wr.assetType, custodialAddress, assetOwner, wr.assetAddress, wr.tokenId, wr.qty);
         emit TokenWithdraw(assetOwner, wr.authId, wr.tokenId, wr.qty);
         return true;
+    }
+
+    /**
+     * @dev This empty reserved space is put in place to allow future versions to add new
+     * variables without shifting down storage in the inheritance chain.
+     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
+     */
+    uint256[1000] private __gap;
+}
+
+// 
+pragma solidity ^0.7.6;
+
+/// @dev Taken from https://github.com/f8n/fnd-protocol/tree/v2.0.3
+
+
+
+
+/**
+ * @title A place for common modifiers and functions used by various NFTMarket mixins, if any.
+ * @dev This also leaves a gap which can be used to add a new mixin to the top of the inheritance tree.
+ */
+abstract contract NFTMarketCore is OwnableUpgradeable {
+    using SafeMathUpgradeable for uint256;
+
+    /// @notice Emitted when owner has updated the minIncrementPermille
+    event MinIncrementPermilleUpdated(uint16 prevValue, uint16 newValue);
+
+    /// @dev The minimum required when making an offer or placing a bid. Ej: 100 => 0.1 => 10%
+    uint16 public minIncrementPermille;
+
+    /**
+     * @param _minIncrementPermille The increment to outbid. Ej: 100 => 0.1 => 10%
+     */
+    function _initializeNFTMarketCore(uint16 _minIncrementPermille) internal {
+        minIncrementPermille = _minIncrementPermille;
+    }
+
+    function setMinIncrementPermille(uint16 _minIncrementPermille) external onlyOwner {
+        emit MinIncrementPermilleUpdated(minIncrementPermille, _minIncrementPermille);
+        minIncrementPermille = _minIncrementPermille;
+    }
+
+    /**
+     * @notice Transfers the NFT from escrow and clears any state tracking this escrowed NFT.
+     */
+    function _transferFromEscrow(
+        address nftContract,
+        uint256 tokenId,
+        address recipient
+    ) internal virtual;
+
+    /**
+     * @notice Transfers an NFT into escrow
+     */
+    function _transferToEscrow(address nftContract, uint256 tokenId) internal virtual;
+
+    /**
+     * @notice Applies fees and distributes funds for a finalized market operation.
+     * For all creator, platforma and seller.
+     * @param nftContract The address of the NFT contract.
+     * @param tokenId The id of the NFT.
+     * @param amount Reserve price, plus buyerFee.
+     * @param seller The address of the seller.
+     * @return platformFee Platform share total from the sale, both taken from the buyer and seller
+     * @return royaltyFee Rayalty fee distributed to owner/s
+     * @return assetFee Total received bu the saller
+     */
+    function _distFunds(
+        address nftContract,
+        uint256 tokenId,
+        uint256 amount,
+        address payable seller
+    )
+        internal
+        virtual
+        returns (
+            uint256 platformFee,
+            uint256 royaltyFee,
+            uint256 assetFee
+        );
+
+    /**
+     * @notice For a given price and fee, it returns the total amount a buyer must provide to cover for both
+     * @param _price the target price
+     * @param _buyerFeePermille the fee taken from the buyer, expressed in *1000 (ej: 10% = 0.1 => 100)
+     * @return amount the buyer must sent to comply to this price and fees
+     */
+    function applyBuyerFee(uint256 _price, uint8 _buyerFeePermille) internal pure returns (uint256 amount) {
+        if (_buyerFeePermille == 0) {
+            amount = _price;
+        } else {
+            amount = _price.add(_price.mul(_buyerFeePermille).div(1000));
+        }
+    }
+
+    /**
+     * @dev Determines the minimum amount when increasing an existing offer or bid.
+     */
+    function _getMinIncrement(uint256 currentAmount) internal view returns (uint256) {
+        uint256 minIncrement = currentAmount.mul(minIncrementPermille).div(1000);
+        if (minIncrement == 0) {
+            // Since minIncrement reduces from the currentAmount, this cannot overflow.
+            // The next amount must be at least 1 wei greater than the current.
+            return currentAmount + 1;
+        }
+
+        return minIncrement + currentAmount;
     }
 
     /**
@@ -7405,6 +7562,114 @@ abstract contract SendValueWithFallbackWithdraw is OwnableUpgradeable {
 }
 
 // 
+pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
+
+
+
+
+
+
+
+
+/// @notice A RBAC based Vault contract:
+///             - Requires a signed payload
+///             - If signature is ok, the transaction will be forwarded using call
+/// @dev This contract was inspired by
+///      https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/metatx/MinimalForwarder.sol
+contract Vault is AccessControlUpgradeable, ERC1155Holder, ERC721Holder {
+    using AuthorizationBitmap for AuthorizationBitmap.Bitmap;
+
+    bytes32 public constant ADMIN_ROLE = 0x00;
+    bytes32 public constant SIGNER_ROLE = bytes32(uint256(0x01));
+
+    AuthorizationBitmap.Bitmap private authorizationBitmap;
+
+    struct ForwardRequest {
+        address to;
+        uint256 value;
+        uint256 nonce;
+        bytes data;
+    }
+
+    function initialize(address admin, address[] calldata signers) public initializer {
+        __AccessControl_init();
+        _setupRole(ADMIN_ROLE, admin);
+        // Setup signers
+        uint256 signersLength = signers.length;
+        for (uint256 i = 0; i < signersLength; i++) {
+            _setupRole(SIGNER_ROLE, signers[i]);
+        }
+    }
+
+    /// @notice Signature verification function.
+    /// @param req request to be checked against the signature
+    /// @param signature signature made by one of the SIGNERS.
+    ///                  It requires the chainId to be included in the signature as first param as well
+    ///                  as the contract address
+    /// @dev signature payload is bade by chainId + req.to + req.value + req.nonce + keccak256(req.data)
+    function verify(ForwardRequest calldata req, Signature calldata signature) public view returns (bool) {
+        require(!authorizationBitmap.isAuthProcessed(req.nonce), "Vault: already processed");
+
+        bytes32 hash =
+            keccak256(
+                abi.encodePacked(
+                    BlockchainUtils.getChainID(),
+                    address(this),
+                    req.to,
+                    req.value,
+                    req.nonce,
+                    keccak256(req.data)
+                )
+            );
+        address signer =
+            ecrecover(
+                keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)),
+                signature.v,
+                signature.r,
+                signature.s
+            );
+        return hasRole(SIGNER_ROLE, signer);
+    }
+
+    /// @notice Executes a transaction if the provided signature was made by someone whose role is SIGNER_ROLE.
+    ///         - It will use this contract as msg.sender (ie. execute a call)
+    ///         - Requests can only be executed once so they cannot be replayed
+    ///         - It doesn't care who the signer is as long as the signature is ok
+    /// @param req Request to be executed
+    /// @param signature Signature made by a SIGNER that matches the req
+    function execute(ForwardRequest calldata req, Signature calldata signature)
+        public
+        payable
+        returns (bool, bytes memory)
+    {
+        require(verify(req, signature), "Vault: signature does not match request");
+        authorizationBitmap.setAuthProcessed(req.nonce);
+
+        (bool success, bytes memory returndata) =
+            // All the gas is forwarded as this is going to be used by Enigma and not the users
+            // This is not a relayer as GSN
+            req.to.call{ value: req.value }(req.data);
+
+        require(success, _getRevertMsg(returndata));
+        return (success, returndata);
+    }
+
+    /// @dev https://ethereum.stackexchange.com/a/83577
+    function _getRevertMsg(bytes memory _returnData) internal pure returns (string memory) {
+        // If the _res length is less than 68, then the transaction failed silently (without a revert message)
+        if (_returnData.length < 68) return "Transaction reverted silently";
+
+        // solhint-disable-next-line
+        assembly {
+            // Slice the sighash.
+            _returnData := add(_returnData, 0x04)
+        }
+        return abi.decode(_returnData, (string)); // All that remains is the revert string
+    }
+}
+
+// 
 
 pragma solidity >=0.6.0 <0.8.0;
 
@@ -7453,35 +7718,6 @@ pragma solidity >=0.6.0 <0.8.0;
 
 
 
-/**
- * @dev _Available since v3.1._
- */
-contract ERC1155HolderUpgradeable is Initializable, ERC1155ReceiverUpgradeable {
-    function __ERC1155Holder_init() internal initializer {
-        __ERC165_init_unchained();
-        __ERC1155Receiver_init_unchained();
-        __ERC1155Holder_init_unchained();
-    }
-
-    function __ERC1155Holder_init_unchained() internal initializer {
-    }
-    function onERC1155Received(address, address, uint256, uint256, bytes memory) public virtual override returns (bytes4) {
-        return this.onERC1155Received.selector;
-    }
-
-    function onERC1155BatchReceived(address, address, uint256[] memory, uint256[] memory, bytes memory) public virtual override returns (bytes4) {
-        return this.onERC1155BatchReceived.selector;
-    }
-    uint256[50] private __gap;
-}
-
-// 
-
-pragma solidity >=0.6.0 <0.8.0;
-
-
-
-
 
 /**
  * @title ERC721 Burnable Token
@@ -7512,7 +7748,9 @@ abstract contract ERC721BurnableUpgradeable is Initializable, ContextUpgradeable
 }
 
 // 
+
 pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
 
 /// @dev Taken from https://github.com/f8n/fnd-protocol/tree/v2.0.3
 
@@ -7520,98 +7758,506 @@ pragma solidity ^0.7.6;
 
 
 
+
+
+// The gas limit to send ETH to a single recipient, enough for a contract with a simple receiver.
+uint256 constant SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT = 20000;
+
+// solhint-disable max-line-length
+string constant ReserveAuction_Already_Listed = "ReserveAuction_Already_Listed";
+string constant ReserveAuction_Bid_Must_Be_At_Least_Min_Amount = "ReserveAuction_Bid_Must_Be_At_Least_Min_Amount";
+string constant ReserveAuction_Cannot_Admin_Cancel_Without_Reason = "ReserveAuction_Cannot_Admin_Cancel_Without_Reason";
+string constant ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price = "ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price";
+string constant ReserveAuction_Cannot_Bid_On_Ended_Auction = "ReserveAuction_Cannot_Bid_On_Ended_Auction";
+string constant ReserveAuction_Cannot_Bid_On_Nonexistent_Auction = "ReserveAuction_Cannot_Bid_On_Nonexistent_Auction";
+string constant ReserveAuction_Cannot_Cancel_Nonexistent_Auction = "ReserveAuction_Cannot_Cancel_Nonexistent_Auction";
+string constant ReserveAuction_Cannot_Finalize_Already_Settled_Auction = "ReserveAuction_Cannot_Finalize_Already_Settled_Auction";
+string constant ReserveAuction_Cannot_Finalize_Auction_In_Progress = "ReserveAuction_Cannot_Finalize_Auction_In_Progress";
+string constant ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid = "ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid";
+string constant ReserveAuction_Cannot_Update_Auction_In_Progress = "ReserveAuction_Cannot_Update_Auction_In_Progress";
+string constant ReserveAuction_Subceeds_Min_Duration = "ReserveAuction_Subceeds_Min_Duration";
+string constant ReserveAuction_Exceeds_Max_Duration = "ReserveAuction_Exceeds_Max_Duration";
+string constant ReserveAuction_Less_Than_Extension_Duration = "ReserveAuction_Less_Than_Extension_Duration";
+string constant ReserveAuction_Must_Set_Non_Zero_Reserve_Price = "ReserveAuction_Must_Set_Non_Zero_Reserve_Price";
+string constant ReserveAuction_Not_Matching_Bidder = "ReserveAuction_Not_Matching_Bidder";
+string constant ReserveAuction_Only_Owner_Can_Update_Auction = "ReserveAuction_Only_Owner_Can_Update_Auction";
+string constant ReserveAuction_Price_Already_Set = "ReserveAuction_Price_Already_Set";
+
+// solhint-enable max-line-length
+
 /**
- * @title A place for common modifiers and functions used by various NFTMarket mixins, if any.
- * @dev This also leaves a gap which can be used to add a new mixin to the top of the inheritance tree.
+ * @title Allows the owner of an NFT to list it in auction.
+ * @notice NFTs in auction are escrowed in the market contract.
  */
-abstract contract NFTMarketCore is OwnableUpgradeable {
-    using SafeMathUpgradeable for uint256;
-
-    /// @notice Emitted when owner has updated the minIncrementPermille
-    event MinIncrementPermilleUpdated(uint16 prevValue, uint16 newValue);
-
-    /// @dev The minimum required when making an offer or placing a bid. Ej: 100 => 0.1 => 10%
-    uint16 public minIncrementPermille;
-
-    /**
-     * @param _minIncrementPermille The increment to outbid. Ej: 100 => 0.1 => 10%
-     */
-    function _initializeNFTMarketCore(uint16 _minIncrementPermille) internal {
-        minIncrementPermille = _minIncrementPermille;
+abstract contract NFTMarketReserveAuction is
+    ReentrancyGuardUpgradeable,
+    NFTMarketCore,
+    NFTMarketAuction,
+    SendValueWithFallbackWithdraw
+{
+    // Stores the auction configuration for a specific NFT.
+    struct ReserveAuction {
+        // The address of the NFT contract.
+        address nftContract;
+        // The id of the NFT.
+        uint256 tokenId;
+        // The owner of the NFT which listed it in auction.
+        address payable seller;
+        // The duration for this auction.
+        uint256 duration;
+        // The extension window for this auction.
+        uint256 extensionDuration;
+        // The time at which this auction will not accept any new bids.
+        // @dev This is `0` until the first bid is placed.
+        uint256 endTime;
+        // The current highest bidder in this auction.
+        // @dev This is `address(0)` until the first bid is placed.
+        address payable bidder;
+        // The latest amount locked in for this auction. Includes buyerFee.
+        // @dev This is set to the reserve price + buyerFee, and then to the highest bid once the auction has started.
+        uint256 amount;
+        // The buyerFee at the moment the auction was created. Expressed as x1000 (ej: 100 => 10% = 0.1)
+        uint8 buyerFeePermille;
+        // The sellerFee at the moment the auction was created. Expressed as x1000 (ej: 100 => 10% = 0.1)
+        uint8 sellerFeePermille;
     }
 
-    function setMinIncrementPermille(uint16 _minIncrementPermille) external onlyOwner {
-        emit MinIncrementPermilleUpdated(minIncrementPermille, _minIncrementPermille);
-        minIncrementPermille = _minIncrementPermille;
-    }
+    /// @dev The auction configuration for a specific auction id.
+    mapping(address => mapping(uint256 => uint256)) internal nftContractToTokenIdToAuctionId;
+
+    /// @dev The auction id for a specific NFT.
+    /// @dev This is deleted when an auction is finalized or canceled.
+    mapping(uint256 => ReserveAuction) internal auctionIdToAuction;
+
+    /// @dev Minimal value for how long an auction can lasts for once the first bid has been received.
+    uint256 internal minDuration;
+
+    /// @dev Maximal value for how long an auction can lasts for once the first bid has been received.
+    uint256 internal maxDuration;
+
+    /// @dev The window for auction extensions, any bid placed in the final 15 minutes
+    /// of an auction will reset the time remaining to 15 minutes.
+    uint256 internal constant EXTENSION_DURATION = 15 minutes;
+
+    /// @dev Caps the max duration that may be configured so that overflows will not occur.
+    uint256 internal constant MAX_MAX_DURATION = 1000 days;
 
     /**
-     * @notice Transfers the NFT from escrow and clears any state tracking this escrowed NFT.
+     * @notice Emitted when a bid is placed.
+     * @param auctionId The id of the auction this bid was for.
+     * @param bidder The address of the bidder.
+     * @param amount The amount of the bid.
+     * @param endTime The new end time of the auction (which may have been set or extended by this bid).
      */
-    function _transferFromEscrow(
-        address nftContract,
-        uint256 tokenId,
-        address recipient
-    ) internal virtual;
-
+    event ReserveAuctionBidPlaced(uint256 indexed auctionId, address indexed bidder, uint256 amount, uint256 endTime);
     /**
-     * @notice Transfers an NFT into escrow
+     * @notice Emitted when an auction is cancelled.
+     * @dev This is only possible if the auction has not received any bids.
+     * @param auctionId The id of the auction that was cancelled.
      */
-    function _transferToEscrow(address nftContract, uint256 tokenId) internal virtual;
-
+    event ReserveAuctionCanceled(uint256 indexed auctionId);
     /**
-     * @notice Applies fees and distributes funds for a finalized market operation.
-     * For all creator, platforma and seller.
+     * @notice Emitted when an auction is canceled by a Enigma admin.
+     * @dev When this occurs, the highest bidder (if there was a bid) is automatically refunded.
+     * @param auctionId The id of the auction that was cancelled.
+     * @param reason The reason for the cancellation.
+     */
+    event ReserveAuctionCanceledByAdmin(uint256 indexed auctionId, string reason);
+    /**
+     * @notice Emitted when an NFT is listed for auction.
+     * @param seller The address of the seller.
      * @param nftContract The address of the NFT contract.
      * @param tokenId The id of the NFT.
-     * @param amount Reserve price, plus buyerFee.
-     * @param seller The address of the seller.
-     * @return platformFee Platform share total from the sale, both taken from the buyer and seller
-     * @return royaltyFee Rayalty fee distributed to owner/s
-     * @return assetFee Total received bu the saller
+     * @param duration The duration of the auction (always 24-hours).
+     * @param extensionDuration The duration of the auction extension window (always 15-minutes).
+     * @param reservePrice The reserve price to kick off the auction.
+     * @param bidAmount Reserve price, plus buyerFee. Min amount required to win this auction.
+     * @param auctionId The id of the auction that was created.
      */
-    function _distFunds(
+    event ReserveAuctionCreated(
+        address indexed seller,
+        address indexed nftContract,
+        uint256 indexed tokenId,
+        uint256 duration,
+        uint256 extensionDuration,
+        uint256 reservePrice,
+        uint256 bidAmount,
+        uint256 auctionId
+    );
+    /**
+     * @notice Emitted when an auction that has already ended is finalized,
+     * indicating that the NFT has been transferred and revenue from the sale distributed.
+     * @dev The amount of the highest bid / final sale price for this auction is `f8nFee` + `creatorFee` + `ownerRev`.
+     * @param auctionId The id of the auction that was finalized.
+     * @param seller The address of the seller.
+     * @param bidder The address of the highest bidder that won the NFT.
+     * @param platformFee The amount of ETH that was sent to Enigma for this sale.
+     * @param royaltyFee The amount of ETH that was sent to the creator for this sale.
+     * @param sellerRev The amount of ETH that was sent to the sellet for this NFT.
+     */
+    event ReserveAuctionFinalized(
+        uint256 indexed auctionId,
+        address indexed seller,
+        address indexed bidder,
+        uint256 platformFee,
+        uint256 royaltyFee,
+        uint256 sellerRev
+    );
+    /**
+     * @notice Emitted when the auction's reserve price is changed.
+     * @dev This is only possible if the auction has not received any bids.
+     * @param auctionId The id of the auction that was updated.
+     * @param reservePrice The new reserve price for the auction.
+     */
+    event ReserveAuctionUpdated(uint256 indexed auctionId, uint256 reservePrice);
+
+    /// @notice Confirms that the reserve price is not zero.
+    modifier onlyValidAuctionConfig(uint256 reservePrice) {
+        if (reservePrice == 0) {
+            revert(ReserveAuction_Must_Set_Non_Zero_Reserve_Price);
+        }
+        _;
+    }
+
+    /// oz-upgrades-unsafe-allow constructor
+    // solhint-disable-next-line
+    constructor() {}
+
+    /**
+     * @notice Configures the duration for auctions.
+     * @param _minDuration The min duration for auctions, in seconds.
+     * @param _maxDuration The max duration for auctions, in seconds.
+     */
+    function _initializeNFTMarketReserveAuction(uint256 _minDuration, uint256 _maxDuration) internal {
+        if (_maxDuration > MAX_MAX_DURATION) {
+            // This ensures that math in this file will not overflow due to a huge duration.
+            revert(ReserveAuction_Exceeds_Max_Duration);
+        }
+        if (_minDuration < EXTENSION_DURATION) {
+            // The auction duration configuration must be greater than the extension window of 15 minutes
+            revert(ReserveAuction_Less_Than_Extension_Duration);
+        }
+        minDuration = _minDuration;
+        maxDuration = _maxDuration;
+    }
+
+    /**
+     * @notice Creates an auction for the given NFT.
+     * The NFT is held in escrow until the auction is finalized or canceled.
+     * buyer and seller fees are locked at creation time
+     * @param nftContract The address of the NFT contract.
+     * @param tokenId The id of the NFT.
+     * @param duration seconds for how long an auction lasts for once the first bid has been received.
+     * @param reservePrice The initial reserve price for the auction.
+     * @param buyerFeePermille the fee taken from the buyer, expressed in *1000 (ej: 10% = 0.1 => 100)
+     * @param sellerFeePermille the fee taken from the saller, expressed in *1000 (ej: 10% = 0.1 => 100)
+     */
+    function createReserveAuctionFor(
         address nftContract,
         uint256 tokenId,
+        uint256 duration,
+        uint256 reservePrice,
         uint256 amount,
-        address payable seller,
-        uint256 sellerFeesPerMille,
-        uint256 buyerFeesPerMille
-    )
+        uint8 buyerFeePermille,
+        uint8 sellerFeePermille
+    ) internal {
+        uint256 auctionId = nftContractToTokenIdToAuctionId[nftContract][tokenId];
+        if (auctionId == 0) {
+            // NFT is not in auction
+            // If the `msg.sender` is not the owner of the NFT, transferring into escrow should fail.
+            _transferToEscrow(nftContract, tokenId);
+        } else {
+            // Using storage saves gas since most of the data is not needed
+            ReserveAuction storage auction = auctionIdToAuction[auctionId];
+            if (auction.endTime == 0) {
+                revert(ReserveAuction_Already_Listed);
+            } else {
+                // Auction in progress, confirm the highest bidder is a match
+                if (auction.bidder != msg.sender) {
+                    revert(ReserveAuction_Not_Matching_Bidder);
+                }
+
+                // Finalize auction but leave NFT in escrow, reverts if the auction has not ended
+                _finalizeReserveAuction({ auctionId: auctionId, keepInEscrow: true });
+            }
+        }
+        // Get the new Id
+        auctionId = _getNextAndIncrementAuctionId();
+
+        // This checks if duration is between acceptable
+        if (minDuration > duration) {
+            revert(ReserveAuction_Subceeds_Min_Duration);
+        }
+        if (duration > maxDuration) {
+            revert(ReserveAuction_Exceeds_Max_Duration);
+        }
+
+        // Store the auction details
+        nftContractToTokenIdToAuctionId[nftContract][tokenId] = auctionId;
+        auctionIdToAuction[auctionId] = ReserveAuction(
+            nftContract,
+            tokenId,
+            payable(msg.sender),
+            duration,
+            EXTENSION_DURATION,
+            0, // endTime is only known once the reserve price is met
+            payable(0), // bidder is only known once a bid has been placed
+            amount,
+            buyerFeePermille, // fees are locked-in at create time
+            sellerFeePermille
+        );
+
+        emit ReserveAuctionCreated(
+            msg.sender,
+            nftContract,
+            tokenId,
+            duration,
+            EXTENSION_DURATION,
+            reservePrice,
+            amount,
+            auctionId
+        );
+    }
+
+    /**
+     * @notice Once the countdown has expired for an auction, anyone can settle the auction.
+     * This will send the NFT to the highest bidder and distribute revenue for this sale.
+     * @param auctionId The id of the auction to settle.
+     */
+    function finalizeReserveAuction(uint256 auctionId) external nonReentrant {
+        if (auctionIdToAuction[auctionId].endTime == 0) {
+            revert(ReserveAuction_Cannot_Finalize_Already_Settled_Auction);
+        }
+        _finalizeReserveAuction({ auctionId: auctionId, keepInEscrow: false });
+    }
+
+    /**
+     * @notice Settle an auction that has already ended.
+     * This will send the NFT to the highest bidder and distribute revenue for this sale.
+     * @param keepInEscrow If true, the NFT will be kept in escrow to save gas by avoiding
+     * redundant transfers if the NFT should remain in escrow, such as when the new owner
+     * sets a buy price or lists it in a new auction.
+     */
+    function _finalizeReserveAuction(uint256 auctionId, bool keepInEscrow) internal {
+        ReserveAuction memory auction = auctionIdToAuction[auctionId];
+
+        if (auction.endTime >= block.timestamp) {
+            revert(ReserveAuction_Cannot_Finalize_Auction_In_Progress);
+        }
+
+        // Remove the auction.
+        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
+        delete auctionIdToAuction[auctionId];
+
+        if (!keepInEscrow) {
+            // The seller was authorized when the auction was originally created
+            _transferFromEscrow(auction.nftContract, auction.tokenId, auction.bidder);
+        }
+
+        // Distribute revenue for this sale.
+        (uint256 platformFee, uint256 royaltyFee, uint256 assetFee) = _distAuctionFunds(auction);
+
+        emit ReserveAuctionFinalized(auctionId, auction.seller, auction.bidder, platformFee, royaltyFee, assetFee);
+    }
+
+    function _distAuctionFunds(ReserveAuction memory auction)
         internal
-        virtual
         returns (
             uint256 platformFee,
             uint256 royaltyFee,
             uint256 assetFee
-        );
-
-    /**
-     * @notice For a given price and fee, it returns the total amount a buyer must provide to cover for both
-     * @param _price the target price
-     * @param _buyerFeePermille the fee taken from the buyer, expressed in *1000 (ej: 10% = 0.1 => 100)
-     * @return amount the buyer must sent to comply to this price and fees
-     */
-    function applyBuyerFee(uint256 _price, uint8 _buyerFeePermille) internal pure returns (uint256 amount) {
-        if (_buyerFeePermille == 0) {
-            amount = _price;
-        } else {
-            amount = _price.add(_price.mul(_buyerFeePermille).div(1000));
-        }
+        )
+    {
+        return _distFunds(auction.nftContract, auction.tokenId, auction.amount, auction.seller);
     }
 
     /**
-     * @dev Determines the minimum amount when increasing an existing offer or bid.
+     * @notice Allows Enigma to cancel an auction, refunding the bidder and returning the NFT to
+     * the seller (if not active buy price set).
+     * This should only be used for extreme cases such as DMCA takedown requests.
+     * @param auctionId The id of the auction to cancel.
+     * @param reason The reason for the cancellation (a required field).
      */
-    function _getMinIncrement(uint256 currentAmount) internal view returns (uint256) {
-        uint256 minIncrement = currentAmount.mul(minIncrementPermille).div(1000);
-        if (minIncrement == 0) {
-            // Since minIncrement reduces from the currentAmount, this cannot overflow.
-            // The next amount must be at least 1 wei greater than the current.
-            return currentAmount + 1;
+    function adminCancelReserveAuction(uint256 auctionId, string calldata reason) external onlyOwner nonReentrant {
+        if (bytes(reason).length == 0) {
+            revert(ReserveAuction_Cannot_Admin_Cancel_Without_Reason);
+        }
+        ReserveAuction memory auction = auctionIdToAuction[auctionId];
+        if (auction.amount == 0) {
+            revert(ReserveAuction_Cannot_Cancel_Nonexistent_Auction);
         }
 
-        return minIncrement + currentAmount;
+        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
+        delete auctionIdToAuction[auctionId];
+
+        // Return the NFT to the owner.
+        _transferFromEscrow(auction.nftContract, auction.tokenId, auction.seller);
+
+        if (auction.bidder != address(0)) {
+            // Refund the highest bidder if any bids were placed in this auction.
+            _sendValueWithFallbackWithdraw(auction.bidder, auction.amount, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
+        }
+
+        emit ReserveAuctionCanceledByAdmin(auctionId, reason);
+    }
+
+    /**
+     * @notice If an auction has been created but has not yet received bids, it may be canceled by the seller.
+     * @dev The NFT is transferred back to the owner unless there is still a buy price set.
+     * @param auctionId The id of the auction to cancel.
+     */
+    function cancelReserveAuction(uint256 auctionId) external nonReentrant {
+        ReserveAuction memory auction = auctionIdToAuction[auctionId];
+        if (auction.amount == 0) {
+            revert(ReserveAuction_Cannot_Cancel_Nonexistent_Auction);
+        }
+        if (auction.seller != msg.sender) {
+            revert(ReserveAuction_Only_Owner_Can_Update_Auction);
+        }
+        if (auction.endTime != 0) {
+            revert(ReserveAuction_Cannot_Update_Auction_In_Progress);
+        }
+
+        // Remove the auction.
+        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
+        delete auctionIdToAuction[auctionId];
+
+        // Transfer the NFT.
+        _transferFromEscrow(auction.nftContract, auction.tokenId, auction.seller);
+
+        emit ReserveAuctionCanceled(auctionId);
+    }
+
+    /**
+     * @notice Place a bid in an auction.
+     * A bidder may place a bid which is at least the value defined by `getMinBidAmount`.
+     * If this is the first bid on the auction, the countdown will begin.
+     * If there is already an outstanding bid, the previous bidder will be refunded at this time
+     * and if the bid is placed in the final moments of the auction, the countdown may be extended.
+     * @param auctionId The id of the auction to bid on.
+     */
+    /* solhint-disable-next-line code-complexity */
+    function placeBid(uint256 auctionId) external payable nonReentrant {
+        ReserveAuction storage auction = auctionIdToAuction[auctionId];
+
+        if (auction.amount == 0) {
+            // No auction found
+            revert(ReserveAuction_Cannot_Bid_On_Nonexistent_Auction);
+        }
+
+        uint256 endTime = auction.endTime;
+        if (endTime == 0) {
+            // This is the first bid, kicking off the auction.
+
+            if (msg.value < auction.amount) {
+                // The bid must be >= the reserve price.
+                revert(ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price);
+            }
+
+            // Store the bid details.
+            auction.amount = msg.value;
+            auction.bidder = payable(msg.sender);
+
+            // On the first bid, set the endTime to now + duration.
+            // Duration is always less than MAX MAX, so the below can't overflow.
+            endTime = block.timestamp + auction.duration;
+
+            auction.endTime = endTime;
+        } else {
+            if (endTime < block.timestamp) {
+                // The auction has already ended.
+                revert(ReserveAuction_Cannot_Bid_On_Ended_Auction);
+            } else if (auction.bidder == msg.sender) {
+                // We currently do not allow a bidder to increase their bid unless another user has outbid them first.
+                revert(ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid);
+            } else {
+                uint256 minIncrement = _getMinIncrement(auction.amount);
+                if (msg.value < minIncrement) {
+                    // If this bid outbids another, it must be at least 10% greater than the last bid.
+                    revert(ReserveAuction_Bid_Must_Be_At_Least_Min_Amount);
+                }
+            }
+
+            // Cache and update bidder state
+            uint256 originalAmount = auction.amount;
+            address payable originalBidder = auction.bidder;
+            auction.amount = msg.value;
+            auction.bidder = payable(msg.sender);
+
+            // When a bid outbids another, check to see if a time extension should apply.
+            // We confirmed that the auction has not ended, so endTime is always >= the current timestamp.
+            // Current time plus extension duration (always 15 mins) cannot overflow.
+            uint256 endTimeWithExtension = block.timestamp + EXTENSION_DURATION;
+            if (endTime < endTimeWithExtension) {
+                endTime = endTimeWithExtension;
+                auction.endTime = endTime;
+            }
+            // Refund the previous bidder
+            _sendValueWithFallbackWithdraw(originalBidder, originalAmount, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
+        }
+        emit ReserveAuctionBidPlaced(auctionId, msg.sender, msg.value, endTime);
+    }
+
+    /**
+     * @notice If an auction has been created but has not yet received bids, the reservePrice may be
+     * changed by the seller.
+     * @param auctionId The id of the auction to change.
+     * @param reservePrice The new reserve price for this auction.
+     */
+    function updateReserveAuction(uint256 auctionId, uint256 reservePrice)
+        external
+        onlyValidAuctionConfig(reservePrice)
+    {
+        ReserveAuction storage auction = auctionIdToAuction[auctionId];
+        if (auction.seller != msg.sender) {
+            revert(ReserveAuction_Only_Owner_Can_Update_Auction);
+        } else if (auction.endTime != 0) {
+            revert(ReserveAuction_Cannot_Update_Auction_In_Progress);
+        }
+
+        // get the amount, including buyer fee for this reserve price
+        uint256 amount = applyBuyerFee(reservePrice, auction.buyerFeePermille);
+        if (auction.amount == amount) revert(ReserveAuction_Price_Already_Set);
+
+        // Update the current reserve price.
+        auction.amount = amount;
+
+        emit ReserveAuctionUpdated(auctionId, reservePrice);
+    }
+
+    /**
+     * @notice Returns the minimum amount a bidder must spend to participate in an auction.
+     * Bids must be greater than or equal to this value or they will revert.
+     * @param auctionId The id of the auction to check.
+     * @return minimum The minimum amount for a bid to be accepted.
+     */
+    function getMinBidAmount(uint256 auctionId) external view returns (uint256 minimum) {
+        ReserveAuction storage auction = auctionIdToAuction[auctionId];
+        if (auction.endTime == 0) {
+            return auction.amount;
+        }
+        return _getMinIncrement(auction.amount);
+    }
+
+    /**
+     * @notice Returns auction details for a given auctionId.
+     * @param auctionId The id of the auction to lookup.
+     * @return auction The auction details.
+     */
+    function getReserveAuction(uint256 auctionId) external view returns (ReserveAuction memory auction) {
+        return auctionIdToAuction[auctionId];
+    }
+
+    /**
+     * @notice Returns the auctionId for a given NFT, or 0 if no auction is found.
+     * @dev If an auction is canceled, it will not be returned. However the auction may be over
+     *  and pending finalization.
+     * @param nftContract The address of the NFT contract.
+     * @param tokenId The id of the NFT.
+     * @return auctionId The id of the auction, or 0 if no auction is found.
+     */
+    function getReserveAuctionIdFor(address nftContract, uint256 tokenId) external view returns (uint256 auctionId) {
+        auctionId = nftContractToTokenIdToAuctionId[nftContract][tokenId];
     }
 
     /**
@@ -7880,131 +8526,6 @@ abstract contract BaseEnigmaNFT1155 is IRoyaltyAwareNFT, ERC1155BurnableUpgradea
     function setTransferGatekeeperBeacon(IBeacon transferGatekeeperBeacon_) external onlyOwner {
         transferGatekeeperBeacon = transferGatekeeperBeacon_;
     }
-
-    /**
-     * @notice Allows to batchUpdate the royalty fees for several tokens
-     * @dev This function doesn't perform any checks to make it cheaper, be careful when invoking it
-     * @param tokenIds Tokens to update royalty from
-     * @param newRoyaltyFees New royalty fees. They must match with the tokenIds
-     */
-    function batchUpdateRoyaltyFees(uint256[] calldata tokenIds, uint256[] calldata newRoyaltyFees) external onlyOwner {
-        uint256 length = tokenIds.length;
-
-        for (uint256 index; index < length; ) {
-            _royaltyFee[tokenIds[index]] = newRoyaltyFees[index];
-            ++index;
-        }
-    }
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-
-
-
-
-
-
-
-/// @notice A RBAC based Vault contract:
-///             - Requires a signed payload
-///             - If signature is ok, the transaction will be forwarded using call
-/// @dev This contract was inspired by
-///      https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/metatx/MinimalForwarder.sol
-contract Vault is AccessControlUpgradeable, ERC1155HolderUpgradeable, ERC721HolderUpgradeable {
-    using AuthorizationBitmap for AuthorizationBitmap.Bitmap;
-
-    bytes32 public constant ADMIN_ROLE = 0x00;
-    bytes32 public constant SIGNER_ROLE = bytes32(uint256(0x01));
-
-    AuthorizationBitmap.Bitmap private authorizationBitmap;
-
-    struct ForwardRequest {
-        address to;
-        uint256 value;
-        uint256 nonce;
-        bytes data;
-    }
-
-    function initialize(address admin, address[] calldata signers) public initializer {
-        __AccessControl_init();
-        __ERC1155Holder_init();
-        __ERC721Holder_init();
-        _setupRole(ADMIN_ROLE, admin);
-        // Setup signers
-        uint256 signersLength = signers.length;
-        for (uint256 i = 0; i < signersLength; i++) {
-            _setupRole(SIGNER_ROLE, signers[i]);
-        }
-    }
-
-    /// @notice Signature verification function.
-    /// @param req request to be checked against the signature
-    /// @param signature signature made by one of the SIGNERS.
-    ///                  It requires the chainId to be included in the signature as first param as well
-    ///                  as the contract address
-    /// @dev signature payload is bade by chainId + req.to + req.value + req.nonce + keccak256(req.data)
-    function verify(ForwardRequest calldata req, Signature calldata signature) public view returns (bool) {
-        require(!authorizationBitmap.isAuthProcessed(req.nonce), "Vault: already processed");
-
-        bytes32 hash =
-            keccak256(
-                abi.encodePacked(
-                    BlockchainUtils.getChainID(),
-                    address(this),
-                    req.to,
-                    req.value,
-                    req.nonce,
-                    keccak256(req.data)
-                )
-            );
-        address signer =
-            ecrecover(
-                keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)),
-                signature.v,
-                signature.r,
-                signature.s
-            );
-        return hasRole(SIGNER_ROLE, signer);
-    }
-
-    /// @notice Executes a transaction if the provided signature was made by someone whose role is SIGNER_ROLE.
-    ///         - It will use this contract as msg.sender (ie. execute a call)
-    ///         - Requests can only be executed once so they cannot be replayed
-    ///         - It doesn't care who the signer is as long as the signature is ok
-    /// @param req Request to be executed
-    /// @param signature Signature made by a SIGNER that matches the req
-    function execute(ForwardRequest calldata req, Signature calldata signature)
-        public
-        payable
-        returns (bool, bytes memory)
-    {
-        require(verify(req, signature), "Vault: signature does not match request");
-        authorizationBitmap.setAuthProcessed(req.nonce);
-
-        (bool success, bytes memory returndata) =
-            // All the gas is forwarded as this is going to be used by Enigma and not the users
-            // This is not a relayer as GSN
-            req.to.call{ value: req.value }(req.data);
-
-        require(success, _getRevertMsg(returndata));
-        return (success, returndata);
-    }
-
-    /// @dev https://ethereum.stackexchange.com/a/83577
-    function _getRevertMsg(bytes memory _returnData) internal pure returns (string memory) {
-        // If the _res length is less than 68, then the transaction failed silently (without a revert message)
-        if (_returnData.length < 68) return "Transaction reverted silently";
-
-        // solhint-disable-next-line
-        assembly {
-            // Slice the sighash.
-            _returnData := add(_returnData, 0x04)
-        }
-        return abi.decode(_returnData, (string)); // All that remains is the revert string
-    }
 }
 
 // 
@@ -8150,550 +8671,173 @@ abstract contract BaseEnigmaNFT721 is IRoyaltyAwareNFT, ERC721BurnableUpgradeabl
     function setTransferGatekeeperBeacon(IBeacon transferGatekeeperBeacon_) external onlyOwner {
         transferGatekeeperBeacon = transferGatekeeperBeacon_;
     }
-
-    /**
-     * @notice Allows to batchUpdate the royalty fees for several tokens
-     * @dev This function doesn't perform any checks to make it cheaper, be careful when invoking it
-     * @param tokenIds Tokens to update royalty from
-     * @param newRoyaltyFees New royalty fees. They must match with the tokenIds
-     */
-    function batchUpdateRoyaltyFees(uint256[] calldata tokenIds, uint256[] calldata newRoyaltyFees) external onlyOwner {
-        uint256 length = tokenIds.length;
-
-        for (uint256 index; index < length; ) {
-            _royaltyFee[tokenIds[index]] = newRoyaltyFees[index];
-            ++index;
-        }
-    }
 }
 
 // 
-
 pragma solidity ^0.7.6;
 pragma experimental ABIEncoderV2;
 
-/// @dev Taken from https://github.com/f8n/fnd-protocol/tree/v2.0.3
 
 
 
 
 
 
+/// @title EnigmaMarket
+///
+/// @dev This contract is a Transparent Upgradable based in openZeppelin v3.4.0.
+///         Be careful when upgrade, you must respect the same storage.
 
-
-
-// The gas limit to send ETH to a single recipient, enough for a contract with a simple receiver.
-uint256 constant SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT = 20000;
-
-// solhint-disable max-line-length
-string constant ReserveAuction_Already_Listed = "ReserveAuction_Already_Listed";
-string constant ReserveAuction_Bid_Must_Be_At_Least_Min_Amount = "ReserveAuction_Bid_Must_Be_At_Least_Min_Amount";
-string constant ReserveAuction_Cannot_Admin_Cancel_Without_Reason = "ReserveAuction_Cannot_Admin_Cancel_Without_Reason";
-string constant ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price = "ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price";
-string constant ReserveAuction_Cannot_Bid_On_Ended_Auction = "ReserveAuction_Cannot_Bid_On_Ended_Auction";
-string constant ReserveAuction_Cannot_Bid_On_Nonexistent_Auction = "ReserveAuction_Cannot_Bid_On_Nonexistent_Auction";
-string constant ReserveAuction_Cannot_Cancel_Nonexistent_Auction = "ReserveAuction_Cannot_Cancel_Nonexistent_Auction";
-string constant ReserveAuction_Cannot_Finalize_Already_Settled_Auction = "ReserveAuction_Cannot_Finalize_Already_Settled_Auction";
-string constant ReserveAuction_Cannot_Finalize_Auction_In_Progress = "ReserveAuction_Cannot_Finalize_Auction_In_Progress";
-string constant ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid = "ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid";
-string constant ReserveAuction_Cannot_Update_Auction_In_Progress = "ReserveAuction_Cannot_Update_Auction_In_Progress";
-string constant ReserveAuction_Subceeds_Min_Duration = "ReserveAuction_Subceeds_Min_Duration";
-string constant ReserveAuction_Exceeds_Max_Duration = "ReserveAuction_Exceeds_Max_Duration";
-string constant ReserveAuction_Less_Than_Extension_Duration = "ReserveAuction_Less_Than_Extension_Duration";
-string constant ReserveAuction_Must_Set_Non_Zero_Reserve_Price = "ReserveAuction_Must_Set_Non_Zero_Reserve_Price";
-string constant ReserveAuction_Not_Matching_Bidder = "ReserveAuction_Not_Matching_Bidder";
-string constant ReserveAuction_Only_Owner_Can_Update_Auction = "ReserveAuction_Only_Owner_Can_Update_Auction";
-string constant ReserveAuction_Price_Already_Set = "ReserveAuction_Price_Already_Set";
-
-// solhint-enable max-line-length
-
-/**
- * @title Allows the owner of an NFT to list it in auction.
- * @notice NFTs in auction are escrowed in the market contract.
- */
-abstract contract NFTMarketReserveAuction is
-    ReentrancyGuardUpgradeable,
-    NFTMarketCore,
-    NFTMarketAuction,
-    SendValueWithFallbackWithdraw
+contract EnigmaMarket is
+    TradeV4,
+    ERC721HolderUpgradeable, // Make sure the contract is able to use its
+    NFTMarketReserveAuction
 {
-    // Stores the auction configuration for a specific NFT.
-    struct ReserveAuction {
-        // The address of the NFT contract.
-        address nftContract;
-        // The id of the NFT.
-        uint256 tokenId;
-        // The owner of the NFT which listed it in auction.
-        address payable seller;
-        // The duration for this auction.
-        uint256 duration;
-        // The extension window for this auction.
-        uint256 extensionDuration;
-        // The time at which this auction will not accept any new bids.
-        // @dev This is `0` until the first bid is placed.
-        uint256 endTime;
-        // The current highest bidder in this auction.
-        // @dev This is `address(0)` until the first bid is placed.
-        address payable bidder;
-        // The latest amount locked in for this auction. Includes buyerFee.
-        // @dev This is set to the reserve price + buyerFee, and then to the highest bid once the auction has started.
-        uint256 amount;
-        // The buyerFee at the moment the auction was created. Expressed as x1000 (ej: 100 => 10% = 0.1)
-        uint8 buyerFeePermille;
-        // The sellerFee at the moment the auction was created. Expressed as x1000 (ej: 100 => 10% = 0.1)
-        uint8 sellerFeePermille;
-    }
-
-    /// @dev The auction configuration for a specific auction id.
-    mapping(address => mapping(uint256 => uint256)) internal nftContractToTokenIdToAuctionId;
-
-    /// @dev The auction id for a specific NFT.
-    /// @dev This is deleted when an auction is finalized or canceled.
-    mapping(uint256 => ReserveAuction) internal auctionIdToAuction;
-
-    /// @dev Minimal value for how long an auction can lasts for once the first bid has been received.
-    uint256 internal minDuration;
-
-    /// @dev Maximal value for how long an auction can lasts for once the first bid has been received.
-    uint256 internal maxDuration;
-
-    /// @dev The window for auction extensions, any bid placed in the final 15 minutes
-    /// of an auction will reset the time remaining to 15 minutes.
-    uint256 internal constant EXTENSION_DURATION = 15 minutes;
-
-    /// @dev Caps the max duration that may be configured so that overflows will not occur.
-    uint256 internal constant MAX_MAX_DURATION = 1000 days;
-
-    /**
-     * @notice Emitted when a bid is placed.
-     * @param auctionId The id of the auction this bid was for.
-     * @param bidder The address of the bidder.
-     * @param amount The amount of the bid.
-     * @param endTime The new end time of the auction (which may have been set or extended by this bid).
-     */
-    event ReserveAuctionBidPlaced(uint256 indexed auctionId, address indexed bidder, uint256 amount, uint256 endTime);
-    /**
-     * @notice Emitted when an auction is cancelled.
-     * @dev This is only possible if the auction has not received any bids.
-     * @param auctionId The id of the auction that was cancelled.
-     */
-    event ReserveAuctionCanceled(uint256 indexed auctionId);
-    /**
-     * @notice Emitted when an auction is canceled by a Enigma admin.
-     * @dev When this occurs, the highest bidder (if there was a bid) is automatically refunded.
-     * @param auctionId The id of the auction that was cancelled.
-     * @param reason The reason for the cancellation.
-     */
-    event ReserveAuctionCanceledByAdmin(uint256 indexed auctionId, string reason);
-    /**
-     * @notice Emitted when an NFT is listed for auction.
-     * @param seller The address of the seller.
-     * @param nftContract The address of the NFT contract.
-     * @param tokenId The id of the NFT.
-     * @param duration The duration of the auction (always 24-hours).
-     * @param extensionDuration The duration of the auction extension window (always 15-minutes).
-     * @param reservePrice The reserve price to kick off the auction.
-     * @param bidAmount Reserve price, plus buyerFee. Min amount required to win this auction.
-     * @param auctionId The id of the auction that was created.
-     */
-    event ReserveAuctionCreated(
-        address indexed seller,
-        address indexed nftContract,
-        uint256 indexed tokenId,
-        uint256 duration,
-        uint256 extensionDuration,
-        uint256 reservePrice,
-        uint256 bidAmount,
-        uint256 auctionId
-    );
-    /**
-     * @notice Emitted when an auction that has already ended is finalized,
-     * indicating that the NFT has been transferred and revenue from the sale distributed.
-     * @dev The amount of the highest bid / final sale price for this auction is `f8nFee` + `creatorFee` + `ownerRev`.
-     * @param auctionId The id of the auction that was finalized.
-     * @param seller The address of the seller.
-     * @param bidder The address of the highest bidder that won the NFT.
-     * @param platformFee The amount of ETH that was sent to Enigma for this sale.
-     * @param royaltyFee The amount of ETH that was sent to the creator for this sale.
-     * @param sellerRev The amount of ETH that was sent to the sellet for this NFT.
-     */
-    event ReserveAuctionFinalized(
-        uint256 indexed auctionId,
-        address indexed seller,
-        address indexed bidder,
-        uint256 platformFee,
-        uint256 royaltyFee,
-        uint256 sellerRev
-    );
-    /**
-     * @notice Emitted when the auction's reserve price is changed.
-     * @dev This is only possible if the auction has not received any bids.
-     * @param auctionId The id of the auction that was updated.
-     * @param reservePrice The new reserve price for the auction.
-     */
-    event ReserveAuctionUpdated(uint256 indexed auctionId, uint256 reservePrice);
-
-    /// @notice Confirms that the reserve price is not zero.
-    modifier onlyValidAuctionConfig(uint256 reservePrice) {
-        if (reservePrice == 0) {
-            revert(ReserveAuction_Must_Set_Non_Zero_Reserve_Price);
-        }
-        _;
-    }
-
     /// oz-upgrades-unsafe-allow constructor
     // solhint-disable-next-line
-    constructor() {}
+    constructor() initializer {}
 
     /**
-     * @notice Configures the duration for auctions.
+     * @notice Called once to configure the contract after the initial proxy deployment.
+     * @dev This farms the initialize call out to inherited contracts as needed to initialize mutable variables.
+     * @param _buyerFee the fee taken from the buyer, expressed in *1000 (ej: 10% = 0.1 => 100)
+     * @param _sellerFee the fee taken from the seller, expressed in *1000 (ej: 10% = 0.1 => 100)
+     * @param _transferProxy the proxy from wich all NFT transfers are gonna be processed from.
+     * @param _enigmaNFT721Address Enigma ERC721 NFT proxy.
+     * @param _enigmaNFT1155Address Enigma ERC1155 NFT proxy.
+     * @param _custodialAddress The address on wich NFTs are gonna be kept during Fiat Trades.
+     * @param _minDuration The min duration for auctions, in seconds.
+     * @param _maxDuration The max duration for auctions, in seconds.
+     * @param _minIncrementPermille The minimum required when making an offer or placing a bid. Ej: 100 => 0.1 => 10%
+     */
+    function fullInitialize(
+        uint8 _buyerFee,
+        uint8 _sellerFee,
+        ITransferProxy _transferProxy,
+        address _enigmaNFT721Address,
+        address _enigmaNFT1155Address,
+        address _custodialAddress,
+        uint256 _minDuration,
+        uint256 _maxDuration,
+        uint16 _minIncrementPermille
+    ) external initializer {
+        initializeTradeV4(
+            _buyerFee,
+            _sellerFee,
+            _transferProxy,
+            _enigmaNFT721Address,
+            _enigmaNFT1155Address,
+            _custodialAddress
+        );
+        __Ownable_init();
+        __ReentrancyGuard_init();
+        _initializeNFTMarketAuction();
+        _initializeNFTMarketReserveAuction(_minDuration, _maxDuration);
+        _initializeNFTMarketCore(_minIncrementPermille);
+    }
+
+    /**
+     * @notice Called once to configure the contract after the initial proxy deployment.
+     * @dev as we are updating an already deployed contracts, legacy vars don't need init.
      * @param _minDuration The min duration for auctions, in seconds.
      * @param _maxDuration The max duration for auctions, in seconds.
      */
-    function _initializeNFTMarketReserveAuction(uint256 _minDuration, uint256 _maxDuration) internal {
-        if (_maxDuration > MAX_MAX_DURATION) {
-            // This ensures that math in this file will not overflow due to a huge duration.
-            revert(ReserveAuction_Exceeds_Max_Duration);
-        }
-        if (_minDuration < EXTENSION_DURATION) {
-            // The auction duration configuration must be greater than the extension window of 15 minutes
-            revert(ReserveAuction_Less_Than_Extension_Duration);
-        }
-        minDuration = _minDuration;
-        maxDuration = _maxDuration;
+    function upgradeInitialize(uint256 _minDuration, uint256 _maxDuration) external onlyOwner {
+        _initializeNFTMarketAuction();
+        _initializeNFTMarketReserveAuction(_minDuration, _maxDuration);
+    }
+
+    function getPlatformTreasury() public view returns (address payable) {
+        // TODO: review if we don't need a new field for collecting fees
+        return payable(owner());
     }
 
     /**
-     * @notice Creates an auction for the given NFT.
-     * The NFT is held in escrow until the auction is finalized or canceled.
-     * buyer and seller fees are locked at creation time
-     * @param nftContract The address of the NFT contract.
-     * @param tokenId The id of the NFT.
-     * @param duration seconds for how long an auction lasts for once the first bid has been received.
-     * @param reservePrice The initial reserve price for the auction.
+     * @inheritdoc NFTMarketCore
      */
-    function createReserveAuctionFor(
+    function _transferFromEscrow(
         address nftContract,
         uint256 tokenId,
-        uint256 duration,
-        uint256 reservePrice,
+        address recipient
+    ) internal virtual override {
+        // As we are transfering through our own market, there's no need to go by transferProxy
+        IERC721(nftContract).transferFrom(address(this), recipient, tokenId);
+    }
+
+    /**
+     * @inheritdoc NFTMarketCore
+     */
+    function _transferToEscrow(address nftContract, uint256 tokenId) internal virtual override {
+        safeTransferFrom(AssetType.ERC721, msg.sender, address(this), nftContract, tokenId, 1);
+    }
+
+    /**
+     * @dev Be careful when invoking this function as reentrancy guard should be put in place
+     */
+    // slither-disable-next-line reentrancy-eth
+    function _distFunds(
+        address nftContract,
+        uint256 tokenId,
         uint256 amount,
-        PlatformFees calldata platformFees
-    ) internal {
-        uint256 auctionId = nftContractToTokenIdToAuctionId[nftContract][tokenId];
-        if (auctionId == 0) {
-            // NFT is not in auction
-            // If the `msg.sender` is not the owner of the NFT, transferring into escrow should fail.
-            _transferToEscrow(nftContract, tokenId);
-        } else {
-            // Using storage saves gas since most of the data is not needed
-            ReserveAuction storage auction = auctionIdToAuction[auctionId];
-            if (auction.endTime == 0) {
-                revert(ReserveAuction_Already_Listed);
-            } else {
-                // Auction in progress, confirm the highest bidder is a match
-                if (auction.bidder != msg.sender) {
-                    revert(ReserveAuction_Not_Matching_Bidder);
-                }
-
-                // Finalize auction but leave NFT in escrow, reverts if the auction has not ended
-                _finalizeReserveAuction({ auctionId: auctionId, keepInEscrow: true });
-            }
-        }
-        // Get the new Id
-        auctionId = _getNextAndIncrementAuctionId();
-
-        // This checks if duration is between acceptable
-        if (minDuration > duration) {
-            revert(ReserveAuction_Subceeds_Min_Duration);
-        }
-        if (duration > maxDuration) {
-            revert(ReserveAuction_Exceeds_Max_Duration);
-        }
-
-        // Store the auction details
-        nftContractToTokenIdToAuctionId[nftContract][tokenId] = auctionId;
-        PlatformFeesFunctions.checkValidPlatformFees(platformFees, owner());
-        auctionIdToAuction[auctionId] = ReserveAuction(
-            nftContract,
-            tokenId,
-            payable(msg.sender),
-            duration,
-            EXTENSION_DURATION,
-            0, // endTime is only known once the reserve price is met
-            payable(0), // bidder is only known once a bid has been placed
-            amount,
-            platformFees.buyerFeePermille, // fees are locked-in at create time
-            platformFees.sellerFeePermille
-        );
-
-        emit ReserveAuctionCreated(
-            msg.sender,
-            nftContract,
-            tokenId,
-            duration,
-            EXTENSION_DURATION,
-            reservePrice,
-            amount,
-            auctionId
-        );
-    }
-
-    /**
-     * @notice Once the countdown has expired for an auction, anyone can settle the auction.
-     * This will send the NFT to the highest bidder and distribute revenue for this sale.
-     * @param auctionId The id of the auction to settle.
-     */
-    function finalizeReserveAuction(uint256 auctionId) external nonReentrant {
-        if (auctionIdToAuction[auctionId].endTime == 0) {
-            revert(ReserveAuction_Cannot_Finalize_Already_Settled_Auction);
-        }
-        _finalizeReserveAuction({ auctionId: auctionId, keepInEscrow: false });
-    }
-
-    /**
-     * @notice Settle an auction that has already ended.
-     * This will send the NFT to the highest bidder and distribute revenue for this sale.
-     * @param keepInEscrow If true, the NFT will be kept in escrow to save gas by avoiding
-     * redundant transfers if the NFT should remain in escrow, such as when the new owner
-     * sets a buy price or lists it in a new auction.
-     */
-    function _finalizeReserveAuction(uint256 auctionId, bool keepInEscrow) internal {
-        ReserveAuction memory auction = auctionIdToAuction[auctionId];
-
-        if (auction.endTime >= block.timestamp) {
-            revert(ReserveAuction_Cannot_Finalize_Auction_In_Progress);
-        }
-
-        // Remove the auction.
-        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
-        delete auctionIdToAuction[auctionId];
-
-        if (!keepInEscrow) {
-            // The seller was authorized when the auction was originally created
-            _transferFromEscrow(auction.nftContract, auction.tokenId, auction.bidder);
-        }
-
-        // Distribute revenue for this sale.
-        (uint256 platformFee, uint256 royaltyFee, uint256 assetFee) = _distAuctionFunds(auction);
-
-        emit ReserveAuctionFinalized(auctionId, auction.seller, auction.bidder, platformFee, royaltyFee, assetFee);
-    }
-
-    function _distAuctionFunds(ReserveAuction memory auction)
+        address payable seller
+    )
         internal
+        override
         returns (
             uint256 platformFee,
             uint256 royaltyFee,
             uint256 assetFee
         )
     {
-        return
-            _distFunds(
-                auction.nftContract,
-                auction.tokenId,
-                auction.amount,
-                auction.seller,
-                auction.sellerFeePermille,
-                auction.buyerFeePermille
-            );
-    }
-
-    /**
-     * @notice Allows Enigma to cancel an auction, refunding the bidder and returning the NFT to
-     * the seller (if not active buy price set).
-     * This should only be used for extreme cases such as DMCA takedown requests.
-     * @param auctionId The id of the auction to cancel.
-     * @param reason The reason for the cancellation (a required field).
-     */
-    function adminCancelReserveAuction(uint256 auctionId, string calldata reason) external onlyOwner nonReentrant {
-        if (bytes(reason).length == 0) {
-            revert(ReserveAuction_Cannot_Admin_Cancel_Without_Reason);
-        }
-        ReserveAuction memory auction = auctionIdToAuction[auctionId];
-        if (auction.amount == 0) {
-            revert(ReserveAuction_Cannot_Cancel_Nonexistent_Auction);
-        }
-
-        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
-        delete auctionIdToAuction[auctionId];
-
-        // Return the NFT to the owner.
-        _transferFromEscrow(auction.nftContract, auction.tokenId, auction.seller);
-
-        if (auction.bidder != address(0)) {
-            // Refund the highest bidder if any bids were placed in this auction.
-            _sendValueWithFallbackWithdraw(auction.bidder, auction.amount, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
-        }
-
-        emit ReserveAuctionCanceledByAdmin(auctionId, reason);
-    }
-
-    /**
-     * @notice If an auction has been created but has not yet received bids, it may be canceled by the seller.
-     * @dev The NFT is transferred back to the owner unless there is still a buy price set.
-     * @param auctionId The id of the auction to cancel.
-     */
-    function cancelReserveAuction(uint256 auctionId) external nonReentrant {
-        ReserveAuction memory auction = auctionIdToAuction[auctionId];
-        if (auction.amount == 0) {
-            revert(ReserveAuction_Cannot_Cancel_Nonexistent_Auction);
-        }
-        if (auction.seller != msg.sender) {
-            revert(ReserveAuction_Only_Owner_Can_Update_Auction);
-        }
-        if (auction.endTime != 0) {
-            revert(ReserveAuction_Cannot_Update_Auction_In_Progress);
-        }
-
-        // Remove the auction.
-        delete nftContractToTokenIdToAuctionId[auction.nftContract][auction.tokenId];
-        delete auctionIdToAuction[auctionId];
-
-        // Transfer the NFT.
-        _transferFromEscrow(auction.nftContract, auction.tokenId, auction.seller);
-
-        emit ReserveAuctionCanceled(auctionId);
-    }
-
-    /**
-     * @notice Place a bid in an auction.
-     * A bidder may place a bid which is at least the value defined by `getMinBidAmount`.
-     * If this is the first bid on the auction, the countdown will begin.
-     * If there is already an outstanding bid, the previous bidder will be refunded at this time
-     * and if the bid is placed in the final moments of the auction, the countdown may be extended.
-     * @param auctionId The id of the auction to bid on.
-     */
-    /* solhint-disable-next-line code-complexity */
-    function placeBid(uint256 auctionId) external payable nonReentrant {
-        ReserveAuction storage auction = auctionIdToAuction[auctionId];
-
-        if (auction.amount == 0) {
-            // No auction found
-            revert(ReserveAuction_Cannot_Bid_On_Nonexistent_Auction);
-        }
-
-        uint256 endTime = auction.endTime;
-        if (endTime == 0) {
-            // This is the first bid, kicking off the auction.
-
-            if (msg.value < auction.amount) {
-                // The bid must be >= the reserve price.
-                revert(ReserveAuction_Cannot_Bid_Lower_Than_Reserve_Price);
-            }
-
-            // Store the bid details.
-            auction.amount = msg.value;
-            auction.bidder = payable(msg.sender);
-
-            // On the first bid, set the endTime to now + duration.
-            // Duration is always less than MAX MAX, so the below can't overflow.
-            endTime = block.timestamp + auction.duration;
-
-            auction.endTime = endTime;
+        // Disable slither warning because it's only invoked from functions with nonReentrant checks
+        Fee memory fee = getFees(amount, nftContract, tokenId);
+        _sendValueWithFallbackWithdraw(getPlatformTreasury(), fee.platformFee, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
+        uint256 toSeller;
+        // Verifies it the seller is the creator, to avoid doble sent and save some gas
+        if (seller == fee.tokenCreator) {
+            toSeller = fee.royaltyFee + fee.assetFee;
         } else {
-            if (endTime < block.timestamp) {
-                // The auction has already ended.
-                revert(ReserveAuction_Cannot_Bid_On_Ended_Auction);
-            } else if (auction.bidder == msg.sender) {
-                // We currently do not allow a bidder to increase their bid unless another user has outbid them first.
-                revert(ReserveAuction_Cannot_Rebid_Over_Outstanding_Bid);
-            } else {
-                uint256 minIncrement = _getMinIncrement(auction.amount);
-                if (msg.value < minIncrement) {
-                    // If this bid outbids another, it must be at least 10% greater than the last bid.
-                    revert(ReserveAuction_Bid_Must_Be_At_Least_Min_Amount);
-                }
-            }
-
-            // Cache and update bidder state
-            uint256 originalAmount = auction.amount;
-            address payable originalBidder = auction.bidder;
-            auction.amount = msg.value;
-            auction.bidder = payable(msg.sender);
-
-            // When a bid outbids another, check to see if a time extension should apply.
-            // We confirmed that the auction has not ended, so endTime is always >= the current timestamp.
-            // Current time plus extension duration (always 15 mins) cannot overflow.
-            uint256 endTimeWithExtension = block.timestamp + EXTENSION_DURATION;
-            if (endTime < endTimeWithExtension) {
-                endTime = endTimeWithExtension;
-                auction.endTime = endTime;
-            }
-            // Refund the previous bidder
-            _sendValueWithFallbackWithdraw(originalBidder, originalAmount, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
+            _sendValueWithFallbackWithdraw(
+                payable(fee.tokenCreator),
+                fee.royaltyFee,
+                SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT
+            );
+            toSeller = fee.assetFee;
         }
-        emit ReserveAuctionBidPlaced(auctionId, msg.sender, msg.value, endTime);
+        _sendValueWithFallbackWithdraw(seller, toSeller, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
+        return (fee.platformFee, fee.royaltyFee, fee.assetFee);
     }
 
-    /**
-     * @notice If an auction has been created but has not yet received bids, the reservePrice may be
-     * changed by the seller.
-     * @param auctionId The id of the auction to change.
-     * @param reservePrice The new reserve price for this auction.
-     */
-    function updateReserveAuction(uint256 auctionId, uint256 reservePrice)
-        external
-        onlyValidAuctionConfig(reservePrice)
-    {
-        ReserveAuction storage auction = auctionIdToAuction[auctionId];
-        if (auction.seller != msg.sender) {
-            revert(ReserveAuction_Only_Owner_Can_Update_Auction);
-        } else if (auction.endTime != 0) {
-            revert(ReserveAuction_Cannot_Update_Auction_In_Progress);
-        }
-
-        // get the amount, including buyer fee for this reserve price
-        uint256 amount = applyBuyerFee(reservePrice, auction.buyerFeePermille);
-        if (auction.amount == amount) revert(ReserveAuction_Price_Already_Set);
-
-        // Update the current reserve price.
-        auction.amount = amount;
-
-        emit ReserveAuctionUpdated(auctionId, reservePrice);
-    }
+    /*********************
+     ** PUBLIC FUNCTIONS *
+     *********************/
 
     /**
-     * @notice Returns the minimum amount a bidder must spend to participate in an auction.
-     * Bids must be greater than or equal to this value or they will revert.
-     * @param auctionId The id of the auction to check.
-     * @return minimum The minimum amount for a bid to be accepted.
-     */
-    function getMinBidAmount(uint256 auctionId) external view returns (uint256 minimum) {
-        ReserveAuction storage auction = auctionIdToAuction[auctionId];
-        if (auction.endTime == 0) {
-            return auction.amount;
-        }
-        return _getMinIncrement(auction.amount);
-    }
-
-    /**
-     * @notice Returns auction details for a given auctionId.
-     * @param auctionId The id of the auction to lookup.
-     * @return auction The auction details.
-     */
-    function getReserveAuction(uint256 auctionId) external view returns (ReserveAuction memory auction) {
-        return auctionIdToAuction[auctionId];
-    }
-
-    /**
-     * @notice Returns the auctionId for a given NFT, or 0 if no auction is found.
-     * @dev If an auction is canceled, it will not be returned. However the auction may be over
-     *  and pending finalization.
+     * @notice Creates an auction for the given NFT.
+     * The NFT is held in escrow until the auction is finalized or canceled.
      * @param nftContract The address of the NFT contract.
      * @param tokenId The id of the NFT.
-     * @return auctionId The id of the auction, or 0 if no auction is found.
+     * @param duration seconds for how long an auction lasts for once the first bid has been received.
+     * @param reservePrice The initial reserve price for the auction.
      */
-    function getReserveAuctionIdFor(address nftContract, uint256 tokenId) external view returns (uint256 auctionId) {
-        auctionId = nftContractToTokenIdToAuctionId[nftContract][tokenId];
+    function createReserveAuction(
+        address nftContract,
+        uint256 tokenId,
+        uint256 duration,
+        uint256 reservePrice
+    ) external nonReentrant onlyValidAuctionConfig(reservePrice) {
+        // get the amount, including buyer fee for this reserve price
+        uint256 amount = applyBuyerFee(reservePrice, buyerFeePermille);
+        createReserveAuctionFor(
+            nftContract,
+            tokenId,
+            duration,
+            reservePrice,
+            amount,
+            buyerFeePermille,
+            sellerFeePermille
+        );
     }
-
-    /**
-     * @dev This empty reserved space is put in place to allow future versions to add new
-     * variables without shifting down storage in the inheritance chain.
-     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
-     */
-    uint256[1000] private __gap;
 }
 
 // 
@@ -8705,16 +8849,14 @@ pragma experimental ABIEncoderV2;
 /// @title EnigmaUserToken1155
 ///
 /// @dev This contract extends from BaseEnigmaNFT1155
+
 contract EnigmaUserToken1155 is BaseEnigmaNFT1155 {
     address public operator;
     bool public autoId;
-    address public bundledItemsRecipient;
 
     event OperatorChanged(address indexed newOperator);
-    event BundledItemsRecipientChanged(address indexed newBundledItemsrecipient);
-    event ItemsBundled(uint256 indexed newTokenId, uint256[] ids, uint256[] amounts);
 
-    struct MintItem {
+    struct BatchMintItem {
         uint256 tokenId;
         address recipient;
         uint256 amount;
@@ -8738,9 +8880,6 @@ contract EnigmaUserToken1155 is BaseEnigmaNFT1155 {
      * @param symbol_ the token symbol
      * @param tokenURIPrefix_ the token base uri
      * @param operator_ that will be able to mint tokens on behalf the owner
-     * @param transferGatekeeperBeacon_ TransferGatekeeper beacon
-     * @param autoId_ True if token id will be automatically assigned when minting
-     * @param bundledItemsRecipient_ Adress that will receive the tokens to be bundled. This ideally should lock them.
      */
     function initialize(
         string memory name_,
@@ -8748,53 +8887,27 @@ contract EnigmaUserToken1155 is BaseEnigmaNFT1155 {
         string memory tokenURIPrefix_,
         address operator_,
         address transferGatekeeperBeacon_,
-        bool autoId_,
-        address bundledItemsRecipient_
+        bool autoId_
     ) external initializer {
         super._initialize(name_, symbol_, tokenURIPrefix_);
         operator = operator_;
         transferGatekeeperBeacon = IBeacon(transferGatekeeperBeacon_);
         autoId = autoId_;
-        bundledItemsRecipient = bundledItemsRecipient_;
     }
 
-    function batchMint(MintItem[] calldata toMint) external onlyOwnerOrOperator {
+    function batchMint(BatchMintItem[] calldata toMint) external onlyOwnerOrOperator {
         uint256 length = toMint.length;
 
+        BatchMintItem calldata item;
+        uint256 tokenId;
         for (uint256 index = 0; index < length; index++) {
-            _mintItem(toMint[index]);
-        }
-    }
-
-    /**
-     * @notice This function bundles (exchanges) some tokens in exchange for a new one. All the tokens
-     *         must belong to the same collection (this one)
-     * @dev This operation can only be performed by the owner or the operator.
-     *
-     * @param tokensOwner The one the tokens are going to be taken from
-     * @param ids TokenIds to be locked in exchange for the new one
-     * @param amounts For each token to be exchanged
-     * @param toMint new token to be generated and minted to the owner
-     */
-    function bundle(
-        address tokensOwner,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        MintItem calldata toMint
-    ) external onlyOwnerOrOperator {
-        super.safeBatchTransferFrom(tokensOwner, bundledItemsRecipient, ids, amounts, "");
-        _mintItem(toMint);
-        emit ItemsBundled(toMint.tokenId, ids, amounts);
-    }
-
-    /**
-     * @dev Mints a new NFT if it doesn't exist otherwise uses the existing one
-     */
-    function _mintItem(MintItem calldata item) internal {
-        if (!super._exists(item.tokenId)) {
-            super._mintNew(item.recipient, autoId ? _increaseNextId() : item.tokenId, item.amount, item.uri, item.fee);
-        } else {
-            super._mint(item.recipient, item.tokenId, item.amount, "");
+            item = toMint[index];
+            tokenId = item.tokenId;
+            if (!super._exists(item.tokenId)) {
+                super._mintNew(item.recipient, autoId ? _increaseNextId() : tokenId, item.amount, item.uri, item.fee);
+            } else {
+                super._mint(item.recipient, tokenId, item.amount, "");
+            }
         }
     }
 
@@ -8812,16 +8925,6 @@ contract EnigmaUserToken1155 is BaseEnigmaNFT1155 {
     function setOperator(address newOperator) external onlyOwner {
         operator = newOperator;
         emit OperatorChanged(newOperator);
-    }
-
-    /**
-     * @notice Allows changing the bundled NFTs recipient to another address
-     * @param bundledItemsRecipient_ New recipient. Cannot be 0x0 address otherwise will fail when transfering
-     */
-    function setBundledItemsRecipient(address bundledItemsRecipient_) external onlyOwnerOrOperator {
-        require(bundledItemsRecipient_ != address(0x0), "Cannot be 0x0 address");
-        bundledItemsRecipient = bundledItemsRecipient_;
-        emit BundledItemsRecipientChanged(bundledItemsRecipient);
     }
 }
 
@@ -8913,6 +9016,63 @@ pragma experimental ABIEncoderV2;
 
 
 
+/// @title TestEnigmaNFT721
+///
+/// @dev This contract extends from BaseEnigmaNFT721 for upgradeablity testing
+
+contract TestEnigmaNFT721 is BaseEnigmaNFT721 {
+    event CollectibleCreated(uint256 tokenId);
+
+    /**
+     * @notice public function to mint a new token.
+     * @param tokenURI_ string memory URI of the token to be minted.
+     * @param fee_ uint256 royalty of the token to be minted.
+     */
+    function createCollectible(string memory tokenURI_, uint256 fee_) external returns (uint256) {
+        uint256 newItemId = tokenCounter;
+        tokenCounter = tokenCounter + 1;
+        emit CollectibleCreated(newItemId);
+        _safeMint(msg.sender, newItemId, fee_);
+        _setTokenURI(newItemId, tokenURI_);
+        return newItemId;
+    }
+}
+
+// 
+pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
+
+
+
+/// @title EnigmaUserToken721
+///
+/// @dev This contract extends from BaseEnigmaNFT721
+
+contract EnigmaUserToken721 is BaseEnigmaNFT721 {
+    /// oz-upgrades-unsafe-allow constructor
+    // solhint-disable-next-line
+    constructor() initializer {}
+
+    /**
+     * @notice public function to mint a new token.
+     * @param tokenURI_ string memory URI of the token to be minted.
+     * @param fee_ uint256 royalty of the token to be minted.
+     */
+    function createCollectible(string memory tokenURI_, uint256 fee_) external onlyOwner returns (uint256) {
+        uint256 newItemId = tokenCounter;
+        tokenCounter = tokenCounter + 1;
+        _safeMint(msg.sender, newItemId, fee_);
+        _setTokenURI(newItemId, tokenURI_);
+        return newItemId;
+    }
+}
+
+// 
+pragma solidity ^0.7.6;
+pragma experimental ABIEncoderV2;
+
+
+
 
 /// @title EnigmaNFT721
 ///
@@ -8975,205 +9135,27 @@ pragma experimental ABIEncoderV2;
 
 
 
-/// @title TestEnigmaNFT721
+/// @title TestTradeV4
 ///
-/// @dev This contract extends from BaseEnigmaNFT721 for upgradeablity testing
+/// @dev This contract extends from Trade Series for upgradeablity testing
 
-contract TestEnigmaNFT721 is BaseEnigmaNFT721 {
-    event CollectibleCreated(uint256 tokenId);
-
-    /**
-     * @notice public function to mint a new token.
-     * @param tokenURI_ string memory URI of the token to be minted.
-     * @param fee_ uint256 royalty of the token to be minted.
-     */
-    function createCollectible(string memory tokenURI_, uint256 fee_) external returns (uint256) {
-        uint256 newItemId = tokenCounter;
-        tokenCounter = tokenCounter + 1;
-        emit CollectibleCreated(newItemId);
-        _safeMint(msg.sender, newItemId, fee_);
-        _setTokenURI(newItemId, tokenURI_);
-        return newItemId;
-    }
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-
-
-/// @title EnigmaUserToken721
-///
-/// @dev This contract extends from BaseEnigmaNFT721
-
-contract EnigmaUserToken721 is BaseEnigmaNFT721 {
-    /// oz-upgrades-unsafe-allow constructor
-    // solhint-disable-next-line
-    constructor() initializer {}
-
-    /**
-     * @notice public function to mint a new token.
-     * @param tokenURI_ string memory URI of the token to be minted.
-     * @param fee_ uint256 royalty of the token to be minted.
-     */
-    function createCollectible(string memory tokenURI_, uint256 fee_) external onlyOwner returns (uint256) {
-        uint256 newItemId = tokenCounter;
-        tokenCounter = tokenCounter + 1;
-        _safeMint(msg.sender, newItemId, fee_);
-        _setTokenURI(newItemId, tokenURI_);
-        return newItemId;
-    }
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-
-
-
-
-
-
-/// @title EnigmaMarket
-///
-/// @dev This contract is a Transparent Upgradable based in openZeppelin v3.4.0.
-///         Be careful when upgrade, you must respect the same storage.
-
-contract EnigmaMarket is
-    TradeV4,
-    ERC721HolderUpgradeable, // Make sure the contract is able to use its
-    NFTMarketReserveAuction
-{
-    /// oz-upgrades-unsafe-allow constructor
-    // solhint-disable-next-line
-    constructor() initializer {}
-
-    /**
-     * @notice Called once to configure the contract after the initial proxy deployment.
-     * @dev This farms the initialize call out to inherited contracts as needed to initialize mutable variables.
-     * @param _transferProxy the proxy from wich all NFT transfers are gonna be processed from.
-     * @param _enigmaNFT721Address Enigma ERC721 NFT proxy.
-     * @param _enigmaNFT1155Address Enigma ERC1155 NFT proxy.
-     * @param _custodialAddress The address on wich NFTs are gonna be kept during Fiat Trades.
-     * @param _minDuration The min duration for auctions, in seconds.
-     * @param _maxDuration The max duration for auctions, in seconds.
-     * @param _minIncrementPermille The minimum required when making an offer or placing a bid. Ej: 100 => 0.1 => 10%
-     */
-    function fullInitialize(
+contract TestTradeV4 is TradeV4 {
+    function initialize(
+        uint8 _buyerFee,
+        uint8 _sellerFee,
         ITransferProxy _transferProxy,
         address _enigmaNFT721Address,
         address _enigmaNFT1155Address,
-        address _custodialAddress,
-        uint256 _minDuration,
-        uint256 _maxDuration,
-        uint16 _minIncrementPermille
+        address _custodialAddress
     ) external initializer {
-        initializeTradeV4(_transferProxy, _enigmaNFT721Address, _enigmaNFT1155Address, _custodialAddress);
-        __Ownable_init();
-        __ReentrancyGuard_init();
-        _initializeNFTMarketAuction();
-        _initializeNFTMarketReserveAuction(_minDuration, _maxDuration);
-        _initializeNFTMarketCore(_minIncrementPermille);
-    }
-
-    /**
-     * @notice Called once to configure the contract after the initial proxy deployment.
-     * @dev as we are updating an already deployed contracts, legacy vars don't need init.
-     * @param _minDuration The min duration for auctions, in seconds.
-     * @param _maxDuration The max duration for auctions, in seconds.
-     */
-    function upgradeInitialize(uint256 _minDuration, uint256 _maxDuration) external onlyOwner {
-        _initializeNFTMarketAuction();
-        _initializeNFTMarketReserveAuction(_minDuration, _maxDuration);
-    }
-
-    function getPlatformTreasury() public view returns (address payable) {
-        // TODO: review if we don't need a new field for collecting fees
-        return payable(owner());
-    }
-
-    /**
-     * @inheritdoc NFTMarketCore
-     */
-    function _transferFromEscrow(
-        address nftContract,
-        uint256 tokenId,
-        address recipient
-    ) internal virtual override {
-        // As we are transfering through our own market, there's no need to go by transferProxy
-        IERC721(nftContract).transferFrom(address(this), recipient, tokenId);
-    }
-
-    /**
-     * @inheritdoc NFTMarketCore
-     */
-    function _transferToEscrow(address nftContract, uint256 tokenId) internal virtual override {
-        safeTransferFrom(AssetType.ERC721, msg.sender, address(this), nftContract, tokenId, 1);
-    }
-
-    /**
-     * @dev Be careful when invoking this function as reentrancy guard should be put in place
-     */
-    // slither-disable-next-line reentrancy-eth
-    function _distFunds(
-        address nftContract,
-        uint256 tokenId,
-        uint256 amount,
-        address payable seller,
-        uint256 sellerFeesPerMille,
-        uint256 buyerFeesPerMille
-    )
-        internal
-        override
-        returns (
-            uint256 platformFee,
-            uint256 royaltyFee,
-            uint256 assetFee
-        )
-    {
-        // Disable slither warning because it's only invoked from functions with nonReentrant checks
-        Fee memory fee = getFees(amount, nftContract, tokenId, sellerFeesPerMille, buyerFeesPerMille);
-        _sendValueWithFallbackWithdraw(getPlatformTreasury(), fee.platformFee, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
-        uint256 toSeller;
-        // Verifies it the seller is the creator, to avoid doble sent and save some gas
-        if (seller == fee.tokenCreator) {
-            toSeller = fee.royaltyFee + fee.assetFee;
-        } else {
-            _sendValueWithFallbackWithdraw(
-                payable(fee.tokenCreator),
-                fee.royaltyFee,
-                SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT
-            );
-            toSeller = fee.assetFee;
-        }
-        _sendValueWithFallbackWithdraw(seller, toSeller, SEND_VALUE_GAS_LIMIT_SINGLE_RECIPIENT);
-        return (fee.platformFee, fee.royaltyFee, fee.assetFee);
-    }
-
-    /*********************
-     ** PUBLIC FUNCTIONS *
-     *********************/
-
-    /**
-     * @notice Creates an auction for the given NFT.
-     * The NFT is held in escrow until the auction is finalized or canceled.
-     * @param nftContract The address of the NFT contract.
-     * @param tokenId The id of the NFT.
-     * @param duration seconds for how long an auction lasts for once the first bid has been received.
-     * @param reservePrice The initial reserve price for the auction.
-     */
-    function createReserveAuction(
-        address nftContract,
-        uint256 tokenId,
-        uint256 duration,
-        uint256 reservePrice,
-        PlatformFees calldata platformFees
-    ) external nonReentrant onlyValidAuctionConfig(reservePrice) {
-        // get the amount, including buyer fee for this reserve price
-        uint256 amount = applyBuyerFee(reservePrice, platformFees.buyerFeePermille);
-        createReserveAuctionFor(nftContract, tokenId, duration, reservePrice, amount, platformFees);
+        initializeTradeV4(
+            _buyerFee,
+            _sellerFee,
+            _transferProxy,
+            _enigmaNFT721Address,
+            _enigmaNFT1155Address,
+            _custodialAddress
+        );
     }
 }
 
@@ -9214,13 +9196,17 @@ pragma experimental ABIEncoderV2;
 
 
 
-
 /// @title TestEnigmaMarket
 ///
 /// @dev This contract extends from Trade Series for upgradeablity testing
 
 contract TestEnigmaMarket is EnigmaMarket {
     uint256 public aNewValue;
+
+    /// @dev trivial getter override, to verify actual change
+    function sellerServiceFee() external view virtual override returns (uint8) {
+        return 42;
+    }
 
     /// @dev makes internal storage visible
     function getMaxDuration() external view returns (uint256) {
@@ -9249,11 +9235,10 @@ contract TestAuctionSeller {
         address nftContract,
         uint256 tokenId,
         uint256 duration,
-        uint256 reservePrice,
-        PlatformFees calldata platformFees
+        uint256 reservePrice
     ) public {
         doFail = true;
-        TestEnigmaMarket(market).createReserveAuction(nftContract, tokenId, duration, reservePrice, platformFees);
+        TestEnigmaMarket(market).createReserveAuction(nftContract, tokenId, duration, reservePrice);
     }
 
     function doWithdrawTo(address market, address payable user) public {
@@ -9268,26 +9253,5 @@ contract TestAuctionSeller {
     /// receive fails on purpose to test this scenario
     receive() external payable {
         if (doFail) revert("test only");
-    }
-}
-
-// 
-pragma solidity ^0.7.6;
-pragma experimental ABIEncoderV2;
-
-
-
-/// @title TestTradeV4
-///
-/// @dev This contract extends from Trade Series for upgradeablity testing
-
-contract TestTradeV4 is TradeV4 {
-    function initialize(
-        ITransferProxy _transferProxy,
-        address _enigmaNFT721Address,
-        address _enigmaNFT1155Address,
-        address _custodialAddress
-    ) external initializer {
-        initializeTradeV4(_transferProxy, _enigmaNFT721Address, _enigmaNFT1155Address, _custodialAddress);
     }
 }
