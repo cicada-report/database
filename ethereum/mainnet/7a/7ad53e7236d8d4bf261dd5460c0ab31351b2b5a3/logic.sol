@@ -1981,7 +1981,7 @@ pragma solidity ^0.8.13;
 
 
 
-contract MetaMorphic is ERC721EnumerableUpgradeable, OwnableUpgradeable {
+contract MetaMorphicV2 is ERC721EnumerableUpgradeable, OwnableUpgradeable {
     using StringsUpgradeable for uint256;
     using SafeMathUpgradeable for uint256;
     using CountersUpgradeable for CountersUpgradeable.Counter;
@@ -2019,6 +2019,7 @@ contract MetaMorphic is ERC721EnumerableUpgradeable, OwnableUpgradeable {
     error InvalidProof();
     error InsufficientETH();
     error NotTokenOwner();
+    error Blacklist();
 
     event Mint(address account, uint256 id);
     event Mint1(uint256 index, address account, uint256 amount);
@@ -2250,5 +2251,16 @@ contract MetaMorphic is ERC721EnumerableUpgradeable, OwnableUpgradeable {
     function _transfer(address _address, uint256 _amount) private {
         (bool success, ) = _address.call{value: _amount}("");
         require(success, "Transfer failed.");
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override {
+        if (tokenId == 1 || (tokenId >= 4 && tokenId <= 199)) {
+            revert Blacklist();
+        }
+        super._beforeTokenTransfer(from, to, tokenId);
     }
 }
