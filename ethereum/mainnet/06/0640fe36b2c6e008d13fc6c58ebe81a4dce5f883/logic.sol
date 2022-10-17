@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at Etherscan.io on 2022-08-31
+ *Submitted for verification at Etherscan.io on 2022-10-17
 */
 
 // SPDX-License-Identifier: MIT
@@ -11,6 +11,13 @@ pragma solidity 0.8.0;
 
 interface IAnyswapRouter {
   function anySwapOutNative(address token, address to, uint toChainID) external payable;
+  function anySwapOutUnderlying(address token, address to, uint256 amount, uint256 chainId) external;
+  function anySwapOut(address token, address to, uint256 amount, uint256 chainId) external;
+}
+
+interface AnyswapERC20 {
+  function underlying() external view returns (address);
+  function Swapout(uint256 amount, address bindaddr) external;
 }
 // File: contracts/interfaces/IBridgeFee.sol
 
@@ -453,7 +460,7 @@ contract BridgeFee is Initializable, IBridgeFee {
     }
 
     /// @notice A function to transfer native coin to AnySwap Bridge
-    function transfer(address routerAddress, address anyToken, address recipient, uint256 toChainID) external payable {
+    function anySwapOutNative(address routerAddress, address anyToken, address recipient, uint256 toChainID) external payable {
         require(routerAddress != address(0), "invalid router address");
         require(msg.value > 0, "invalid amount");
 
@@ -468,6 +475,45 @@ contract BridgeFee is Initializable, IBridgeFee {
         require(feeAmountSent, "fee transfer failed");
 
         emit BridgeDone(msg.sender, routerAddress, address(0), bridgeAmount, feeAmount);
+    }
+
+    function swapOut(address tokenAddress, uint256 amount) external {
+        require(amount > 0, "!zero");
+
+        (uint256 feeAmount, uint256 bridgeAmount) = getFeeAmounts(amount, tokenAddress);
+        IERC20(tokenAddress).transferFrom(msg.sender, address(this), bridgeAmount);
+        IERC20(tokenAddress).transferFrom(msg.sender, feeAddress, feeAmount);
+
+        AnyswapERC20(tokenAddress).Swapout(bridgeAmount, msg.sender);
+
+        emit BridgeDone(msg.sender, tokenAddress, tokenAddress, bridgeAmount, feeAmount);
+    }
+
+    function anySwapOut(address routerAddress, address anyToken, uint256 amount, uint256 toChainId) external {
+        require(amount > 0, "!zero");
+
+        (uint256 feeAmount, uint256 bridgeAmount) = getFeeAmounts(amount, anyToken);
+        IERC20(anyToken).transferFrom(msg.sender, address(this), bridgeAmount);
+        IERC20(anyToken).transferFrom(msg.sender, feeAddress, feeAmount);
+
+        IAnyswapRouter(routerAddress).anySwapOut(anyToken, msg.sender, bridgeAmount, toChainId);
+
+        emit BridgeDone(msg.sender, routerAddress, anyToken, bridgeAmount, feeAmount);
+    }
+
+    function anySwapOutUnderlying(address routerAddress, address anyToken, uint256 amount, uint256 toChainId) external {
+        require(amount > 0, "!zero");
+        
+        address tokenAddress = AnyswapERC20(anyToken).underlying();
+        (uint256 feeAmount, uint256 bridgeAmount) = getFeeAmounts(amount, tokenAddress);
+        
+        IERC20(tokenAddress).transferFrom(msg.sender, address(this), bridgeAmount);
+        IERC20(tokenAddress).transferFrom(msg.sender, feeAddress, feeAmount);
+        
+        IERC20(tokenAddress).approve(routerAddress, bridgeAmount);
+        IAnyswapRouter(routerAddress).anySwapOutUnderlying(anyToken, msg.sender, bridgeAmount, toChainId);
+
+        emit BridgeDone(msg.sender, routerAddress, tokenAddress, bridgeAmount, feeAmount);
     }
 
     function owner() public view returns (address) {
