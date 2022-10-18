@@ -2820,87 +2820,6 @@ interface IExchange{
 // 
 pragma solidity ^0.8.11;
 
-interface ICvxBaseRewardPool {
-    function addExtraReward(address _reward) external returns (bool);
-
-    function balanceOf(address account) external view returns (uint256);
-
-    function clearExtraRewards() external;
-
-    function currentRewards() external view returns (uint256);
-
-    function donate(uint256 _amount) external returns (bool);
-
-    function duration() external view returns (uint256);
-
-    function earned(address account) external view returns (uint256);
-
-    function extraRewards(uint256) external view returns (address);
-
-    function extraRewardsLength() external view returns (uint256);
-
-    function getReward() external returns (bool);
-
-    function getReward(address _account, bool _claimExtras)
-        external
-        returns (bool);
-
-    function historicalRewards() external view returns (uint256);
-
-    function lastTimeRewardApplicable() external view returns (uint256);
-
-    function lastUpdateTime() external view returns (uint256);
-
-    function newRewardRatio() external view returns (uint256);
-
-    function operator() external view returns (address);
-
-    function periodFinish() external view returns (uint256);
-
-    function pid() external view returns (uint256);
-
-    function queueNewRewards(uint256 _rewards) external returns (bool);
-
-    function queuedRewards() external view returns (uint256);
-
-    function rewardManager() external view returns (address);
-
-    function rewardPerToken() external view returns (uint256);
-
-    function rewardPerTokenStored() external view returns (uint256);
-
-    function rewardRate() external view returns (uint256);
-
-    function rewardToken() external view returns (address);
-
-    function rewards(address) external view returns (uint256);
-
-    function stake(uint256 _amount) external returns (bool);
-
-    function stakeAll() external returns (bool);
-
-    function stakeFor(address _for, uint256 _amount) external returns (bool);
-
-    function stakingToken() external view returns (address);
-
-    function totalSupply() external view returns (uint256);
-
-    function userRewardPerTokenPaid(address) external view returns (uint256);
-
-    function withdraw(uint256 amount, bool claim) external returns (bool);
-
-    function withdrawAll(bool claim) external;
-
-    function withdrawAllAndUnwrap(bool claim) external;
-
-    function withdrawAndUnwrap(uint256 amount, bool claim)
-        external
-        returns (bool);
-}
-
-// 
-pragma solidity ^0.8.11;
-
 // Interface from ABI of
 // https://etherscan.io/address/0xF403C135812408BFbE8713b5A23a04b3D48AAE31
 // Built with https://bia.is/tools/abi2solidity/
@@ -3063,15 +2982,106 @@ interface ICvxBooster {
     ) external returns (bool);
 }
 
+// 
+pragma solidity ^0.8.11;
+
+interface ICvxBaseRewardPool {
+    function addExtraReward(address _reward) external returns (bool);
+
+    function balanceOf(address account) external view returns (uint256);
+
+    function clearExtraRewards() external;
+
+    function currentRewards() external view returns (uint256);
+
+    function donate(uint256 _amount) external returns (bool);
+
+    function duration() external view returns (uint256);
+
+    function earned(address account) external view returns (uint256);
+
+    function extraRewards(uint256) external view returns (address);
+
+    function extraRewardsLength() external view returns (uint256);
+
+    function getReward() external returns (bool);
+
+    function getReward(address _account, bool _claimExtras)
+        external
+        returns (bool);
+
+    function historicalRewards() external view returns (uint256);
+
+    function lastTimeRewardApplicable() external view returns (uint256);
+
+    function lastUpdateTime() external view returns (uint256);
+
+    function newRewardRatio() external view returns (uint256);
+
+    function operator() external view returns (address);
+
+    function periodFinish() external view returns (uint256);
+
+    function pid() external view returns (uint256);
+
+    function queueNewRewards(uint256 _rewards) external returns (bool);
+
+    function queuedRewards() external view returns (uint256);
+
+    function rewardManager() external view returns (address);
+
+    function rewardPerToken() external view returns (uint256);
+
+    function rewardPerTokenStored() external view returns (uint256);
+
+    function rewardRate() external view returns (uint256);
+
+    function rewardToken() external view returns (address);
+
+    function rewards(address) external view returns (uint256);
+
+    function stake(uint256 _amount) external returns (bool);
+
+    function stakeAll() external returns (bool);
+
+    function stakeFor(address _for, uint256 _amount) external returns (bool);
+
+    function stakingToken() external view returns (address);
+
+    function totalSupply() external view returns (uint256);
+
+    function userRewardPerTokenPaid(address) external view returns (uint256);
+
+    function withdraw(uint256 amount, bool claim) external returns (bool);
+
+    function withdrawAll(bool claim) external;
+
+    function withdrawAllAndUnwrap(bool claim) external;
+
+    function withdrawAndUnwrap(uint256 amount, bool claim)
+        external
+        returns (bool);
+}
+
 //
 pragma solidity ^0.8.11;
 
 interface IAlluoPool {
+    
+    struct RewardData {
+        address token;
+        uint256 amount;
+    }
+
+
     function farm() external;
     function withdraw(uint256 amount) external;
     function fundsLocked() external view returns (uint256);
     function claimRewardsFromPool() external;
-
+    function rewardTokenBalance() external view returns (uint256);
+    function accruedRewards() external view returns (RewardData[] memory);
+    function balances(address) external view returns (uint256);
+    function totalBalances() external view returns (uint256);
 }
 
 // 
@@ -5031,7 +5041,6 @@ pragma solidity ^0.8.11;
 
 
 
-
 contract AlluoVaultUpgradeable is Initializable, PausableUpgradeable, AccessControlUpgradeable, UUPSUpgradeable, ERC4626Upgradeable {
 
     // Deposit vs Mint
@@ -5065,15 +5074,22 @@ contract AlluoVaultUpgradeable is Initializable, PausableUpgradeable, AccessCont
     uint256 public adminFee;
     address public gnosis;
 
+    uint256 vaultRewardsBefore;
+
     using AddressUpgradeable for address;
     using SafeERC20Upgradeable for IERC20MetadataUpgradeable;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
     using MathUpgradeable for uint256;
 
+    struct RewardData {
+        address token;
+        uint256 amount;
+    }
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
 
-  function initialize(
+    function initialize(
         string memory _name,
         string memory _symbol,
         IERC20MetadataUpgradeable _underlying,
@@ -5108,40 +5124,78 @@ contract AlluoVaultUpgradeable is Initializable, PausableUpgradeable, AccessCont
         _grantRole(GELATO, _multiSigWallet);
 
         // ENABLE ONLY FOR TESTS
-        // _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        // _grantRole(UPGRADER_ROLE, msg.sender);
-        // _grantRole(GELATO, msg.sender);
-
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(UPGRADER_ROLE, msg.sender);
+        _grantRole(GELATO, msg.sender);
 
         gnosis = _multiSigWallet;
         trustedForwarder = _trustedForwarder;
-        adminFee = 100;
+        adminFee = 0;
     }
 
     /// @notice Loop called periodically to compound reward tokens into the respective alluo pool
     /// @dev Claims rewards, transfers all rewards to the alluoPool. Then, the pool is farmed and rewards are credited accordingly per share.
-    function loopRewards() external onlyRole(GELATO) {
-        // Send tokens to pool first.
-        // Then call the farm function that converts all rewards to LP tokens 
+    function loopRewards() external onlyRole(DEFAULT_ADMIN_ROLE) {
+        // The vaultRewardsBefore is set in the same call right before the rewardToken balance is increased to allow for this calculation to work.
+        uint256 vaultRewardAfter = IAlluoPool(alluoPool).rewardTokenBalance();
+        uint256 totalRewards = vaultRewardAfter - vaultRewardsBefore;
+        if (totalRewards > 0) {
+            uint256 totalFees = totalRewards * adminFee / 10**4;
+            uint256 newRewards = totalRewards - totalFees;
+            rewards[gnosis] += totalFees;
+            rewardsPerShareAccumulated += newRewards * 10**18 / totalSupply();
+        }
+        console.log("Vault reward after", vaultRewardAfter);
+        console.log("Vault rewards before", vaultRewardsBefore);
+        console.log("Total rewards", totalRewards);
+    }
+
+    function claimAndConvertToPoolEntryToken(address entryToken) external onlyRole(DEFAULT_ADMIN_ROLE) returns (uint256) {
         claimRewardsFromPool();
-        uint256 rewardBefore = IAlluoPool(alluoPool).fundsLocked();
         for (uint256 i; i < yieldTokens.length(); i++) {
             address token = yieldTokens.at(i);
             uint256 balance = IERC20MetadataUpgradeable(token).balanceOf(address(this));
-            IERC20MetadataUpgradeable(token).safeTransfer(alluoPool, balance);
+            if (token != address(entryToken) && balance > 0) {
+                IERC20MetadataUpgradeable(token).safeIncreaseAllowance(address(exchange), balance);
+                exchange.exchange(token, address(entryToken), balance, 0);
+            }
         }
-        IAlluoPool(alluoPool).farm();
-        uint256 rewardAfter = IAlluoPool(alluoPool).fundsLocked();
-        uint256 totalRewards = rewardAfter - rewardBefore;
-        uint256 totalFees = totalRewards * adminFee / 10**4;
-        uint256 newRewards = totalRewards - totalFees;
-        rewards[gnosis] += totalFees;
-        rewardsPerShareAccumulated += newRewards * 10**18 / totalSupply();
+        vaultRewardsBefore = IAlluoPool(alluoPool).rewardTokenBalance();
+        uint256 amount = IERC20MetadataUpgradeable(entryToken).balanceOf(address(this));
+        IERC20MetadataUpgradeable(entryToken).safeTransfer(alluoPool, amount);
+        return amount;
+    }
+    function accruedRewards() public view returns (RewardData[] memory) {
+        (, , , address pool, , ) = cvxBooster.poolInfo(poolId);
+        ICvxBaseRewardPool mainCvxPool = ICvxBaseRewardPool(pool);
+        uint256 extraRewardsLength = mainCvxPool.extraRewardsLength();
+        RewardData[] memory rewardArray = new RewardData[](extraRewardsLength + 1);
+        rewardArray[0] = RewardData(mainCvxPool.rewardToken(),mainCvxPool.earned(address(this)));
+        for (uint256 i; i < extraRewardsLength; i++) {
+            ICvxBaseRewardPool extraReward = ICvxBaseRewardPool(mainCvxPool.extraRewards(i));
+            rewardArray[i+1] = (RewardData(extraReward.rewardToken(), extraReward.earned(address(this))));
+        }
+        return rewardArray;
+    }
 
-        // Disable for Sepolia:
-        // uint256 newRewards = 10**5;
-        // rewardsPerShareAccumulated += newRewards * 10**18 / totalSupply();
-
+    function shareholderAccruedRewards(address shareholder) public view returns (RewardData[] memory, IAlluoPool.RewardData[] memory) {
+        RewardData[] memory vaultAccruals = accruedRewards();
+        IAlluoPool.RewardData[] memory poolAccruals = IAlluoPool(alluoPool).accruedRewards();
+        uint256 shares = balanceOf(shareholder);
+        uint256 totalSupplyShares = totalSupply();
+        uint256 poolTotalBalances = IAlluoPool(alluoPool).totalBalances();
+        for (uint256 i; i < vaultAccruals.length; i++) {
+            uint256 userShareOfVaultAccruals = vaultAccruals[i].amount * shares / totalSupplyShares;
+            vaultAccruals[i].amount = userShareOfVaultAccruals;
+        }
+        for (uint256 i; i < poolAccruals.length; i++) {
+            if (poolTotalBalances == 0) {
+                break;
+            }
+            uint256 vaultShareOfPoolAccruals = poolAccruals[i].amount * IAlluoPool(alluoPool).balances(address(this)) / poolTotalBalances;
+            poolAccruals[i].amount = vaultShareOfPoolAccruals * shares / totalSupplyShares;
+        }
+        return (vaultAccruals, poolAccruals);
     }
 
     /// @notice Stakes all underlying LP tokens that are not already staked. 
