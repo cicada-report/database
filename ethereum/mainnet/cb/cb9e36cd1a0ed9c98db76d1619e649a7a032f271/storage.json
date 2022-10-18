@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 10587,
+      "astId": 10616,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 10590,
+      "astId": 10619,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 11212,
+      "astId": 11241,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 11635,
+      "astId": 11664,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_paused",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 11740,
+      "astId": 11769,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 11253,
+      "astId": 11282,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -49,15 +49,15 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 12381,
+      "astId": 12410,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_roles",
       "offset": 0,
       "slot": "151",
-      "type": "t_mapping(t_bytes32,t_struct(RoleData)12376_storage)"
+      "type": "t_mapping(t_bytes32,t_struct(RoleData)12405_storage)"
     },
     {
-      "astId": 12680,
+      "astId": 12709,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -65,7 +65,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 11616,
+      "astId": 11645,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -73,7 +73,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 12812,
+      "astId": 12841,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -81,7 +81,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 11755,
+      "astId": 11784,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_balances",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_mapping(t_address,t_uint256)"
     },
     {
-      "astId": 11761,
+      "astId": 11790,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_allowances",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
     },
     {
-      "astId": 11763,
+      "astId": 11792,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_totalSupply",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 11765,
+      "astId": 11794,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_name",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_string_storage"
     },
     {
-      "astId": 11767,
+      "astId": 11796,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_symbol",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_string_storage"
     },
     {
-      "astId": 12346,
+      "astId": 12375,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -129,15 +129,15 @@
       "type": "t_array(t_uint256)45_storage"
     },
     {
-      "astId": 12827,
+      "astId": 12856,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "_asset",
       "offset": 0,
       "slot": "351",
-      "type": "t_contract(IERC20MetadataUpgradeable)10582"
+      "type": "t_contract(IERC20MetadataUpgradeable)10611"
     },
     {
-      "astId": 13403,
+      "astId": 13432,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "__gap",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 13439,
+      "astId": 13468,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "trustedForwarder",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_address"
     },
     {
-      "astId": 13441,
+      "astId": 13470,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "upgradeStatus",
       "offset": 20,
@@ -161,7 +161,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 13443,
+      "astId": 13472,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "rewardsPerShareAccumulated",
       "offset": 0,
@@ -169,7 +169,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 13447,
+      "astId": 13476,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "userRewardPaid",
       "offset": 0,
@@ -177,7 +177,7 @@
       "type": "t_mapping(t_address,t_uint256)"
     },
     {
-      "astId": 13451,
+      "astId": 13480,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "rewards",
       "offset": 0,
@@ -185,15 +185,15 @@
       "type": "t_mapping(t_address,t_uint256)"
     },
     {
-      "astId": 13454,
+      "astId": 13483,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "rewardToken",
       "offset": 0,
       "slot": "405",
-      "type": "t_contract(IERC20MetadataUpgradeable)10582"
+      "type": "t_contract(IERC20MetadataUpgradeable)10611"
     },
     {
-      "astId": 13456,
+      "astId": 13485,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "alluoPool",
       "offset": 0,
@@ -201,7 +201,7 @@
       "type": "t_address"
     },
     {
-      "astId": 13458,
+      "astId": 13487,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "poolId",
       "offset": 0,
@@ -209,7 +209,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 13461,
+      "astId": 13490,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "yieldTokens",
       "offset": 0,
@@ -217,7 +217,7 @@
       "type": "t_struct(AddressSet)1553_storage"
     },
     {
-      "astId": 13464,
+      "astId": 13493,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "poolTokens",
       "offset": 0,
@@ -225,7 +225,7 @@
       "type": "t_struct(AddressSet)1553_storage"
     },
     {
-      "astId": 13466,
+      "astId": 13495,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "curvePool",
       "offset": 0,
@@ -233,7 +233,7 @@
       "type": "t_address"
     },
     {
-      "astId": 13468,
+      "astId": 13497,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "adminFee",
       "offset": 0,
@@ -241,12 +241,20 @@
       "type": "t_uint256"
     },
     {
-      "astId": 13470,
+      "astId": 13499,
       "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
       "label": "gnosis",
       "offset": 0,
       "slot": "414",
       "type": "t_address"
+    },
+    {
+      "astId": 13501,
+      "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
+      "label": "vaultRewardsBefore",
+      "offset": 0,
+      "slot": "415",
+      "type": "t_uint256"
     }
   ],
   "types": {
@@ -289,7 +297,7 @@
       "label": "bytes32",
       "numberOfBytes": "32"
     },
-    "t_contract(IERC20MetadataUpgradeable)10582": {
+    "t_contract(IERC20MetadataUpgradeable)10611": {
       "encoding": "inplace",
       "label": "contract IERC20MetadataUpgradeable",
       "numberOfBytes": "20"
@@ -315,12 +323,12 @@
       "numberOfBytes": "32",
       "value": "t_uint256"
     },
-    "t_mapping(t_bytes32,t_struct(RoleData)12376_storage)": {
+    "t_mapping(t_bytes32,t_struct(RoleData)12405_storage)": {
       "encoding": "mapping",
       "key": "t_bytes32",
       "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
       "numberOfBytes": "32",
-      "value": "t_struct(RoleData)12376_storage"
+      "value": "t_struct(RoleData)12405_storage"
     },
     "t_mapping(t_bytes32,t_uint256)": {
       "encoding": "mapping",
@@ -349,12 +357,12 @@
       ],
       "numberOfBytes": "64"
     },
-    "t_struct(RoleData)12376_storage": {
+    "t_struct(RoleData)12405_storage": {
       "encoding": "inplace",
       "label": "struct AccessControlUpgradeable.RoleData",
       "members": [
         {
-          "astId": 12373,
+          "astId": 12402,
           "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
           "label": "members",
           "offset": 0,
@@ -362,7 +370,7 @@
           "type": "t_mapping(t_address,t_bool)"
         },
         {
-          "astId": 12375,
+          "astId": 12404,
           "contract": "/database/ethereum/mainnet/cb/cb9e36cd1a0ed9c98db76d1619e649a7a032f271/logic.sol:AlluoVaultUpgradeable",
           "label": "adminRole",
           "offset": 0,
