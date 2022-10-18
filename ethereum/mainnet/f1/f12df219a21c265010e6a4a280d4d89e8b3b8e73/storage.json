@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 1001,
+      "astId": 1387,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 1004,
+      "astId": 1390,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1624,
+      "astId": 1771,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1665,
+      "astId": 1812,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "__gap",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_array(t_uint256)44_storage"
     },
     {
-      "astId": 1672,
+      "astId": 1591,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_HASHED_NAME",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_bytes32"
     },
     {
-      "astId": 1674,
+      "astId": 1593,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_HASHED_VERSION",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_bytes32"
     },
     {
-      "astId": 1812,
+      "astId": 1731,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "__gap",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 3180,
+      "astId": 3322,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_ownedTokens",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))"
     },
     {
-      "astId": 3184,
+      "astId": 3326,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_ownedTokensIndex",
       "offset": 0,
@@ -129,7 +129,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 3187,
+      "astId": 3329,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_allTokens",
       "offset": 0,
@@ -137,7 +137,7 @@
       "type": "t_array(t_uint256)dyn_storage"
     },
     {
-      "astId": 3191,
+      "astId": 3333,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_allTokensIndex",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 3507,
+      "astId": 3649,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "__gap",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_array(t_uint256)46_storage"
     },
     {
-      "astId": 3533,
+      "astId": 3179,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "_tokenURIs",
       "offset": 0,
@@ -161,7 +161,7 @@
       "type": "t_mapping(t_uint256,t_string_storage)"
     },
     {
-      "astId": 3649,
+      "astId": 3295,
       "contract": "/database/ethereum/mainnet/f1/f12df219a21c265010e6a4a280d4d89e8b3b8e73/logic.sol:TheTrapNFT",
       "label": "__gap",
       "offset": 0,
