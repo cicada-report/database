@@ -1,0 +1,280 @@
+{
+  "storage": [
+    {
+      "astId": 832,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 835,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1028,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1069,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1454,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_balances",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))"
+    },
+    {
+      "astId": 1460,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_operatorApprovals",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_mapping(t_address,t_mapping(t_address,t_bool))"
+    },
+    {
+      "astId": 1462,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_uri",
+      "offset": 0,
+      "slot": "103",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 2669,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "104",
+      "type": "t_array(t_uint256)47_storage"
+    },
+    {
+      "astId": 2704,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_roles",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_mapping(t_bytes32,t_struct(RoleData)2699_storage)"
+    },
+    {
+      "astId": 2999,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "152",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1432,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "201",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 3131,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "251",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 3161,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_tokenTransfer",
+      "offset": 0,
+      "slot": "301",
+      "type": "t_bool"
+    },
+    {
+      "astId": 3164,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "owner",
+      "offset": 1,
+      "slot": "301",
+      "type": "t_address"
+    },
+    {
+      "astId": 3167,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "name",
+      "offset": 0,
+      "slot": "302",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 3170,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "symbol",
+      "offset": 0,
+      "slot": "303",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 3173,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "currentPoap",
+      "offset": 0,
+      "slot": "304",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 3176,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_lastPoapId",
+      "offset": 0,
+      "slot": "305",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 3179,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "poapActive",
+      "offset": 0,
+      "slot": "306",
+      "type": "t_bool"
+    },
+    {
+      "astId": 3184,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "lastYearMinted",
+      "offset": 0,
+      "slot": "307",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 3187,
+      "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+      "label": "_contractURI",
+      "offset": 0,
+      "slot": "308",
+      "type": "t_string_storage"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)47_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[47]",
+      "numberOfBytes": "1504"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_address,t_bool)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => bool)",
+      "numberOfBytes": "32",
+      "value": "t_bool"
+    },
+    "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(address => bool))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_bool)"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_mapping(t_bytes32,t_struct(RoleData)2699_storage)": {
+      "encoding": "mapping",
+      "key": "t_bytes32",
+      "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+      "numberOfBytes": "32",
+      "value": "t_struct(RoleData)2699_storage"
+    },
+    "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => mapping(address => uint256))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_uint256)"
+    },
+    "t_string_storage": {
+      "encoding": "bytes",
+      "label": "string",
+      "numberOfBytes": "32"
+    },
+    "t_struct(RoleData)2699_storage": {
+      "encoding": "inplace",
+      "label": "struct AccessControlUpgradeable.RoleData",
+      "members": [
+        {
+          "astId": 2696,
+          "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+          "label": "members",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_mapping(t_address,t_bool)"
+        },
+        {
+          "astId": 2698,
+          "contract": "/database/ethereum/mainnet/40/4030afcbe7f1982616e330e684ec1622d5195eb4/logic.sol:LuckyVR",
+          "label": "adminRole",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_bytes32"
+        }
+      ],
+      "numberOfBytes": "64"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
