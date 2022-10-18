@@ -308,7 +308,7 @@ library Address {
 
 // 
 pragma solidity ^0.8.0;
-pragma abicoder v2;
+pragma experimental ABIEncoderV2;
 
 interface ISturdyIncentivesController {
   event RewardsAccrued(address indexed user, uint256 amount);
@@ -363,14 +363,14 @@ interface ISturdyIncentivesController {
 
   /**
    * @dev Called by the corresponding asset on any update that affects the rewards distribution
-   * @param user The address of the user
+   * @param asset The address of the user
    * @param userBalance The balance of the user of the asset in the lending pool
    * @param totalSupply The total supply of the asset in the lending pool
    **/
   function handleAction(
-    address user,
-    uint256 totalSupply,
-    uint256 userBalance
+    address asset,
+    uint256 userBalance,
+    uint256 totalSupply
   ) external;
 
   /**
@@ -737,13 +737,11 @@ abstract contract VersionedInitializable {
   /**
    * @dev returns the revision number of the contract
    * Needs to be defined in the inherited class as a constant.
-   * @return The revision number
    **/
   function getRevision() internal pure virtual returns (uint256);
 
   /**
    * @dev Returns true if and only if the function is running in the constructor
-   * @return `true` only if the function is running in the constructor
    **/
   function isConstructor() private view returns (bool) {
     // extcodesize checks the size of the code stored in an address, and
@@ -889,23 +887,6 @@ library Errors {
   string internal constant VT_EXTRA_REWARDS_INDEX_INVALID = '99'; // Invalid extraRewards index
   string internal constant VT_SWAP_PATH_LENGTH_INVALID = '100'; // Invalid token or fee length
   string internal constant VT_SWAP_PATH_TOKEN_INVALID = '101'; // Invalid token information
-  string internal constant CLAIMER_UNAUTHORIZED = '102'; // 'The claimer is not authorized'
-  string internal constant YD_INVALID_CONFIGURATION = '103'; // 'The yield distribution's invalid configuration'
-  string internal constant CALLER_NOT_EMISSION_MANAGER = '104'; // 'The caller must be emission manager'
-  string internal constant CALLER_NOT_INCENTIVE_CONTROLLER = '105'; // 'The caller must be incentive controller'
-  string internal constant YD_VR_ASSET_ALREADY_IN_USE = '106'; // Vault is already registered
-  string internal constant YD_VR_INVALID_VAULT = '107'; // Invalid vault is used for an asset
-  string internal constant YD_VR_INVALID_REWARDS_AMOUNT = '108'; // Rewards amount should be bigger than before
-  string internal constant YD_VR_REWARD_TOKEN_NOT_VALID = '109'; // The reward token must be same with configured address
-  string internal constant YD_VR_ASSET_NOT_REGISTERED = '110';
-  string internal constant YD_VR_CALLER_NOT_VAULT = '111'; // The caller must be same with configured vault address
-  string internal constant LS_INVALID_CONFIGURATION = '112'; // Invalid Leverage Swapper configuration
-  string internal constant LS_SWAP_AMOUNT_NOT_GT_0 = '113'; // Collateral amount needs to be greater than zero
-  string internal constant LS_STABLE_COIN_NOT_SUPPORTED = '114'; // Doesn't support swap for the stable coin
-  string internal constant LS_SUPPLY_NOT_ALLOWED = '115'; // no sufficient funds
-  string internal constant LS_SUPPLY_FAILED = '116'; // Deposit fails when leverage works
-  string internal constant LS_REMOVE_ITERATION_OVER = '117'; // Withdraw iteration limit over
-  string internal constant CALLER_NOT_WHITELIST_USER = '118'; // 'The caller must be whitelist user'
 
   enum CollateralManagerErrors {
     NO_ERROR,
@@ -1156,7 +1137,7 @@ interface IAToken is IERC20, IScaledBalanceToken, IInitializableAToken {
 
 // 
 pragma solidity ^0.8.0;
-pragma abicoder v2;
+pragma experimental ABIEncoderV2;
 
 
 
@@ -1311,7 +1292,6 @@ interface ILendingPool {
   /**
    * @dev Deposits an `amount` of underlying asset into the reserve, receiving in return overlying aTokens.
    * - E.g. User deposits 100 USDC and gets in return 100 aUSDC
-   * - Caller is anyone.
    * @param asset The address of the underlying asset to deposit
    * @param amount The amount to be deposited
    * @param onBehalfOf The address that will receive the aTokens, same as msg.sender if the user
@@ -1327,32 +1307,12 @@ interface ILendingPool {
     uint16 referralCode
   ) external;
 
-  /**
-   * @dev Deposits an `amount` of underlying asset into the reserve for supplier from vault
-   * - Caller is only Vault which is registered in this contract
-   * @param asset The address of the underlying asset to deposit
-   * @param amount The amount to be deposited
-   **/
   function depositYield(address asset, uint256 amount) external;
 
-  /**
-   * @dev Grab an Yield `amount` of underlying asset into the vault
-   * - Caller is only Vault which is registered in this contract
-   * @param asset The address of the underlying asset to get yield
-   * @param amount The yield amount
-   **/
   function getYield(address asset, uint256 amount) external;
 
-  /**
-   * @dev Get underlying asset and aToken's total balance
-   * @param asset The address of the underlying asset
-   **/
   function getTotalBalanceOfAssetPair(address asset) external view returns (uint256, uint256);
 
-  /**
-   * @dev Get total underlying asset which is borrowable
-   *  and also list of underlying asset
-   **/
   function getBorrowingAssetAndVolumes()
     external
     view
@@ -1363,26 +1323,11 @@ interface ILendingPool {
       uint256
     );
 
-  /**
-   * @dev Register the vault address
-   * - To check if the caller is vault for some functions
-   * - Caller is only LendingPoolConfigurator
-   * @param _vaultAddress The address of the Vault
-   **/
   function registerVault(address _vaultAddress) external payable;
 
   /**
-   * @dev Unregister the vault address
-   * - To check if the caller is vault for some functions
-   * - Caller is only LendingPoolConfigurator
-   * @param _vaultAddress The address of the Vault
-   **/
-  function unregisterVault(address _vaultAddress) external payable;
-
-  /**
    * @dev Withdraws an `amount` of underlying asset from the reserve, burning the equivalent aTokens owned
-   * - E.g. User has 100 aUSDC, calls withdraw() and receives 100 USDC, burning the 100 aUSDC
-   * - Caller is anyone
+   * E.g. User has 100 aUSDC, calls withdraw() and receives 100 USDC, burning the 100 aUSDC
    * @param asset The address of the underlying asset to withdraw
    * @param amount The underlying amount to be withdrawn
    *   - Send the value type(uint256).max in order to withdraw the whole aToken balance
@@ -1397,19 +1342,6 @@ interface ILendingPool {
     address to
   ) external returns (uint256);
 
-  /**
-   * @dev Withdraws an `amount` of underlying asset from the reserve, burning the equivalent aTokens owned
-   * - E.g. User has 100 aUSDC, calls withdraw() and receives 100 USDC, burning the 100 aUSDC
-   * - Caller is anyone
-   * @param asset The address of the underlying asset to withdraw
-   * @param amount The underlying amount to be withdrawn
-   *   - Send the value type(uint256).max in order to withdraw the whole aToken balance
-   * @param from The address of user who is depositor of underlying asset
-   * @param to Address that will receive the underlying, same as msg.sender if the user
-   *   wants to receive it on his own wallet, or a different address if the beneficiary is a
-   *   different wallet
-   * @return The final amount withdrawn
-   **/
   function withdrawFrom(
     address asset,
     uint256 amount,
@@ -1423,7 +1355,6 @@ interface ILendingPool {
    * corresponding debt token (StableDebtToken or VariableDebtToken)
    * - E.g. User borrows 100 USDC passing as `onBehalfOf` his own address, receiving the 100 USDC in his wallet
    *   and 100 stable/variable debt tokens, depending on the `interestRateMode`
-   * - Caller is anyone
    * @param asset The address of the underlying asset to borrow
    * @param amount The amount to be borrowed
    * @param interestRateMode The interest rate mode at which the user wants to borrow: 1 for Stable, 2 for Variable
@@ -1444,7 +1375,6 @@ interface ILendingPool {
   /**
    * @notice Repays a borrowed `amount` on a specific reserve, burning the equivalent debt tokens owned
    * - E.g. User repays 100 USDC, burning 100 variable/stable debt tokens of the `onBehalfOf` address
-   * - Caller is anyone
    * @param asset The address of the borrowed underlying asset previously borrowed
    * @param amount The amount to repay
    * - Send the value type(uint256).max in order to repay the whole debt for `asset` on the specific `debtMode`
@@ -1472,7 +1402,6 @@ interface ILendingPool {
    * @dev Function to liquidate a non-healthy position collateral-wise, with Health Factor below 1
    * - The caller (liquidator) covers `debtToCover` amount of debt of the user getting liquidated, and receives
    *   a proportionally amount of the `collateralAsset` plus a bonus to cover market risk
-   * - Caller is anyone
    * @param collateralAsset The address of the underlying asset used as collateral, to receive as result of the liquidation
    * @param debtAsset The address of the underlying borrowed asset to be repaid with the liquidation
    * @param user The address of the borrower getting liquidated
@@ -1510,18 +1439,6 @@ interface ILendingPool {
       uint256 healthFactor
     );
 
-  /**
-   * @dev Initializes a reserve, activating it, assigning an aToken and debt tokens and an
-   * interest rate strategy
-   * - Only callable by the LendingPoolConfigurator contract
-   * - Caller is only LendingPoolConfigurator
-   * @param reserve The address of the underlying asset of the reserve
-   * @param yieldAddress The address of the underlying asset's yield contract of the reserve
-   * @param aTokenAddress The address of the aToken that will be assigned to the reserve
-   * @param stableDebtAddress The address of the StableDebtToken that will be assigned to the reserve
-   * @param variableDebtAddress The address of the VariableDebtToken that will be assigned to the reserve
-   * @param interestRateStrategyAddress The address of the interest rate strategy contract
-   **/
   function initReserve(
     address reserve,
     address yieldAddress,
@@ -1531,22 +1448,10 @@ interface ILendingPool {
     address interestRateStrategyAddress
   ) external payable;
 
-  /**
-   * @dev Updates the address of the interest rate strategy contract
-   * - Caller is only LendingPoolConfigurator
-   * @param reserve The address of the underlying asset of the reserve
-   * @param rateStrategyAddress The address of the interest rate strategy contract
-   **/
   function setReserveInterestRateStrategyAddress(address reserve, address rateStrategyAddress)
     external
     payable;
 
-  /**
-   * @dev Sets the configuration bitmap of the reserve as a whole
-   * - Caller is only LendingPoolConfigurator
-   * @param reserve The address of the underlying asset of the reserve
-   * @param configuration The new configuration bitmap
-   **/
   function setConfiguration(address reserve, uint256 configuration) external payable;
 
   /**
@@ -1590,17 +1495,6 @@ interface ILendingPool {
    **/
   function getReserveData(address asset) external view returns (DataTypes.ReserveData memory);
 
-  /**
-   * @dev Validates and finalizes an aToken transfer
-   * - Only callable by the overlying aToken of the `asset`
-   * - Caller is only aToken contract which is storing the underlying asset of depositors
-   * @param asset The address of the underlying asset of the aToken
-   * @param from The user from which the aTokens are transferred
-   * @param to The user receiving the aTokens
-   * @param amount The amount being transferred/withdrawn
-   * @param balanceFromAfter The aToken balance of the `from` user before the transfer
-   * @param balanceToBefore The aToken balance of the `to` user before the transfer
-   */
   function finalizeTransfer(
     address asset,
     address from,
@@ -1610,26 +1504,12 @@ interface ILendingPool {
     uint256 balanceToBefore
   ) external;
 
-  /**
-   * @dev Returns the list of the initialized reserves
-   **/
   function getReservesList() external view returns (address[] memory);
 
-  /**
-   * @dev Returns the cached LendingPoolAddressesProvider connected to this contract
-   **/
   function getAddressesProvider() external view returns (ILendingPoolAddressesProvider);
 
-  /**
-   * @dev Set the _pause state of a reserve
-   * - Caller is only LendingPoolConfigurator
-   * @param val `true` to pause the reserve, `false` to un-pause it
-   */
   function setPause(bool val) external payable;
 
-  /**
-   * @dev Returns if the LendingPool is paused
-   */
   function paused() external view returns (bool);
 }
 
@@ -1688,7 +1568,7 @@ library SafeERC20 {
     (bool success, bytes memory returndata) = address(token).call(data);
     require(success, 'SafeERC20: low-level call failed');
 
-    if (returndata.length != 0) {
+    if (returndata.length > 0) {
       // Return data is optional
       // solhint-disable-next-line max-line-length
       require(abi.decode(returndata, (bool)), 'SafeERC20: ERC20 operation did not succeed');
@@ -1809,7 +1689,7 @@ contract ATokenForCollateral is
   bytes32 private constant PERMIT_TYPEHASH =
     keccak256('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)');
 
-  uint256 private constant ATOKEN_REVISION = 0x2;
+  uint256 private constant ATOKEN_REVISION = 0x1;
 
   /// @dev owner => next valid nonce to submit with permit()
   mapping(address => uint256) public _nonces;
@@ -1832,7 +1712,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Initializes the aToken
-   * - Caller is initializer (LendingPoolAddressesProvider or deployer)
    * @param pool The address of the lending pool where this aToken will be used
    * @param treasury The address of the Sturdy treasury, receiving the fees on this aToken
    * @param underlyingAsset The address of the underlying asset of this aToken (E.g. WETH for aWETH)
@@ -1851,12 +1730,6 @@ contract ATokenForCollateral is
     string calldata aTokenSymbol,
     bytes calldata params
   ) external override initializer {
-    require(address(pool) != address(0), Errors.LPC_INVALID_CONFIGURATION);
-    require(treasury != address(0), Errors.LPC_INVALID_CONFIGURATION);
-    require(underlyingAsset != address(0), Errors.LPC_INVALID_CONFIGURATION);
-    require(address(incentivesController) != address(0), Errors.LPC_INVALID_CONFIGURATION);
-    require(aTokenDecimals != 0, Errors.LPC_INVALID_CONFIGURATION);
-
     uint256 chainId;
 
     //solium-disable-next-line
@@ -1897,7 +1770,7 @@ contract ATokenForCollateral is
 
   /**
    * @dev Burns aTokens from `user` and sends the equivalent amount of underlying to `receiverOfUnderlying`
-   * - Caller is only LendingPool, as extra state updates there need to be managed
+   * - Only callable by the LendingPool, as extra state updates there need to be managed
    * @param user The owner of the aTokens, getting them burned
    * @param receiverOfUnderlying The address that will receive the underlying
    * @param amount The amount being burned
@@ -1915,7 +1788,7 @@ contract ATokenForCollateral is
     if (decimal < 18) share = amount.rayDiv(index) / 10**(18 - decimal);
     else share = amount.rayDiv(index);
 
-    require(share != 0, Errors.CT_INVALID_BURN_AMOUNT);
+    require(share > 0, Errors.CT_INVALID_BURN_AMOUNT);
 
     _burn(user, amount);
 
@@ -1927,7 +1800,7 @@ contract ATokenForCollateral is
 
   /**
    * @dev Mints `amount` aTokens to `user`
-   * - Caller is only LendingPool, as extra state updates there need to be managed
+   * - Only callable by the LendingPool, as extra state updates there need to be managed
    * @param user The address receiving the minted tokens
    * @param share The share for amount of tokens getting minted
    * @param index The new liquidity index of the reserve
@@ -1944,7 +1817,7 @@ contract ATokenForCollateral is
     if (decimal < 18) amount = (share * 10**(18 - decimal)).rayMul(index);
     else amount = share.rayMul(index);
 
-    require(amount != 0, Errors.CT_INVALID_MINT_AMOUNT);
+    require(amount > 0, Errors.CT_INVALID_MINT_AMOUNT);
 
     _mint(user, amount);
 
@@ -1956,7 +1829,7 @@ contract ATokenForCollateral is
 
   /**
    * @dev Mints aTokens to the reserve treasury
-   * - Caller is only LendingPool
+   * - Only callable by the LendingPool
    * @param amount The amount of tokens getting minted
    * @param index The new liquidity index of the reserve
    */
@@ -1979,7 +1852,7 @@ contract ATokenForCollateral is
 
   /**
    * @dev Transfers aTokens in the event of a borrow being liquidated, in case the liquidators reclaims the aToken
-   * - Caller is only LendingPool
+   * - Only callable by the LendingPool
    * @param from The address getting liquidated, current owner of the aTokens
    * @param to The recipient
    * @param value The amount of tokens getting transferred
@@ -2031,7 +1904,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Returns the address of the Sturdy treasury, receiving the fees on this aToken
-   * @return The address of the treasury
    **/
   function RESERVE_TREASURY_ADDRESS() public view returns (address) {
     return _treasury;
@@ -2039,7 +1911,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Returns the address of the underlying asset of this aToken (E.g. WETH for aWETH)
-   * @return The address of the underlying asset of aToken
    **/
   function UNDERLYING_ASSET_ADDRESS() public view override returns (address) {
     return _underlyingAsset;
@@ -2047,7 +1918,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Returns the address of the lending pool where this aToken is used
-   * @return The address of the lending pool
    **/
   function POOL() public view returns (ILendingPool) {
     return _pool;
@@ -2055,7 +1925,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev For internal usage in the logic of the parent contract IncentivizedERC20
-   * @return The address of the incentive controller
    **/
   function _getIncentivesController() internal view override returns (ISturdyIncentivesController) {
     return _incentivesController;
@@ -2063,7 +1932,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Returns the address of the incentives controller contract
-   * @return The address of the lending pool
    **/
   function getIncentivesController() external view override returns (ISturdyIncentivesController) {
     return _getIncentivesController();
@@ -2072,7 +1940,6 @@ contract ATokenForCollateral is
   /**
    * @dev Transfers the underlying asset to `target`. Used by the LendingPool to transfer
    * assets in borrow(), withdraw() and flashLoan()
-   * - Caller is only LendingPool
    * @param target The recipient of the aTokens
    * @param amount The amount getting transferred
    * @return The amount transferred
@@ -2090,7 +1957,6 @@ contract ATokenForCollateral is
 
   /**
    * @dev Invoked to execute actions on the aToken side after a repayment.
-   * - Caller is only LendingPool
    * @param user The user executing the repayment
    * @param amount The amount getting repaid
    **/
@@ -2099,7 +1965,6 @@ contract ATokenForCollateral is
   /**
    * @dev implements the permit function as for
    * https://github.com/ethereum/EIPs/blob/8a34d644aacf0f9f8f00815307fd7dd5da07655f/EIPS/eip-2612.md
-   * - Caller is anyone
    * @param owner The owner of the funds
    * @param spender The spender
    * @param value The amount
@@ -2124,7 +1989,7 @@ contract ATokenForCollateral is
     bytes32 digest = keccak256(
       abi.encodePacked(
         '\x19\x01',
-        _domain_separator(),
+        DOMAIN_SEPARATOR,
         keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, currentValidNonce, deadline))
       )
     );
@@ -2176,29 +2041,5 @@ contract ATokenForCollateral is
     uint256 amount
   ) internal override {
     _transfer(from, to, amount, true);
-  }
-
-  /**
-   * @dev get the domain_separator value
-   * @return the domain_separator
-   **/
-  function _domain_separator() internal view returns (bytes32) {
-    uint256 chainId;
-
-    //solium-disable-next-line
-    assembly {
-      chainId := chainid()
-    }
-
-    return
-      keccak256(
-        abi.encode(
-          EIP712_DOMAIN,
-          keccak256(bytes(name())),
-          keccak256(EIP712_REVISION),
-          chainId,
-          address(this)
-        )
-      );
   }
 }
