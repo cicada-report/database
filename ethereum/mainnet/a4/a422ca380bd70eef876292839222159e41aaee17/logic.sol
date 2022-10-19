@@ -3732,7 +3732,7 @@ contract LendingPool is VersionedInitializable, ILendingPool, LendingPoolStorage
   using ReserveConfiguration for DataTypes.ReserveConfigurationMap;
   using UserConfiguration for DataTypes.UserConfigurationMap;
 
-  uint256 private constant LENDINGPOOL_REVISION = 0x3;
+  uint256 private constant LENDINGPOOL_REVISION = 0x4;
 
   modifier whenNotPaused() {
     _whenNotPaused();
@@ -4014,6 +4014,7 @@ contract LendingPool is VersionedInitializable, ILendingPool, LendingPoolStorage
     address from,
     address to
   ) external override whenNotPaused returns (uint256) {
+    require(_availableVaults[msg.sender] == true, Errors.VT_COLLATERAL_WITHDRAW_INVALID);
     return _withdraw(asset, amount, from, to);
   }
 
