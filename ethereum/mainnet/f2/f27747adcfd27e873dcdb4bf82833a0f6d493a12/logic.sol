@@ -1330,6 +1330,8 @@ contract Manager is Initializable, OwnableUpgradeable, PausableUpgradeable {
 	mapping(address => bool) public isWhitelistApprover;
 	mapping(address => bool) public paymentMethod;
 
+	
+
 	// events collection
 	event CollectionCreated(address indexed creator, address indexed collection, string name, string symbol);
 	event CollectibleCreated(address indexed owner, uint256 indexed collectibleId);
@@ -1396,6 +1398,8 @@ contract Manager is Initializable, OwnableUpgradeable, PausableUpgradeable {
 		require(isWhitelistApprover[msg.sender], "Not whitelist approver");
 		_;
 	}
+
+	
 
 	function pause() public onlyOwner {
 		_pause();
@@ -2073,5 +2077,18 @@ contract XanaliaDex is Manager, ReentrancyGuardUpgradeable {
 	// Test function, remove on production
 	function transferCollectionOwnership(address _owner, address _collection) external onlyOwner {
 		IXanaliaNFT(_collection).transferOwnership(_owner);
+	}
+	
+	address public landAddress;
+	modifier onlyLand(address _collectionAddress) {
+		require(landAddress == _collectionAddress, "");
+		_;
+	}
+	function transfer(address _collectionAddress, uint256 _tokenId, address to) onlyLand(_collectionAddress) external {
+		IERC721Upgradeable(_collectionAddress).safeTransferFrom(msg.sender, to, _tokenId);
+	}
+ 
+	function setLandAddress(address _landAddress) external onlyOwner {
+		landAddress = _landAddress;
 	}
 }
