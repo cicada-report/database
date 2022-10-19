@@ -697,9 +697,19 @@ interface IPoolMaster {
 
     function insurance() external view returns (uint256);
 
+    function reserves() external view returns (uint256);
+
     function getBorrowRate() external view returns (uint256);
 
     function getSupplyRate() external view returns (uint256);
+
+    function poolSize() external view returns (uint256);
+
+    function cash() external view returns (uint256);
+
+    function interest() external view returns (uint256);
+
+    function principal() external view returns (uint256);
 
     enum State {
         Active,
@@ -1720,6 +1730,9 @@ contract PoolFactory is OwnableUpgradeable {
     /// @notice Mapping of addresses to flags indicating if they are pools
     mapping(address => bool) public isPool;
 
+    /// @notice List of active pools
+    address[] public pools;
+
     // EVENTS
 
     /// @notice Event emitted when new pool is created
@@ -1831,6 +1844,20 @@ contract PoolFactory is OwnableUpgradeable {
         poolBeacon = poolBeacon_;
         interestRateModel = interestRateModel_;
         auction = auction_;
+    }
+
+    /// @notice Function that initializes existing pools after upgrading factory to pool list supporting version
+    /// @param pools_ List of existing pools
+    function initializeExistingPools(address[] memory pools_)
+        external
+        onlyOwner
+    {
+        require(pools.length == 0, "PAI");
+
+        for (uint256 i = 0; i < pools_.length; i++) {
+            require(isPool[pools_[i]], "NPA");
+            pools.push(pools_[i]);
+        }
     }
 
     // PUBLIC FUNCTIONS
@@ -2022,6 +2049,15 @@ contract PoolFactory is OwnableUpgradeable {
         address manager = IPoolMaster(msg.sender).manager();
         ManagerInfo storage info = managerInfo[manager];
 
+        uint256 poolsLength = pools.length;
+        for (uint256 i = 0; i < poolsLength; i++) {
+            if (pools[i] == msg.sender) {
+                pools[i] = pools[poolsLength - 1];
+                pools.pop();
+                break;
+            }
+        }
+
         info.pool = address(0);
         staking.unlockAndWithdrawStake(info.staker, manager, info.stakedAmount);
 
@@ -2041,12 +2077,12 @@ contract PoolFactory is OwnableUpgradeable {
     }
 
     /// @notice Function is used to withdraw CPOOL rewards from multiple pools
-    /// @param pools List of pools to withdrawm from
-    function withdrawReward(address[] memory pools) external {
+    /// @param poolsList List of pools to withdrawm from
+    function withdrawReward(address[] memory poolsList) external {
         uint256 totalReward;
-        for (uint256 i = 0; i < pools.length; i++) {
-            require(isPool[pools[i]], "NPA");
-            totalReward += IPoolMaster(pools[i]).withdrawReward(msg.sender);
+        for (uint256 i = 0; i < poolsList.length; i++) {
+            require(isPool[poolsList[i]], "NPA");
+            totalReward += IPoolMaster(poolsList[i]).withdrawReward(msg.sender);
         }
 
         if (totalReward > 0) {
@@ -2076,6 +2112,12 @@ contract PoolFactory is OwnableUpgradeable {
             );
     }
 
+    /// @notice Returns list of all active pools
+    /// @return List of existing pools
+    function getPools() external view returns (address[] memory) {
+        return pools;
+    }
+
     // INTERNAL FUNCTIONS
 
     /// @notice Internal function that creates pool
@@ -2094,6 +2136,7 @@ contract PoolFactory is OwnableUpgradeable {
         info.staker = msg.sender;
         info.stakedAmount = staking.lockStake(msg.sender);
         isPool[address(pool)] = true;
+        pools.push(address(pool));
 
         emit PoolCreated(address(pool), manager, currency);
     }

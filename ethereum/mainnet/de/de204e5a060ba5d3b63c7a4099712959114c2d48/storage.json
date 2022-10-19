@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 1609,
+      "astId": 1634,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1612,
+      "astId": 1637,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 2037,
+      "astId": 2062,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 2046,
+      "astId": 2071,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "_owner",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2158,
+      "astId": 2183,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "__gap",
       "offset": 0,
@@ -41,15 +41,15 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 2176,
+      "astId": 2201,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "cpool",
       "offset": 0,
       "slot": "101",
-      "type": "t_contract(IERC20Upgradeable)1291"
+      "type": "t_contract(IERC20Upgradeable)1316"
     },
     {
-      "astId": 2180,
+      "astId": 2205,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "staking",
       "offset": 0,
@@ -57,7 +57,7 @@
       "type": "t_contract(IMembershipStaking)745"
     },
     {
-      "astId": 2183,
+      "astId": 2208,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "flashGovernor",
       "offset": 0,
@@ -65,7 +65,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2186,
+      "astId": 2211,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "poolBeacon",
       "offset": 0,
@@ -73,7 +73,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2189,
+      "astId": 2214,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "interestRateModel",
       "offset": 0,
@@ -81,7 +81,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2192,
+      "astId": 2217,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "auction",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2195,
+      "astId": 2220,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "treasury",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2198,
+      "astId": 2223,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "reserveFactor",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2201,
+      "astId": 2226,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "insuranceFactor",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2204,
+      "astId": 2229,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "warningUtilization",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2207,
+      "astId": 2232,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "provisionalDefaultUtilization",
       "offset": 0,
@@ -129,7 +129,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2210,
+      "astId": 2235,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "warningGracePeriod",
       "offset": 0,
@@ -137,7 +137,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2213,
+      "astId": 2238,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "maxInactivePeriod",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2216,
+      "astId": 2241,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "periodToStartAuction",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2221,
+      "astId": 2246,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "currencyAllowed",
       "offset": 0,
@@ -161,15 +161,15 @@
       "type": "t_mapping(t_address,t_bool)"
     },
     {
-      "astId": 2242,
+      "astId": 2267,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "managerInfo",
       "offset": 0,
       "slot": "116",
-      "type": "t_mapping(t_address,t_struct(ManagerInfo)2236_storage)"
+      "type": "t_mapping(t_address,t_struct(ManagerInfo)2261_storage)"
     },
     {
-      "astId": 2247,
+      "astId": 2272,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "usedManagerSymbols",
       "offset": 0,
@@ -177,12 +177,20 @@
       "type": "t_mapping(t_string_memory_ptr,t_bool)"
     },
     {
-      "astId": 2252,
+      "astId": 2277,
       "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
       "label": "isPool",
       "offset": 0,
       "slot": "118",
       "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 2281,
+      "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
+      "label": "pools",
+      "offset": 0,
+      "slot": "119",
+      "type": "t_array(t_address)dyn_storage"
     }
   ],
   "types": {
@@ -190,6 +198,12 @@
       "encoding": "inplace",
       "label": "address",
       "numberOfBytes": "20"
+    },
+    "t_array(t_address)dyn_storage": {
+      "base": "t_address",
+      "encoding": "dynamic_array",
+      "label": "address[]",
+      "numberOfBytes": "32"
     },
     "t_array(t_uint256)49_storage": {
       "base": "t_uint256",
@@ -213,7 +227,7 @@
       "label": "bytes32",
       "numberOfBytes": "32"
     },
-    "t_contract(IERC20Upgradeable)1291": {
+    "t_contract(IERC20Upgradeable)1316": {
       "encoding": "inplace",
       "label": "contract IERC20Upgradeable",
       "numberOfBytes": "20"
@@ -230,12 +244,12 @@
       "numberOfBytes": "32",
       "value": "t_bool"
     },
-    "t_mapping(t_address,t_struct(ManagerInfo)2236_storage)": {
+    "t_mapping(t_address,t_struct(ManagerInfo)2261_storage)": {
       "encoding": "mapping",
       "key": "t_address",
       "label": "mapping(address => struct PoolFactory.ManagerInfo)",
       "numberOfBytes": "32",
-      "value": "t_struct(ManagerInfo)2236_storage"
+      "value": "t_struct(ManagerInfo)2261_storage"
     },
     "t_mapping(t_string_memory_ptr,t_bool)": {
       "encoding": "mapping",
@@ -254,12 +268,12 @@
       "label": "string",
       "numberOfBytes": "32"
     },
-    "t_struct(ManagerInfo)2236_storage": {
+    "t_struct(ManagerInfo)2261_storage": {
       "encoding": "inplace",
       "label": "struct PoolFactory.ManagerInfo",
       "members": [
         {
-          "astId": 2223,
+          "astId": 2248,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "currency",
           "offset": 0,
@@ -267,7 +281,7 @@
           "type": "t_address"
         },
         {
-          "astId": 2225,
+          "astId": 2250,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "pool",
           "offset": 0,
@@ -275,7 +289,7 @@
           "type": "t_address"
         },
         {
-          "astId": 2227,
+          "astId": 2252,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "staker",
           "offset": 0,
@@ -283,7 +297,7 @@
           "type": "t_address"
         },
         {
-          "astId": 2229,
+          "astId": 2254,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "proposalId",
           "offset": 20,
@@ -291,7 +305,7 @@
           "type": "t_uint32"
         },
         {
-          "astId": 2231,
+          "astId": 2256,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "stakedAmount",
           "offset": 0,
@@ -299,7 +313,7 @@
           "type": "t_uint256"
         },
         {
-          "astId": 2233,
+          "astId": 2258,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "ipfsHash",
           "offset": 0,
@@ -307,7 +321,7 @@
           "type": "t_bytes32"
         },
         {
-          "astId": 2235,
+          "astId": 2260,
           "contract": "/database/ethereum/mainnet/de/de204e5a060ba5d3b63c7a4099712959114c2d48/logic.sol:PoolFactory",
           "label": "managerSymbol",
           "offset": 0,
