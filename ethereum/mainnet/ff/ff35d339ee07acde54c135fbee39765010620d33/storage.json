@@ -167,6 +167,30 @@
       "offset": 0,
       "slot": "212",
       "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 1672,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "exoSuitNft",
+      "offset": 0,
+      "slot": "213",
+      "type": "t_contract(IERC721)906"
+    },
+    {
+      "astId": 1676,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "beepBoopBotExoSuit",
+      "offset": 0,
+      "slot": "214",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 1680,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_beepBoopBotOfExoSuit",
+      "offset": 0,
+      "slot": "215",
+      "type": "t_mapping(t_uint256,t_uint256)"
     }
   ],
   "types": {

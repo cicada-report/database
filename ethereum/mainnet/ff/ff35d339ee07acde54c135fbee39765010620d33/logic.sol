@@ -1574,6 +1574,11 @@ contract BattleZone is
     /// @notice Temporary gating of withdrawals
     mapping(address => bool) private withdrawGated;
 
+    /// @notice Staked exo suits
+    IERC721 public exoSuitNft;
+    mapping(uint256 => uint256) beepBoopBotExoSuit;
+    mapping(uint256 => uint256) private _beepBoopBotOfExoSuit;
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -1796,6 +1801,86 @@ contract BattleZone is
         emit Withdraw(msg.sender, toolboxNft_, toolboxTokenIds.length);
     }
 
+    /**
+     * @notice Deposit
+     */
+    function depositExoSuit(uint256 beepBoopTokenId, uint256 beepBoopExoSuitId)
+        public
+    {
+        require(!depositPaused, "Deposit paused");
+        require(stakingLaunched, "Staking is not launched yet");
+        require(
+            ownerOf(address(beepBoopBotNft), beepBoopTokenId) == msg.sender,
+            "Beep boop not staked"
+        );
+
+        address exoSuitNft_ = address(exoSuitNft);
+        require(exoSuitNft_ != address(0), "!disabled");
+
+        Staker storage user = _stakers[msg.sender];
+        uint256 netIncrease;
+
+        IERC721(exoSuitNft_).safeTransferFrom(
+            msg.sender,
+            address(this),
+            beepBoopExoSuitId
+        );
+        require(
+            beepBoopBotExoSuit[beepBoopTokenId] == 0,
+            "Bot already has an exo suit"
+        );
+        beepBoopBotExoSuit[beepBoopTokenId] = beepBoopExoSuitId;
+        netIncrease += getTokenYield(exoSuitNft_, beepBoopExoSuitId);
+        _ownerOfToken[exoSuitNft_][beepBoopExoSuitId] = msg.sender;
+        _beepBoopBotOfExoSuit[beepBoopExoSuitId] = beepBoopTokenId;
+
+        accumulate(msg.sender);
+        user.currentYield += netIncrease;
+
+        emit Deposit(msg.sender, exoSuitNft_, 1);
+    }
+
+    function withdrawExoSuit(uint256 exoSuitTokenId) public {
+        address exoSuitNft_ = address(exoSuitNft);
+        require(exoSuitNft_ != address(0), "!disabled");
+
+        Staker storage user = _stakers[msg.sender];
+        uint256 newYield = user.currentYield;
+
+        uint256 exoSuitBeepBoopId = _beepBoopBotOfExoSuit[exoSuitTokenId];
+        require(
+            IERC721(exoSuitNft_).ownerOf(exoSuitTokenId) == address(this),
+            "Exo suit not staked"
+        );
+        require(
+            ownerOf(address(beepBoopBotNft), exoSuitBeepBoopId) == msg.sender,
+            "Not the bot owner"
+        );
+
+        _ownerOfToken[exoSuitNft_][exoSuitTokenId] = address(0);
+
+        // reduce yield
+        if (user.currentYield != 0) {
+            uint256 tokenYield = getTokenYield(exoSuitNft_, exoSuitTokenId);
+            newYield -= tokenYield;
+        }
+
+        // remove suit from beep bop
+        delete beepBoopBotExoSuit[exoSuitBeepBoopId];
+
+        // return it back
+        IERC721(exoSuitNft_).safeTransferFrom(
+            address(this),
+            msg.sender,
+            exoSuitTokenId
+        );
+
+        accumulate(msg.sender);
+        user.currentYield = newYield;
+
+        emit Withdraw(msg.sender, exoSuitNft_, 1);
+    }
+
     modifier validContract(address contract_) {
         require(
             (contract_ != address(0) && contract_ == address(beepBoopBotNft)) ||
@@ -1839,6 +1924,7 @@ contract BattleZone is
         returns (
             uint256[] memory,
             uint256[] memory,
+            uint256[] memory,
             uint256[] memory
         )
     {
@@ -1847,16 +1933,19 @@ contract BattleZone is
         uint256[] memory stakedToolboxes = new uint256[](
             MAX_TOOL_BOXES_STAKED * stakedBots.length
         );
+        uint256[] memory stakedExoSuits = new uint256[](stakedBots.length);
         for (uint256 i; i < stakedBots.length; ++i) {
-            uint256[] memory botToolboxes = beepBoopBotToolboxes[stakedBots[i]];
+            uint256 botId = stakedBots[i];
+            uint256[] memory botToolboxes = beepBoopBotToolboxes[botId];
             for (uint256 t; t < botToolboxes.length; t++) {
                 stakedToolboxes[toolBoxIdx++] = botToolboxes[t];
             }
+            stakedExoSuits[i] = beepBoopBotExoSuit[botId];
         }
         assembly {
             mstore(stakedToolboxes, toolBoxIdx)
         }
-        return (stakedBots, _stakers[staker].stakedBattery, stakedToolboxes);
+        return (stakedBots, _stakers[staker].stakedBattery, stakedToolboxes, stakedExoSuits);
     }
 
     function isRaritiesSet(address contractAddress, uint256[] memory tokenIds)
@@ -1972,6 +2061,14 @@ contract BattleZone is
         onlyOwner
     {
         batteryNft = IERC721(_battery);
+        baseYieldRate[_battery] = baseReward;
+    }
+
+    function setExoSuitNft(address _battery, uint256 baseReward)
+        public
+        onlyOwner
+    {
+        exoSuitNft = IERC721(_battery);
         baseYieldRate[_battery] = baseReward;
     }
 
