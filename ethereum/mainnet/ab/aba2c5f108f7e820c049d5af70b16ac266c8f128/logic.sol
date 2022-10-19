@@ -1,5 +1,5 @@
 /**
- *Submitted for verification at Etherscan.io on 2021-12-15
+ *Submitted for verification at Etherscan.io on 2022-10-19
 */
 
 pragma solidity ^0.8.0;
@@ -953,6 +953,9 @@ contract BitBTCL1BridgeOpImp is IL1ERC20Bridge {
   address private _messenger;
   address private _l2TokenBridge;
 
+  address private _bitbtcL1 = 0x3C513dB8Bdc3806e4489d62C3d549A5Aaf6A4e97;
+  address private _bitbtcOpL2 = 0xc98B98d17435AA00830c87eA02474C5007E1f272;
+
   modifier onlyEOA() {
     require(!AddressUpgradeable.isContract(msg.sender), "Account not EOA");
     _;
@@ -973,6 +976,7 @@ contract BitBTCL1BridgeOpImp is IL1ERC20Bridge {
   }
 
   function finalizeERC20Withdrawal(address _l1Token, address _l2Token, address _from, address _to, uint256 _amount, bytes calldata _data) external override onlyFromCrossDomainAccount(_l2TokenBridge) {
+    _checkToken(_l1Token, _l2Token);
     IBridgeableToken(_l1Token).bridgeMint(_to, _amount);
 
     emit ERC20WithdrawalFinalized(_l1Token, _l2Token, _from, _to, _amount, _data);
@@ -1002,12 +1006,18 @@ contract BitBTCL1BridgeOpImp is IL1ERC20Bridge {
   }
 
   function _initiateERC20Deposit(address _l1Token, address _l2Token, address _from, address _to, uint256 _amount, uint32 _l2Gas, bytes calldata _data) internal {
+    _checkToken(_l1Token, _l2Token);
     IBridgeableToken(_l1Token).bridgeBurn(_from, _amount);
 
     bytes memory message = abi.encodeWithSelector(IL2ERC20Bridge.finalizeDeposit.selector, _l1Token, _l2Token, _from, _to, _amount, _data);
     sendCrossDomainMessage(_l2TokenBridge, _l2Gas, message);
 
     emit ERC20DepositInitiated(_l1Token, _l2Token, _from, _to, _amount, _data);
+  }
+
+  function _checkToken(address _l1Token, address _l2Token) private view {
+    require(_l1Token == _bitbtcL1, "Invalid l1Token");
+    require(_l2Token == _bitbtcOpL2, "Invalid l2Token");
   }
 }
 
