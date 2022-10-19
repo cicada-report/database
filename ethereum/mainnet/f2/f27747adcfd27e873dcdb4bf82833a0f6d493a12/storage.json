@@ -1,0 +1,230 @@
+{
+  "storage": [
+    {
+      "astId": 1001,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 1004,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1453,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1462,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_address"
+    },
+    {
+      "astId": 1574,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1593,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "_paused",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1682,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1701,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "xanaliaAddressesStorage",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_contract(IXanaliaAddressesStorage)115"
+    },
+    {
+      "astId": 1706,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "xanaliaAddressesStorageAddress",
+      "offset": 0,
+      "slot": "152",
+      "type": "t_address"
+    },
+    {
+      "astId": 1708,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "platformFee",
+      "offset": 0,
+      "slot": "153",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1710,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "collectionCount",
+      "offset": 0,
+      "slot": "154",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1712,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "processing",
+      "offset": 0,
+      "slot": "155",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1716,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "collectionAddresses",
+      "offset": 0,
+      "slot": "156",
+      "type": "t_mapping(t_uint256,t_address)"
+    },
+    {
+      "astId": 1721,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "collections",
+      "offset": 0,
+      "slot": "157",
+      "type": "t_mapping(t_address,t_array(t_address)dyn_storage)"
+    },
+    {
+      "astId": 1725,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "isUserCollection",
+      "offset": 0,
+      "slot": "158",
+      "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 1729,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "isUserWhitelisted",
+      "offset": 0,
+      "slot": "159",
+      "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 1733,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "isWhitelistApprover",
+      "offset": 0,
+      "slot": "160",
+      "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 1737,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "paymentMethod",
+      "offset": 0,
+      "slot": "161",
+      "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 1369,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "_status",
+      "offset": 0,
+      "slot": "162",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1413,
+      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "163",
+      "type": "t_array(t_uint256)49_storage"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_address)dyn_storage": {
+      "base": "t_address",
+      "encoding": "dynamic_array",
+      "label": "address[]",
+      "numberOfBytes": "32"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_contract(IXanaliaAddressesStorage)115": {
+      "encoding": "inplace",
+      "label": "contract IXanaliaAddressesStorage",
+      "numberOfBytes": "20"
+    },
+    "t_mapping(t_address,t_array(t_address)dyn_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => address[])",
+      "numberOfBytes": "32",
+      "value": "t_array(t_address)dyn_storage"
+    },
+    "t_mapping(t_address,t_bool)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => bool)",
+      "numberOfBytes": "32",
+      "value": "t_bool"
+    },
+    "t_mapping(t_uint256,t_address)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => address)",
+      "numberOfBytes": "32",
+      "value": "t_address"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
