@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 3405,
+      "astId": 6043,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 3408,
+      "astId": 6046,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 4208,
+      "astId": 7232,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 5433,
+      "astId": 8604,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_owner",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_address"
     },
     {
-      "astId": 5553,
+      "astId": 8724,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "__gap",
       "offset": 0,
@@ -41,23 +41,23 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 5662,
+      "astId": 9625,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_uniswapV2Router",
       "offset": 0,
       "slot": "101",
-      "type": "t_contract(IUniswapV2Router02)3093"
+      "type": "t_contract(IUniswapV2Router02)5754"
     },
     {
-      "astId": 5665,
+      "astId": 9628,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_soulbound",
       "offset": 0,
       "slot": "102",
-      "type": "t_contract(ISoulbound)4156"
+      "type": "t_contract(ISoulbound)7180"
     },
     {
-      "astId": 5667,
+      "astId": 9630,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_token",
       "offset": 0,
@@ -65,7 +65,7 @@
       "type": "t_address"
     },
     {
-      "astId": 5669,
+      "astId": 9632,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_mintFee",
       "offset": 0,
@@ -73,7 +73,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 5671,
+      "astId": 9634,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_uriSuffix",
       "offset": 0,
@@ -81,7 +81,7 @@
       "type": "t_string_storage"
     },
     {
-      "astId": 5673,
+      "astId": 9636,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_marketingWallet",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_address"
     },
     {
-      "astId": 5675,
+      "astId": 9638,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_name",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_string_storage"
     },
     {
-      "astId": 5681,
+      "astId": 9644,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_balances",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))"
     },
     {
-      "astId": 5687,
+      "astId": 9650,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_operatorApprovals",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_mapping(t_address,t_mapping(t_address,t_bool))"
     },
     {
-      "astId": 5691,
+      "astId": 9654,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_costs",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 5695,
+      "astId": 9658,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_supplies",
       "offset": 0,
@@ -129,7 +129,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 5699,
+      "astId": 9662,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_minted",
       "offset": 0,
@@ -137,7 +137,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 5703,
+      "astId": 9666,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_attributes",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_mapping(t_uint256,t_string_storage)"
     },
     {
-      "astId": 5711,
+      "astId": 9674,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_endorsements",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_mapping(t_uint256,t_mapping(t_address,t_mapping(t_address,t_bool)))"
     },
     {
-      "astId": 5713,
+      "astId": 9676,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_attributeId",
       "offset": 0,
@@ -161,7 +161,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 5719,
+      "astId": 9682,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_links",
       "offset": 0,
@@ -169,7 +169,7 @@
       "type": "t_mapping(t_uint256,t_mapping(t_address,t_bool))"
     },
     {
-      "astId": 5725,
+      "astId": 9688,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_power",
       "offset": 0,
@@ -177,12 +177,36 @@
       "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))"
     },
     {
-      "astId": 5727,
+      "astId": 9690,
       "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
       "label": "_uri",
       "offset": 0,
       "slot": "118",
       "type": "t_string_storage"
+    },
+    {
+      "astId": 9704,
+      "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
+      "label": "_delegates",
+      "offset": 0,
+      "slot": "119",
+      "type": "t_mapping(t_address,t_address)"
+    },
+    {
+      "astId": 9710,
+      "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
+      "label": "_checkpoints",
+      "offset": 0,
+      "slot": "120",
+      "type": "t_mapping(t_address,t_array(t_struct(Checkpoint)9695_storage)dyn_storage)"
+    },
+    {
+      "astId": 9714,
+      "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
+      "label": "_totalSupplyCheckpoints",
+      "offset": 0,
+      "slot": "121",
+      "type": "t_array(t_struct(Checkpoint)9695_storage)dyn_storage"
     }
   ],
   "types": {
@@ -190,6 +214,12 @@
       "encoding": "inplace",
       "label": "address",
       "numberOfBytes": "20"
+    },
+    "t_array(t_struct(Checkpoint)9695_storage)dyn_storage": {
+      "base": "t_struct(Checkpoint)9695_storage",
+      "encoding": "dynamic_array",
+      "label": "struct Space.Checkpoint[]",
+      "numberOfBytes": "32"
     },
     "t_array(t_uint256)49_storage": {
       "base": "t_uint256",
@@ -208,15 +238,29 @@
       "label": "bool",
       "numberOfBytes": "1"
     },
-    "t_contract(ISoulbound)4156": {
+    "t_contract(ISoulbound)7180": {
       "encoding": "inplace",
       "label": "contract ISoulbound",
       "numberOfBytes": "20"
     },
-    "t_contract(IUniswapV2Router02)3093": {
+    "t_contract(IUniswapV2Router02)5754": {
       "encoding": "inplace",
       "label": "contract IUniswapV2Router02",
       "numberOfBytes": "20"
+    },
+    "t_mapping(t_address,t_address)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => address)",
+      "numberOfBytes": "32",
+      "value": "t_address"
+    },
+    "t_mapping(t_address,t_array(t_struct(Checkpoint)9695_storage)dyn_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct Space.Checkpoint[])",
+      "numberOfBytes": "32",
+      "value": "t_array(t_struct(Checkpoint)9695_storage)dyn_storage"
     },
     "t_mapping(t_address,t_bool)": {
       "encoding": "mapping",
@@ -279,10 +323,43 @@
       "label": "string",
       "numberOfBytes": "32"
     },
+    "t_struct(Checkpoint)9695_storage": {
+      "encoding": "inplace",
+      "label": "struct Space.Checkpoint",
+      "members": [
+        {
+          "astId": 9692,
+          "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
+          "label": "fromBlock",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint32"
+        },
+        {
+          "astId": 9694,
+          "contract": "/database/ethereum/mainnet/f1/f11282126a5c5f55deda79b1761febfcd1468d4d/logic.sol:Space",
+          "label": "votes",
+          "offset": 4,
+          "slot": "0",
+          "type": "t_uint224"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_uint224": {
+      "encoding": "inplace",
+      "label": "uint224",
+      "numberOfBytes": "28"
+    },
     "t_uint256": {
       "encoding": "inplace",
       "label": "uint256",
       "numberOfBytes": "32"
+    },
+    "t_uint32": {
+      "encoding": "inplace",
+      "label": "uint32",
+      "numberOfBytes": "4"
     },
     "t_uint8": {
       "encoding": "inplace",
