@@ -1,0 +1,105 @@
+{
+  "storage": [
+    {
+      "astId": 314,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 317,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 745,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 852,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 893,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 901,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_address"
+    },
+    {
+      "astId": 1014,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "152",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1541,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "_messenger",
+      "offset": 0,
+      "slot": "201",
+      "type": "t_address"
+    },
+    {
+      "astId": 1543,
+      "contract": "/database/ethereum/mainnet/ab/aba2c5f108f7e820c049d5af70b16ac266c8f128/logic.sol:BitBTCL1Bridge",
+      "label": "_l2TokenBridge",
+      "offset": 0,
+      "slot": "202",
+      "type": "t_address"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    }
+  }
+}
