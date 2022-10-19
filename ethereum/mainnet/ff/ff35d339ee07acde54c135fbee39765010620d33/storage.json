@@ -1,0 +1,320 @@
+{
+  "storage": [
+    {
+      "astId": 630,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 633,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 945,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1317,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_address"
+    },
+    {
+      "astId": 1437,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1308,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1569,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1611,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "beepBoopBotNft",
+      "offset": 0,
+      "slot": "201",
+      "type": "t_contract(IERC721)906"
+    },
+    {
+      "astId": 1615,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "batteryNft",
+      "offset": 0,
+      "slot": "202",
+      "type": "t_contract(IERC721)906"
+    },
+    {
+      "astId": 1619,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "toolboxNft",
+      "offset": 0,
+      "slot": "203",
+      "type": "t_contract(IERC721)906"
+    },
+    {
+      "astId": 1622,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "acceleratedYield",
+      "offset": 0,
+      "slot": "204",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1625,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "signerAddress",
+      "offset": 0,
+      "slot": "205",
+      "type": "t_address"
+    },
+    {
+      "astId": 1628,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "stakingLaunched",
+      "offset": 20,
+      "slot": "205",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1631,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "depositPaused",
+      "offset": 21,
+      "slot": "205",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1635,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "baseYieldRate",
+      "offset": 0,
+      "slot": "206",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 1641,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_rarityBasedYield",
+      "offset": 0,
+      "slot": "207",
+      "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))"
+    },
+    {
+      "astId": 1646,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_stakers",
+      "offset": 0,
+      "slot": "208",
+      "type": "t_mapping(t_address,t_struct(Staker)1607_storage)"
+    },
+    {
+      "astId": 1652,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_ownerOfToken",
+      "offset": 0,
+      "slot": "209",
+      "type": "t_mapping(t_address,t_mapping(t_uint256,t_address))"
+    },
+    {
+      "astId": 1658,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "beepBoopBotToolboxes",
+      "offset": 0,
+      "slot": "210",
+      "type": "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)"
+    },
+    {
+      "astId": 1663,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "_beepBoopBotOfToolboxId",
+      "offset": 0,
+      "slot": "211",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 1668,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "withdrawGated",
+      "offset": 0,
+      "slot": "212",
+      "type": "t_mapping(t_address,t_bool)"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_array(t_uint256)dyn_storage": {
+      "base": "t_uint256",
+      "encoding": "dynamic_array",
+      "label": "uint256[]",
+      "numberOfBytes": "32"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_contract(IERC721)906": {
+      "encoding": "inplace",
+      "label": "contract IERC721",
+      "numberOfBytes": "20"
+    },
+    "t_mapping(t_address,t_bool)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => bool)",
+      "numberOfBytes": "32",
+      "value": "t_bool"
+    },
+    "t_mapping(t_address,t_mapping(t_uint256,t_address))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(uint256 => address))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_uint256,t_address)"
+    },
+    "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(uint256 => uint256))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_uint256,t_uint256)"
+    },
+    "t_mapping(t_address,t_struct(Staker)1607_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct BattleZone.Staker)",
+      "numberOfBytes": "32",
+      "value": "t_struct(Staker)1607_storage"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_mapping(t_uint256,t_address)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => address)",
+      "numberOfBytes": "32",
+      "value": "t_address"
+    },
+    "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => uint256[])",
+      "numberOfBytes": "32",
+      "value": "t_array(t_uint256)dyn_storage"
+    },
+    "t_mapping(t_uint256,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_struct(Staker)1607_storage": {
+      "encoding": "inplace",
+      "label": "struct BattleZone.Staker",
+      "members": [
+        {
+          "astId": 1596,
+          "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+          "label": "currentYield",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 1598,
+          "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+          "label": "accumulatedAmount",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 1600,
+          "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+          "label": "lastCheckpoint",
+          "offset": 0,
+          "slot": "2",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 1603,
+          "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+          "label": "stakedBots",
+          "offset": 0,
+          "slot": "3",
+          "type": "t_array(t_uint256)dyn_storage"
+        },
+        {
+          "astId": 1606,
+          "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+          "label": "stakedBattery",
+          "offset": 0,
+          "slot": "4",
+          "type": "t_array(t_uint256)dyn_storage"
+        }
+      ],
+      "numberOfBytes": "160"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
