@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 1136,
+      "astId": 1149,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1139,
+      "astId": 1152,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1846,
+      "astId": 1957,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 2103,
+      "astId": 2220,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_paused",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 2194,
+      "astId": 2311,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "__gap",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 2203,
+      "astId": 2320,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_owner",
       "offset": 0,
@@ -49,7 +49,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2322,
+      "astId": 2439,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "__gap",
       "offset": 0,
@@ -57,7 +57,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 1859,
+      "astId": 1970,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_status",
       "offset": 0,
@@ -65,7 +65,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1902,
+      "astId": 2013,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "__gap",
       "offset": 0,
@@ -73,7 +73,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 2337,
+      "astId": 2454,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "limit",
       "offset": 0,
@@ -81,7 +81,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2339,
+      "astId": 2456,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "governanceRecoveryFund",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1917,
+      "astId": 2028,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "_lastCallerBlock",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_bytes32"
     },
     {
-      "astId": 1919,
+      "astId": 2030,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "latestHarvestBlock",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1921,
+      "astId": 2032,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "weth",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1924,
+      "astId": 2035,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "incentiveTokens",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_array(t_address)dyn_storage"
     },
     {
-      "astId": 1926,
+      "astId": 2037,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "token",
       "offset": 0,
@@ -129,7 +129,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1928,
+      "astId": 2039,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "guardian",
       "offset": 0,
@@ -137,7 +137,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1930,
+      "astId": 2041,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "oneToken",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1932,
+      "astId": 2043,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "rebalancer",
       "offset": 0,
@@ -153,15 +153,15 @@
       "type": "t_address"
     },
     {
-      "astId": 1935,
+      "astId": 2046,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "uniswapRouterV2",
       "offset": 0,
       "slot": "211",
-      "type": "t_contract(IUniswapV2Router02)1262"
+      "type": "t_contract(IUniswapV2Router02)1275"
     },
     {
-      "astId": 1937,
+      "astId": 2048,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "allowAAWithdraw",
       "offset": 20,
@@ -169,7 +169,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1939,
+      "astId": 2050,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "allowBBWithdraw",
       "offset": 21,
@@ -177,7 +177,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1941,
+      "astId": 2052,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "revertIfTooLow",
       "offset": 22,
@@ -185,7 +185,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1943,
+      "astId": 2054,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "skipDefaultCheck",
       "offset": 23,
@@ -193,7 +193,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1945,
+      "astId": 2056,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "strategy",
       "offset": 0,
@@ -201,7 +201,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1947,
+      "astId": 2058,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "strategyToken",
       "offset": 0,
@@ -209,7 +209,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1949,
+      "astId": 2060,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "AATranche",
       "offset": 0,
@@ -217,7 +217,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1951,
+      "astId": 2062,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "BBTranche",
       "offset": 0,
@@ -225,7 +225,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1953,
+      "astId": 2064,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "AAStaking",
       "offset": 0,
@@ -233,7 +233,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1955,
+      "astId": 2066,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "BBStaking",
       "offset": 0,
@@ -241,7 +241,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1957,
+      "astId": 2068,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "trancheAPRSplitRatio",
       "offset": 0,
@@ -249,7 +249,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1959,
+      "astId": 2070,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "trancheIdealWeightRatio",
       "offset": 0,
@@ -257,7 +257,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1961,
+      "astId": 2072,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "priceAA",
       "offset": 0,
@@ -265,7 +265,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1963,
+      "astId": 2074,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "priceBB",
       "offset": 0,
@@ -273,7 +273,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1965,
+      "astId": 2076,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "lastNAVAA",
       "offset": 0,
@@ -281,7 +281,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1967,
+      "astId": 2078,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "lastNAVBB",
       "offset": 0,
@@ -289,7 +289,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1969,
+      "astId": 2080,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "lastStrategyPrice",
       "offset": 0,
@@ -297,7 +297,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1971,
+      "astId": 2082,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "unclaimedFees",
       "offset": 0,
@@ -305,7 +305,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1973,
+      "astId": 2084,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "unlentPerc",
       "offset": 0,
@@ -313,7 +313,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1975,
+      "astId": 2086,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "fee",
       "offset": 0,
@@ -321,7 +321,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1977,
+      "astId": 2088,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "feeReceiver",
       "offset": 0,
@@ -329,7 +329,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1979,
+      "astId": 2090,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "idealRange",
       "offset": 0,
@@ -337,7 +337,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1981,
+      "astId": 2092,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "releaseBlocksPeriod",
       "offset": 0,
@@ -345,7 +345,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1983,
+      "astId": 2094,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "harvestedRewards",
       "offset": 0,
@@ -353,7 +353,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1997,
+      "astId": 2108,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "isStkAAVEActive",
       "offset": 0,
@@ -361,7 +361,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1999,
+      "astId": 2110,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "referral",
       "offset": 1,
@@ -369,7 +369,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2001,
+      "astId": 2112,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "feeSplit",
       "offset": 0,
@@ -377,12 +377,28 @@
       "type": "t_uint256"
     },
     {
-      "astId": 2003,
+      "astId": 2114,
       "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
       "label": "isAYSActive",
       "offset": 0,
       "slot": "234",
       "type": "t_bool"
+    },
+    {
+      "astId": 2128,
+      "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
+      "label": "liquidationTolerance",
+      "offset": 0,
+      "slot": "235",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 2132,
+      "contract": "/database/ethereum/mainnet/db/dbcee5ae2e9daf0f5d93473e08780c9f45dfeb93/logic.sol:IdleCDO",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "236",
+      "type": "t_array(t_uint256)50_storage"
     }
   ],
   "types": {
@@ -419,7 +435,7 @@
       "label": "bytes32",
       "numberOfBytes": "32"
     },
-    "t_contract(IUniswapV2Router02)1262": {
+    "t_contract(IUniswapV2Router02)1275": {
       "encoding": "inplace",
       "label": "contract IUniswapV2Router02",
       "numberOfBytes": "20"
