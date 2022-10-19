@@ -159,14 +159,6 @@
       "offset": 0,
       "slot": "163",
       "type": "t_array(t_uint256)49_storage"
-    },
-    {
-      "astId": 4013,
-      "contract": "/database/ethereum/mainnet/f2/f27747adcfd27e873dcdb4bf82833a0f6d493a12/logic.sol:XanaliaDex",
-      "label": "landAddress",
-      "offset": 0,
-      "slot": "212",
-      "type": "t_address"
     }
   ],
   "types": {
