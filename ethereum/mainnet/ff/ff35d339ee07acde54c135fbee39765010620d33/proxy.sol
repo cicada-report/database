@@ -805,18 +805,6 @@ interface IERC1822ProxiableUpgradeable {
 }
 
 // 
-pragma solidity ^0.8.16;
-
-
-
-
-contract UUPSProxy is ERC1967Proxy {
-    constructor(address _implementation, bytes memory _data)
-        ERC1967Proxy(_implementation, _data)
-    {}
-}
-
-// 
 // OpenZeppelin Contracts (last updated v4.5.0) (proxy/ERC1967/ERC1967Upgrade.sol)
 
 pragma solidity ^0.8.2;
@@ -1521,4 +1509,16 @@ abstract contract UUPSUpgradeable is Initializable, IERC1822ProxiableUpgradeable
      * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
      */
     uint256[50] private __gap;
+}
+
+// 
+pragma solidity ^0.8.16;
+
+
+
+
+contract UUPSProxy is ERC1967Proxy {
+    constructor(address _implementation, bytes memory _data)
+        ERC1967Proxy(_implementation, _data)
+    {}
 }
