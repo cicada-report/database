@@ -1,4 +1,36 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.11;
+
+library QuantumBlackListStorage {
+    struct Layout {
+        mapping(address => bool) blackList;
+    }
+
+    bytes32 internal constant STORAGE_SLOT =
+        keccak256("quantum.contracts.storage.quantumblacklist.v1");
+
+    function layout() internal pure returns (Layout storage l) {
+        bytes32 slot = STORAGE_SLOT;
+        assembly {
+            l.slot := slot
+        }
+    }
+}
+
+// 
+pragma solidity ^0.8.11;
+
+interface IQuantumBlackList {
+    function initialize(address admin) external;
+
+    function addToBlackList(address[] calldata users) external;
+
+    function removeFromBlackList(address user) external;
+
+    function isBlackListed(address user) external view returns (bool);
+}
+
+// 
 // OpenZeppelin Contracts v4.4.1 (utils/StorageSlot.sol)
 
 pragma solidity ^0.8.0;
@@ -1321,6 +1353,7 @@ library QuantumSpacesStorage {
         string ipfsURI;
         address authorizer;
         address payable quantumTreasury;
+        address blackListAddress;
     }
 
     bytes32 internal constant STORAGE_SLOT =
@@ -3100,8 +3133,152 @@ abstract contract ManageableUpgradeable is AccessControlEnumerableUpgradeable {
 }
 
 // 
+pragma solidity ^0.8.11;
+
+
+
+
+
+
+
+
+
+error AlreadyBlackListed();
+error NotBlackListed(address _address);
+
+contract QuantumBlackList is
+    IQuantumBlackList,
+    OwnableUpgradeable,
+    ManageableUpgradeable,
+    UUPSUpgradeable
+{
+    using QuantumBlackListStorage for QuantumBlackListStorage.Layout;
+
+    event BlackListAddress(address indexed user, bool isBlackListed);
+
+    /// >>>>>>>>>>>>>>>>>>>>>  INITIALIZER  <<<<<<<<<<<<<<<<<<<<<< ///
+
+    function initialize(address admin) public initializer {
+        __QuantumBlackList_init(admin);
+    }
+
+    function __QuantumBlackList_init(address admin) internal onlyInitializing {
+        __Ownable_init();
+        __UUPSUpgradeable_init();
+        __QuantumBlackList_init_unchained(admin);
+    }
+
+    function __QuantumBlackList_init_unchained(address admin)
+        internal
+        onlyInitializing
+    {
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _setupRole(MANAGER_ROLE, msg.sender);
+        _setupRole(DEFAULT_ADMIN_ROLE, admin);
+        _setupRole(MANAGER_ROLE, admin);
+    }
+
+    /// >>>>>>>>>>>>>>>>>>>>>  PERMISSIONS  <<<<<<<<<<<<<<<<<<<<<< ///
+
+    function _authorizeUpgrade(address newImplementation)
+        internal
+        override
+        onlyOwner
+    {}
+
+    /// @notice set address of the minter
+    /// @param owner The address of the new owner
+    function setOwner(address owner) public onlyOwner {
+        transferOwnership(owner);
+    }
+
+    /// @notice add a contract manager
+    /// @param manager The address of the maanger
+    function setManager(address manager) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        grantRole(MANAGER_ROLE, manager);
+    }
+
+    /// @notice add a contract manager
+    /// @param manager The address of the maanger
+    function unsetManager(address manager) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        revokeRole(MANAGER_ROLE, manager);
+    }
+
+    /// >>>>>>>>>>>>>>>>>>>>>  CORE FUNCTIONALITY  <<<<<<<<<<<<<<<<<<<<<< ///
+
+    /// @notice bulk add addresses to blackList
+    /// @param users The list of address to add to the blackList
+    function addToBlackList(address[] calldata users)
+        public
+        onlyRole(MANAGER_ROLE)
+    {
+        QuantumBlackListStorage.Layout storage qbl = QuantumBlackListStorage
+            .layout();
+
+        for (uint256 i = 0; i < users.length; i++) {
+            address user = users[i];
+
+            if (user != address(0) && !qbl.blackList[user]) {
+                qbl.blackList[user] = true;
+                emit BlackListAddress(user, true);
+            }
+        }
+    }
+
+    /// @notice remove single address from blackList
+    /// @param user The address to remove from the blackList
+    function removeFromBlackList(address user) public onlyRole(MANAGER_ROLE) {
+        QuantumBlackListStorage.Layout storage qbl = QuantumBlackListStorage
+            .layout();
+
+        if (qbl.blackList[user]) {
+            qbl.blackList[user] = false;
+            emit BlackListAddress(user, false);
+        } else {
+            revert NotBlackListed(user);
+        }
+    }
+
+    function isBlackListed(address user) public view returns (bool) {
+        return QuantumBlackListStorage.layout().blackList[user];
+    }
+}
+
+// 
+pragma solidity ^0.8.11;
+
+
+
+// contracts that want to implement blackListing on specific methods (e.g. minting) can and use the functions in this library
+// due to issues with upgrading storage on already deployed contracts, the blackListContractAddress must be stored in the contract itself
+
+library QuantumBlackListable {
+    error BlackListedAddress(address _address);
+    error InvalidBlackListAddress();
+    error BlackListedAddressNotSet();
+
+    function isBlackListed(address user, address blContractAddress)
+        internal
+        view
+        returns (bool)
+    {
+        QuantumBlackList qbl = QuantumBlackList(blContractAddress);
+
+        if (blContractAddress == address(0)) {
+            revert BlackListedAddressNotSet();
+        }
+
+        if (qbl.isBlackListed(user)) {
+            return true;
+        }
+        return false;
+    }
+}
+
+// 
 // Creator: JCBDEV (Quantum Art)
 pragma solidity ^0.8.4;
+
 
 
 
@@ -3156,28 +3333,36 @@ contract QuantumSpaces is
     function initialize(
         address admin,
         address payable quantumTreasury,
-        address authorizer
+        address authorizer,
+        address blAddress
     ) public virtual initializer {
-        __QuantumSpaces_init(admin, quantumTreasury, authorizer);
+        __QuantumSpaces_init(admin, quantumTreasury, authorizer, blAddress);
     }
 
     function __QuantumSpaces_init(
         address admin,
         address payable quantumTreasury,
-        address authorizer
+        address authorizer,
+        address blAddress
     ) internal onlyInitializing {
         __ERC721Q_init("QuantumSpaces", "QSPACE");
         __Ownable_init();
         __Manageable_init();
         __Pausable_init();
         __UUPSUpgradeable_init();
-        __QuantumSpaces_init_unchained(admin, quantumTreasury, authorizer);
+        __QuantumSpaces_init_unchained(
+            admin,
+            quantumTreasury,
+            authorizer,
+            blAddress
+        );
     }
 
     function __QuantumSpaces_init_unchained(
         address admin,
         address payable quantumTreasury,
-        address authorizer
+        address authorizer,
+        address blAddress
     ) internal onlyInitializing {
         QuantumSpacesStorage.Layout storage qs = QuantumSpacesStorage.layout();
         ERC721QStorage.Layout storage erc = ERC721QStorage.layout();
@@ -3189,6 +3374,34 @@ contract QuantumSpaces is
         _setupRole(DEFAULT_ADMIN_ROLE, admin);
         _setupRole(MANAGER_ROLE, admin);
         qs.authorizer = authorizer;
+        qs.blackListAddress = blAddress;
+    }
+
+    /// >>>>>>>>>>>>>>>>>>>>>  BLACKLIST OPS  <<<<<<<<<<<<<<<<<<<<<< ///
+    modifier isNotBlackListed(address user) {
+        if (
+            QuantumBlackListable.isBlackListed(
+                user,
+                QuantumSpacesStorage.layout().blackListAddress
+            )
+        ) {
+            revert QuantumBlackListable.BlackListedAddress(user);
+        }
+        _;
+    }
+
+    function getBlackListAddress() public view returns (address) {
+        return QuantumSpacesStorage.layout().blackListAddress;
+    }
+
+    function setBlackListAddress(address blAddress)
+        public
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        if (blAddress == address(0)) {
+            revert QuantumBlackListable.InvalidBlackListAddress();
+        }
+        QuantumSpacesStorage.layout().blackListAddress = blAddress;
     }
 
     /// >>>>>>>>>>>>>>>>>>>>>  RESTRICTED  <<<<<<<<<<<<<<<<<<<<<< ///
@@ -3357,6 +3570,7 @@ contract QuantumSpaces is
     function authorizedMint(MintAuthorization calldata mintAuth)
         public
         payable
+        isNotBlackListed(mintAuth.to)
     {
         QuantumSpacesStorage.Layout storage qs = QuantumSpacesStorage.layout();
         bytes32 digest = keccak256(
@@ -3414,7 +3628,7 @@ contract QuantumSpaces is
         uint128 amount,
         uint256[] calldata variants,
         uint8 freezePeriod
-    ) public onlyRole(MINTER_ROLE) {
+    ) public onlyRole(MINTER_ROLE) isNotBlackListed(to) {
         _mint(to, dropId, amount, variants, freezePeriod);
     }
 
