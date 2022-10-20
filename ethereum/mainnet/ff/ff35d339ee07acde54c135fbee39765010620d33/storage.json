@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 630,
+      "astId": 628,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 633,
+      "astId": 631,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 945,
+      "astId": 943,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1317,
+      "astId": 1315,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_owner",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1437,
+      "astId": 1435,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "__gap",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 1308,
+      "astId": 1306,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "__gap",
       "offset": 0,
@@ -49,7 +49,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1569,
+      "astId": 1567,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "__gap",
       "offset": 0,
@@ -57,31 +57,31 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1611,
+      "astId": 1609,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "beepBoopBotNft",
       "offset": 0,
       "slot": "201",
-      "type": "t_contract(IERC721)906"
+      "type": "t_contract(IERC721)904"
     },
     {
-      "astId": 1615,
+      "astId": 1613,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "batteryNft",
       "offset": 0,
       "slot": "202",
-      "type": "t_contract(IERC721)906"
+      "type": "t_contract(IERC721)904"
     },
     {
-      "astId": 1619,
+      "astId": 1617,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "toolboxNft",
       "offset": 0,
       "slot": "203",
-      "type": "t_contract(IERC721)906"
+      "type": "t_contract(IERC721)904"
     },
     {
-      "astId": 1622,
+      "astId": 1620,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "acceleratedYield",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1625,
+      "astId": 1623,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "signerAddress",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1628,
+      "astId": 1626,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "stakingLaunched",
       "offset": 20,
@@ -105,7 +105,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1631,
+      "astId": 1629,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "depositPaused",
       "offset": 21,
@@ -113,7 +113,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1635,
+      "astId": 1633,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "baseYieldRate",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_mapping(t_address,t_uint256)"
     },
     {
-      "astId": 1641,
+      "astId": 1639,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_rarityBasedYield",
       "offset": 0,
@@ -129,15 +129,15 @@
       "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))"
     },
     {
-      "astId": 1646,
+      "astId": 1644,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_stakers",
       "offset": 0,
       "slot": "208",
-      "type": "t_mapping(t_address,t_struct(Staker)1607_storage)"
+      "type": "t_mapping(t_address,t_struct(Staker)1605_storage)"
     },
     {
-      "astId": 1652,
+      "astId": 1650,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_ownerOfToken",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_mapping(t_address,t_mapping(t_uint256,t_address))"
     },
     {
-      "astId": 1658,
+      "astId": 1656,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "beepBoopBotToolboxes",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_mapping(t_uint256,t_array(t_uint256)dyn_storage)"
     },
     {
-      "astId": 1663,
+      "astId": 1661,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_beepBoopBotOfToolboxId",
       "offset": 0,
@@ -161,7 +161,7 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 1668,
+      "astId": 1666,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "withdrawGated",
       "offset": 0,
@@ -169,15 +169,15 @@
       "type": "t_mapping(t_address,t_bool)"
     },
     {
-      "astId": 1672,
+      "astId": 1670,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "exoSuitNft",
       "offset": 0,
       "slot": "213",
-      "type": "t_contract(IERC721)906"
+      "type": "t_contract(IERC721)904"
     },
     {
-      "astId": 1676,
+      "astId": 1674,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "beepBoopBotExoSuit",
       "offset": 0,
@@ -185,12 +185,20 @@
       "type": "t_mapping(t_uint256,t_uint256)"
     },
     {
-      "astId": 1680,
+      "astId": 1678,
       "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
       "label": "_beepBoopBotOfExoSuit",
       "offset": 0,
       "slot": "215",
       "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 1684,
+      "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
+      "label": "userToolboxes",
+      "offset": 0,
+      "slot": "216",
+      "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)"
     }
   ],
   "types": {
@@ -222,10 +230,17 @@
       "label": "bool",
       "numberOfBytes": "1"
     },
-    "t_contract(IERC721)906": {
+    "t_contract(IERC721)904": {
       "encoding": "inplace",
       "label": "contract IERC721",
       "numberOfBytes": "20"
+    },
+    "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256[])",
+      "numberOfBytes": "32",
+      "value": "t_array(t_uint256)dyn_storage"
     },
     "t_mapping(t_address,t_bool)": {
       "encoding": "mapping",
@@ -248,12 +263,12 @@
       "numberOfBytes": "32",
       "value": "t_mapping(t_uint256,t_uint256)"
     },
-    "t_mapping(t_address,t_struct(Staker)1607_storage)": {
+    "t_mapping(t_address,t_struct(Staker)1605_storage)": {
       "encoding": "mapping",
       "key": "t_address",
       "label": "mapping(address => struct BattleZone.Staker)",
       "numberOfBytes": "32",
-      "value": "t_struct(Staker)1607_storage"
+      "value": "t_struct(Staker)1605_storage"
     },
     "t_mapping(t_address,t_uint256)": {
       "encoding": "mapping",
@@ -283,12 +298,12 @@
       "numberOfBytes": "32",
       "value": "t_uint256"
     },
-    "t_struct(Staker)1607_storage": {
+    "t_struct(Staker)1605_storage": {
       "encoding": "inplace",
       "label": "struct BattleZone.Staker",
       "members": [
         {
-          "astId": 1596,
+          "astId": 1594,
           "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
           "label": "currentYield",
           "offset": 0,
@@ -296,7 +311,7 @@
           "type": "t_uint256"
         },
         {
-          "astId": 1598,
+          "astId": 1596,
           "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
           "label": "accumulatedAmount",
           "offset": 0,
@@ -304,7 +319,7 @@
           "type": "t_uint256"
         },
         {
-          "astId": 1600,
+          "astId": 1598,
           "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
           "label": "lastCheckpoint",
           "offset": 0,
@@ -312,7 +327,7 @@
           "type": "t_uint256"
         },
         {
-          "astId": 1603,
+          "astId": 1601,
           "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
           "label": "stakedBots",
           "offset": 0,
@@ -320,7 +335,7 @@
           "type": "t_array(t_uint256)dyn_storage"
         },
         {
-          "astId": 1606,
+          "astId": 1604,
           "contract": "/database/ethereum/mainnet/ff/ff35d339ee07acde54c135fbee39765010620d33/logic.sol:BattleZone",
           "label": "stakedBattery",
           "offset": 0,

@@ -1,4 +1,4 @@
-// 
+// SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.7.0) (utils/StorageSlot.sol)
 
 pragma solidity ^0.8.0;
@@ -435,7 +435,6 @@ interface IBattleZone {
         external;
 
     function depositToolboxes(
-        uint256 beepBoopTokenId,
         uint256[] memory toolboxTokenIds
     ) external;
 
@@ -1566,10 +1565,10 @@ contract BattleZone is
     mapping(address => mapping(uint256 => address)) private _ownerOfToken;
 
     /// @notice The toolboxes associated to a bot
-    mapping(uint256 => uint256[]) beepBoopBotToolboxes;
+    mapping(uint256 => uint256[]) beepBoopBotToolboxes; // unused
 
     /// @notice The beep boop asigned to the toolbox
-    mapping(uint256 => uint256) private _beepBoopBotOfToolboxId;
+    mapping(uint256 => uint256) private _beepBoopBotOfToolboxId; // unused
 
     /// @notice Temporary gating of withdrawals
     mapping(address => bool) private withdrawGated;
@@ -1578,6 +1577,9 @@ contract BattleZone is
     IERC721 public exoSuitNft;
     mapping(uint256 => uint256) beepBoopBotExoSuit;
     mapping(uint256 => uint256) private _beepBoopBotOfExoSuit;
+
+    /// @notice Stake batteries
+    mapping(address => uint256[]) userToolboxes;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -1622,6 +1624,19 @@ contract BattleZone is
         Staker storage user = _stakers[msg.sender];
         uint256 newYield = user.currentYield;
 
+        // refactor toolbox yield
+        if (contractAddress == address(beepBoopBotNft)) {
+            uint256 beforeYield = _calculateToolboxYield(
+                userToolboxes[msg.sender].length,
+                user.stakedBots.length
+            );
+            uint256 afterYield = _calculateToolboxYield(
+                userToolboxes[msg.sender].length,
+                user.stakedBots.length + tokenIds.length
+            );
+            newYield += afterYield - beforeYield;
+        }
+
         for (uint256 i; i < tokenIds.length; ++i) {
             uint256 tokenId = tokenIds[i];
             IERC721(contractAddress).safeTransferFrom(
@@ -1664,6 +1679,19 @@ contract BattleZone is
         Staker storage user = _stakers[msg.sender];
         uint256 newYield = user.currentYield;
 
+        // refactor toolbox yield
+        if (contractAddress == address(beepBoopBotNft)) {
+            uint256 beforeYield = _calculateToolboxYield(
+                userToolboxes[msg.sender].length,
+                user.stakedBots.length
+            );
+            uint256 afterYield = _calculateToolboxYield(
+                userToolboxes[msg.sender].length,
+                user.stakedBots.length - tokenIds.length
+            );
+            newYield -= beforeYield - afterYield;
+        }
+
         for (uint256 i; i < tokenIds.length; i++) {
             require(
                 IERC721(contractAddress).ownerOf(tokenIds[i]) == address(this),
@@ -1681,6 +1709,10 @@ contract BattleZone is
             }
 
             if (contractAddress == address(beepBoopBotNft)) {
+                require(
+                    beepBoopBotExoSuit[tokenIds[i]] == 0,
+                    "Must Unstake Exo Suit"
+                );
                 user.stakedBots = _shiftElementToEnd(
                     user.stakedBots,
                     tokenIds[i]
@@ -1710,22 +1742,21 @@ contract BattleZone is
     /**
      * @notice Deposit
      */
-    function depositToolboxes(
-        uint256 beepBoopTokenId,
-        uint256[] memory toolboxTokenIds
-    ) public {
+    function depositToolboxes(uint256[] memory toolboxTokenIds) public {
         require(!depositPaused, "Deposit paused");
         require(stakingLaunched, "Staking is not launched yet");
-        require(
-            ownerOf(address(beepBoopBotNft), beepBoopTokenId) == msg.sender,
-            "Beep boop not staked"
-        );
 
         address toolboxNft_ = address(toolboxNft);
         require(toolboxNft_ != address(0), "!disabled");
 
         Staker storage user = _stakers[msg.sender];
         uint256 netIncrease;
+
+        // get number of bots
+        uint256 numBots = user.stakedBots.length;
+        require(numBots > 0, "Must have a bot staked");
+
+        uint256 numToolboxes = userToolboxes[msg.sender].length;
 
         for (uint256 i; i < toolboxTokenIds.length; i++) {
             uint256 toolboxTokenId = toolboxTokenIds[i];
@@ -1734,22 +1765,32 @@ contract BattleZone is
                 address(this),
                 toolboxTokenId
             );
-            uint256 beforeToolboxCount = beepBoopBotToolboxes[beepBoopTokenId]
-                .length;
-            require(
-                beforeToolboxCount + 1 <= MAX_TOOL_BOXES_STAKED,
-                "Max batteries staked for bot"
-            );
-            beepBoopBotToolboxes[beepBoopTokenId].push(toolboxTokenId);
-            netIncrease += getTokenYield(toolboxNft_, toolboxTokenId);
+            userToolboxes[msg.sender].push(toolboxTokenId);
             _ownerOfToken[toolboxNft_][toolboxTokenId] = msg.sender;
-            _beepBoopBotOfToolboxId[toolboxTokenId] = beepBoopTokenId;
         }
+
+        uint256 beforeYield = _calculateToolboxYield(numToolboxes, numBots);
+        uint256 afterYield = _calculateToolboxYield(
+            numToolboxes + toolboxTokenIds.length,
+            numBots
+        );
+        netIncrease = afterYield - beforeYield;
 
         accumulate(msg.sender);
         user.currentYield += netIncrease;
 
         emit Deposit(msg.sender, toolboxNft_, toolboxTokenIds.length);
+    }
+
+    function _calculateToolboxYield(uint256 numToolboxes, uint256 numBots)
+        private
+        view
+        returns (uint256 total)
+    {
+        uint256 botsPerToolbox = (numToolboxes / MAX_TOOL_BOXES_STAKED);
+        return
+            (numBots < botsPerToolbox ? numBots : botsPerToolbox) *
+            baseYieldRate[address(toolboxNft)];
     }
 
     function withdrawToolboxes(uint256[] memory toolboxTokenIds) public {
@@ -1759,33 +1800,27 @@ contract BattleZone is
         Staker storage user = _stakers[msg.sender];
         uint256 newYield = user.currentYield;
 
+        uint256 numToolboxes = userToolboxes[msg.sender].length;
+        uint256 beforeYield = _calculateToolboxYield(
+            numToolboxes,
+            user.stakedBots.length
+        );
+
         for (uint256 i; i < toolboxTokenIds.length; i++) {
             uint256 toolboxTokenId = toolboxTokenIds[i];
-            uint256 toolboxBeepBoopId = _beepBoopBotOfToolboxId[toolboxTokenId];
             require(
-                IERC721(toolboxNft_).ownerOf(toolboxTokenId) == address(this),
+                ownerOf(address(toolboxNft_), toolboxTokenId) == msg.sender,
                 "Not the owner"
-            );
-            require(
-                ownerOf(address(beepBoopBotNft), toolboxBeepBoopId) ==
-                    msg.sender,
-                "Not the bot owner"
             );
 
             _ownerOfToken[toolboxNft_][toolboxTokenId] = address(0);
 
-            // reduce yield
-            if (user.currentYield != 0) {
-                uint256 tokenYield = getTokenYield(toolboxNft_, toolboxTokenId);
-                newYield -= tokenYield;
-            }
-
             // remove toolbox from beep bop
-            beepBoopBotToolboxes[toolboxBeepBoopId] = _shiftElementToEnd(
-                beepBoopBotToolboxes[toolboxBeepBoopId],
+            userToolboxes[msg.sender] = _shiftElementToEnd(
+                userToolboxes[msg.sender],
                 toolboxTokenId
             );
-            beepBoopBotToolboxes[toolboxBeepBoopId].pop();
+            userToolboxes[msg.sender].pop();
 
             // return it back
             IERC721(toolboxNft_).safeTransferFrom(
@@ -1793,6 +1828,14 @@ contract BattleZone is
                 msg.sender,
                 toolboxTokenId
             );
+        }
+
+        if (user.currentYield != 0) {
+            uint256 afterYield = _calculateToolboxYield(
+                numToolboxes - toolboxTokenIds.length,
+                user.stakedBots.length
+            );
+            newYield -= beforeYield - afterYield;
         }
 
         accumulate(msg.sender);
@@ -1928,24 +1971,17 @@ contract BattleZone is
             uint256[] memory
         )
     {
-        uint256 toolBoxIdx;
         uint256[] memory stakedBots = _stakers[staker].stakedBots;
-        uint256[] memory stakedToolboxes = new uint256[](
-            MAX_TOOL_BOXES_STAKED * stakedBots.length
-        );
         uint256[] memory stakedExoSuits = new uint256[](stakedBots.length);
         for (uint256 i; i < stakedBots.length; ++i) {
-            uint256 botId = stakedBots[i];
-            uint256[] memory botToolboxes = beepBoopBotToolboxes[botId];
-            for (uint256 t; t < botToolboxes.length; t++) {
-                stakedToolboxes[toolBoxIdx++] = botToolboxes[t];
-            }
-            stakedExoSuits[i] = beepBoopBotExoSuit[botId];
+            stakedExoSuits[i] = beepBoopBotExoSuit[stakedBots[i]];
         }
-        assembly {
-            mstore(stakedToolboxes, toolBoxIdx)
-        }
-        return (stakedBots, _stakers[staker].stakedBattery, stakedToolboxes, stakedExoSuits);
+        return (
+            stakedBots,
+            _stakers[staker].stakedBattery,
+            userToolboxes[staker],
+            stakedExoSuits
+        );
     }
 
     function isRaritiesSet(address contractAddress, uint256[] memory tokenIds)
