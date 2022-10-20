@@ -1,0 +1,251 @@
+{
+  "storage": [
+    {
+      "astId": 142,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "name",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 144,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "symbol",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 179,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "_tokenData",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_mapping(t_uint256,t_struct(OwnerStruct)169_storage)"
+    },
+    {
+      "astId": 184,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "_balanceData",
+      "offset": 0,
+      "slot": "3",
+      "type": "t_mapping(t_address,t_struct(BalanceStruct)174_storage)"
+    },
+    {
+      "astId": 188,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "getApproved",
+      "offset": 0,
+      "slot": "4",
+      "type": "t_mapping(t_uint256,t_address)"
+    },
+    {
+      "astId": 194,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "isApprovedForAll",
+      "offset": 0,
+      "slot": "5",
+      "type": "t_mapping(t_address,t_mapping(t_address,t_bool))"
+    },
+    {
+      "astId": 651,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyPadding",
+      "offset": 0,
+      "slot": "6",
+      "type": "t_array(t_bytes32)50_storage"
+    },
+    {
+      "astId": 991,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyPadding",
+      "offset": 0,
+      "slot": "56",
+      "type": "t_array(t_bytes32)50_storage"
+    },
+    {
+      "astId": 9,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "owner",
+      "offset": 0,
+      "slot": "106",
+      "type": "t_address"
+    },
+    {
+      "astId": 61,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyPadding",
+      "offset": 0,
+      "slot": "107",
+      "type": "t_array(t_bytes32)50_storage"
+    },
+    {
+      "astId": 76,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "minters",
+      "offset": 0,
+      "slot": "157",
+      "type": "t_mapping(t_address,t_bool)"
+    },
+    {
+      "astId": 115,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyPadding",
+      "offset": 0,
+      "slot": "158",
+      "type": "t_array(t_bytes32)50_storage"
+    },
+    {
+      "astId": 1006,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyIsInitialized",
+      "offset": 0,
+      "slot": "208",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1052,
+      "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+      "label": "proxyPadding",
+      "offset": 0,
+      "slot": "209",
+      "type": "t_array(t_bytes32)50_storage"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_bytes32)50_storage": {
+      "base": "t_bytes32",
+      "encoding": "inplace",
+      "label": "bytes32[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_address,t_bool)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => bool)",
+      "numberOfBytes": "32",
+      "value": "t_bool"
+    },
+    "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(address => bool))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_bool)"
+    },
+    "t_mapping(t_address,t_struct(BalanceStruct)174_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct ERC721GSM.BalanceStruct)",
+      "numberOfBytes": "32",
+      "value": "t_struct(BalanceStruct)174_storage"
+    },
+    "t_mapping(t_uint256,t_address)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => address)",
+      "numberOfBytes": "32",
+      "value": "t_address"
+    },
+    "t_mapping(t_uint256,t_struct(OwnerStruct)169_storage)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => struct ERC721GSM.OwnerStruct)",
+      "numberOfBytes": "32",
+      "value": "t_struct(OwnerStruct)169_storage"
+    },
+    "t_string_storage": {
+      "encoding": "bytes",
+      "label": "string",
+      "numberOfBytes": "32"
+    },
+    "t_struct(BalanceStruct)174_storage": {
+      "encoding": "inplace",
+      "label": "struct ERC721GSM.BalanceStruct",
+      "members": [
+        {
+          "astId": 171,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "balance",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint32"
+        },
+        {
+          "astId": 173,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "mintedAmount",
+          "offset": 4,
+          "slot": "0",
+          "type": "t_uint32"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_struct(OwnerStruct)169_storage": {
+      "encoding": "inplace",
+      "label": "struct ERC721GSM.OwnerStruct",
+      "members": [
+        {
+          "astId": 162,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "owner",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_address"
+        },
+        {
+          "astId": 164,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "lastTransfer",
+          "offset": 20,
+          "slot": "0",
+          "type": "t_uint32"
+        },
+        {
+          "astId": 166,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "stakeTimestamp",
+          "offset": 24,
+          "slot": "0",
+          "type": "t_uint32"
+        },
+        {
+          "astId": 168,
+          "contract": "/database/ethereum/mainnet/0f/0f926df0ddb33a1db95088964e09fa8fb47e490e/logic.sol:GASGangsters",
+          "label": "totalTimeStaked",
+          "offset": 28,
+          "slot": "0",
+          "type": "t_uint32"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint32": {
+      "encoding": "inplace",
+      "label": "uint32",
+      "numberOfBytes": "4"
+    }
+  }
+}
