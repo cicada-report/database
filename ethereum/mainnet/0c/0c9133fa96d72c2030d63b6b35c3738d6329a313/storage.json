@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 577,
+      "astId": 610,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 580,
+      "astId": 613,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "_initializing",
       "offset": 1,
@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 778,
+      "astId": 811,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "__gap",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1150,
+      "astId": 1183,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "_owner",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1270,
+      "astId": 1303,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "__gap",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 1141,
+      "astId": 1174,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "__gap",
       "offset": 0,
@@ -49,7 +49,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1402,
+      "astId": 1435,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "__gap",
       "offset": 0,
@@ -57,7 +57,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 1427,
+      "astId": 1460,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "trustedRemoteLookup",
       "offset": 0,
@@ -65,15 +65,15 @@
       "type": "t_mapping(t_uint16,t_bytes_storage)"
     },
     {
-      "astId": 1433,
+      "astId": 1466,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "COORDINATOR",
       "offset": 0,
       "slot": "202",
-      "type": "t_contract(VRFCoordinatorV2Interface)555"
+      "type": "t_contract(VRFCoordinatorV2Interface)588"
     },
     {
-      "astId": 1435,
+      "astId": 1468,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "s_subscriptionId",
       "offset": 20,
@@ -81,7 +81,7 @@
       "type": "t_uint64"
     },
     {
-      "astId": 1438,
+      "astId": 1471,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "nft",
       "offset": 0,
@@ -89,7 +89,7 @@
       "type": "t_contract(IERC721)390"
     },
     {
-      "astId": 1440,
+      "astId": 1473,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "reward",
       "offset": 0,
@@ -97,7 +97,7 @@
       "type": "t_address"
     },
     {
-      "astId": 1442,
+      "astId": 1475,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "totalSeats",
       "offset": 0,
@@ -105,7 +105,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1444,
+      "astId": 1477,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "rngInProgress",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1446,
+      "astId": 1479,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "randomSeat",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 1448,
+      "astId": 1481,
       "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
       "label": "winner",
       "offset": 0,
@@ -162,7 +162,7 @@
       "label": "contract IERC721",
       "numberOfBytes": "20"
     },
-    "t_contract(VRFCoordinatorV2Interface)555": {
+    "t_contract(VRFCoordinatorV2Interface)588": {
       "encoding": "inplace",
       "label": "contract VRFCoordinatorV2Interface",
       "numberOfBytes": "20"

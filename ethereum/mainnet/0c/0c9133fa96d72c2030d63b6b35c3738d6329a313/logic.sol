@@ -177,7 +177,7 @@ library AddressUpgradeable {
      * imposed by `transfer`, making them unable to receive funds via
      * `transfer`. {sendValue} removes this limitation.
      *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     * https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/[Learn more].
      *
      * IMPORTANT: because control is transferred to `recipient`, care must be
      * taken to not create reentrancy vulnerabilities. Consider using
@@ -356,6 +356,24 @@ interface IERC721 {
     function ownerOf(uint tokenId) external view returns (address);
 
     function balanceOf(address account) external view returns (uint);
+}
+
+// 
+pragma solidity 0.8.17;
+
+interface ILayerZeroEndpoint {
+    // @notice send a LayerZero message to the specified address at a LayerZero endpoint.
+    // @param _dstChainId - the destination chain identifier
+    // @param _destination - the address on destination chain (in bytes). address length/format may vary by chains
+    // @param _payload - a custom bytes payload to send to the destination contract
+    // @param _refundAddress - if the source transaction is cheaper than the amount of value passed, refund the additional amount to this address
+    // @param _zroPaymentAddress - the address of the ZRO token holder who would pay for the transaction
+    // @param _adapterParams - parameters for custom functionality. e.g. receive airdropped native gas from the relayer on destination
+    function send(uint16 _dstChainId, bytes calldata _destination, bytes calldata _payload, address payable _refundAddress, address _zroPaymentAddress, bytes calldata _adapterParams) external payable;
+
+    function retryPayload(uint16 _srcChainId, bytes calldata _srcAddress, bytes calldata _payload) external;
+
+    function forceResumeReceive(uint16 _srcChainId, bytes calldata _srcAddress) external;
 }
 
 // 
@@ -1294,6 +1312,7 @@ pragma solidity 0.8.17;
 
 
 
+
 contract Dao is
     Initializable, 
     OwnableUpgradeable,
@@ -1302,7 +1321,7 @@ contract Dao is
     IERC721ReceiverUpgradeable,
     VRFConsumerBaseV2(0x271682DEB8C4E0901D1a1550aD2e64D568E69909)
 {
-    ILayerZeroReceiver constant lzEndpoint = ILayerZeroReceiver(0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675);
+    ILayerZeroEndpoint constant lzEndpoint = ILayerZeroEndpoint(0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675);
     mapping(uint16 => bytes) public trustedRemoteLookup; // record contract on Optimism
 
     address constant vrfCoordinator = 0x271682DEB8C4E0901D1a1550aD2e64D568E69909;
@@ -1316,12 +1335,15 @@ contract Dao is
     uint public randomSeat;
     address public winner;
 
+    event LzReceiveRetry(uint16 _srcChainId, bytes _srcAddress, bytes _payload);
+    event LzReceiveClear(uint16 _srcChainId, address _srcAddress);
     event DistributeNFT(address winner, address _nft, uint tokenId);
     event SetNft(address _nft);
     event SetReward(address _reward);
     event SetTotalSeats(uint _totalSeats);
     event SetRandomSeat(uint _randomSeat);
     event SetWinner(address _winner);
+    event SetTrustedRemote(uint16 chainId, address record);
 
     function initialize(address record, uint64 subscriptionId, address _nft) external initializer {
         __Ownable_init();
@@ -1334,8 +1356,8 @@ contract Dao is
     }
 
     function lzReceive(uint16 _srcChainId, bytes calldata _srcAddress, uint64, bytes memory _payload) override external {
-        require(msg.sender == address(lzEndpoint));
-        require(keccak256(_srcAddress) == keccak256(trustedRemoteLookup[_srcChainId]));
+        require(msg.sender == address(lzEndpoint), "sender != lzEndpoint");
+        require(keccak256(_srcAddress) == keccak256(trustedRemoteLookup[_srcChainId]), "srcAddr != trustedRemote");
         
         (uint _totalSeats, address _winner) = abi.decode(_payload, (uint, address));
         if (_totalSeats != 0 && winner == address(0)) {
@@ -1345,6 +1367,26 @@ contract Dao is
             winner = _winner;
             emit SetWinner(_winner);
         }
+    }
+
+    ///@notice retrieve any payload that didn't execute due to error, can view from layerzeroscan.com 
+    ///@param _srcChainId 111 for optimism
+    ///@param _srcAddress abi.encodePacked(optimismRecordAddr, address(this))
+    ///@param _payload abi.encode(totalSeats, address(0)) || abi.encode(0, winnerAddr)
+    function lzReceiveRetry(uint16 _srcChainId, bytes calldata _srcAddress, bytes calldata _payload) external {
+        lzEndpoint.retryPayload(_srcChainId, _srcAddress, _payload);
+
+        emit LzReceiveRetry(_srcChainId, _srcAddress, _payload);
+    }
+
+    ///@notice clear any payload that block the subsequent payload
+    ///@param _srcChainId 111 for optimism
+    ///@param srcAddress optimismRecordAddr
+    function lzReceiveClear(uint16 _srcChainId, address srcAddress) external onlyOwner {
+        bytes memory _srcAddress = abi.encodePacked(srcAddress, address(this));
+        lzEndpoint.forceResumeReceive(_srcChainId, _srcAddress);
+
+        emit LzReceiveClear(_srcChainId, srcAddress);
     }
 
     function requestRandomWords() external {
@@ -1410,6 +1452,12 @@ contract Dao is
         winner = _winner;
 
         emit SetWinner(_winner);
+    }
+
+    function setTrustedRemote(uint16 chainId, address record) external onlyOwner {
+        trustedRemoteLookup[chainId] = abi.encodePacked(record, address(this));
+
+        emit SetTrustedRemote(chainId, record);
     }
 
     function getTokenId() external view returns (uint tokenId) {
