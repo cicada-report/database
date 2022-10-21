@@ -1,0 +1,198 @@
+{
+  "storage": [
+    {
+      "astId": 577,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 580,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 778,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1150,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_address"
+    },
+    {
+      "astId": 1270,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1141,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1402,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1427,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "trustedRemoteLookup",
+      "offset": 0,
+      "slot": "201",
+      "type": "t_mapping(t_uint16,t_bytes_storage)"
+    },
+    {
+      "astId": 1433,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "COORDINATOR",
+      "offset": 0,
+      "slot": "202",
+      "type": "t_contract(VRFCoordinatorV2Interface)555"
+    },
+    {
+      "astId": 1435,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "s_subscriptionId",
+      "offset": 20,
+      "slot": "202",
+      "type": "t_uint64"
+    },
+    {
+      "astId": 1438,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "nft",
+      "offset": 0,
+      "slot": "203",
+      "type": "t_contract(IERC721)390"
+    },
+    {
+      "astId": 1440,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "reward",
+      "offset": 0,
+      "slot": "204",
+      "type": "t_address"
+    },
+    {
+      "astId": 1442,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "totalSeats",
+      "offset": 0,
+      "slot": "205",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1444,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "rngInProgress",
+      "offset": 0,
+      "slot": "206",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1446,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "randomSeat",
+      "offset": 0,
+      "slot": "207",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1448,
+      "contract": "/database/ethereum/mainnet/0c/0c9133fa96d72c2030d63b6b35c3738d6329a313/logic.sol:Dao",
+      "label": "winner",
+      "offset": 0,
+      "slot": "208",
+      "type": "t_address"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes_storage": {
+      "encoding": "bytes",
+      "label": "bytes",
+      "numberOfBytes": "32"
+    },
+    "t_contract(IERC721)390": {
+      "encoding": "inplace",
+      "label": "contract IERC721",
+      "numberOfBytes": "20"
+    },
+    "t_contract(VRFCoordinatorV2Interface)555": {
+      "encoding": "inplace",
+      "label": "contract VRFCoordinatorV2Interface",
+      "numberOfBytes": "20"
+    },
+    "t_mapping(t_uint16,t_bytes_storage)": {
+      "encoding": "mapping",
+      "key": "t_uint16",
+      "label": "mapping(uint16 => bytes)",
+      "numberOfBytes": "32",
+      "value": "t_bytes_storage"
+    },
+    "t_uint16": {
+      "encoding": "inplace",
+      "label": "uint16",
+      "numberOfBytes": "2"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint64": {
+      "encoding": "inplace",
+      "label": "uint64",
+      "numberOfBytes": "8"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
