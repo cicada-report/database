@@ -1,0 +1,142 @@
+{
+  "storage": [
+    {
+      "astId": 275,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 278,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 343,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "______gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 348,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "governor",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_address"
+    },
+    {
+      "astId": 453,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "config",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_mapping(t_bytes32,t_uint256)"
+    },
+    {
+      "astId": 1229,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "farm",
+      "offset": 0,
+      "slot": "53",
+      "type": "t_address"
+    },
+    {
+      "astId": 1231,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "underlying",
+      "offset": 0,
+      "slot": "54",
+      "type": "t_address"
+    },
+    {
+      "astId": 1233,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "totalStaking",
+      "offset": 0,
+      "slot": "55",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1237,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "stakingOf",
+      "offset": 0,
+      "slot": "56",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 1241,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "sumRewardPerOf",
+      "offset": 0,
+      "slot": "57",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 1243,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "sumRewardPer",
+      "offset": 0,
+      "slot": "58",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1245,
+      "contract": "/database/ethereum/mainnet/d1/d17b4b476006ccd008e3fe8b9d96af4f787fe671/logic.sol:LiquidityPool",
+      "label": "lasttime",
+      "offset": 0,
+      "slot": "59",
+      "type": "t_uint256"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_mapping(t_bytes32,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_bytes32",
+      "label": "mapping(bytes32 => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    }
+  }
+}
