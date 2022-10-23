@@ -382,6 +382,46 @@ interface IBlacklist {
 pragma solidity ^0.8.0;
 
 /**
+ * @title Interface for IWhitelist to interact with Whitelist Users Contracts
+ *
+ */
+interface IWhitelist {
+    /**
+     * @dev getWhitelistUpdatesPerYear
+     * @return whiteListUpdatesPerYear uint256 for how many updates the whitelisted gets
+     *
+     */
+    function getWhitelistUpdatesPerYear() external view returns (uint256);
+
+    /**
+     * @dev getWhitelistDuration
+     * @return whiteListDuration uint256 of how long the membership is for whitelisted users
+     */
+    function getWhitelistDuration() external view returns (uint256);
+
+    /**
+     * @dev checkIfAddressIsWhitelisted
+     * @param _user address of the user to verify is on the list
+     * @return whitelisted boolean representing if the input is whitelisted
+     *
+     */
+    function checkIfAddressIsWhitelisted(address _user)
+        external
+        view
+        returns (bool whitelisted);
+
+    /**
+     * @dev Function to get whitelisted addresses
+     * @return list of addresses on the whitelist
+     *
+     */
+    function getWhitelistAddress() external view returns (address[] memory);
+}
+
+//
+pragma solidity ^0.8.0;
+
+/**
  * @title Errors library
  * @notice Defines the error messages emitted by the different contracts of the Webacy
  * @dev inspired by Aave's https://github.com/aave/protocol-v2/blob/master/contracts/protocol/libraries/helpers/Errors.sol
@@ -447,29 +487,6 @@ library Errors {
 
     // RelayerContract Errors
     string public constant RC_UNAUTHORIZED = "36"; // "Only relayer can invoke this function"
-}
-
-//
-pragma solidity ^0.8.0;
-
-/**
- * @dev membershipPlan struct
- * 
- * @param membershipDuration uint256 length of time membership is good for
- * @param costOfMembership uint256 cost in wei of gaining membership
- * @param updatesPerYear uint256 how many updates can the membership be updated in a year by user
- * @param nftCollection address pass as null address if it is not for creating specific
- * membership plan for a specific NFT Collection
- * @param membershipId uint256 id for the new membership to lookup by
- * @param active bool status if the membership can be used to create new contracts
- */
-struct membershipPlan {
-    uint256 membershipDuration;
-    uint256 costOfMembership;
-    uint256 updatesPerYear;
-    address nftCollection;
-    uint256 membershipId;
-    bool active;
 }
 
 //
@@ -648,40 +665,23 @@ interface IProtocolDirectory {
 pragma solidity ^0.8.0;
 
 /**
- * @title Interface for IWhitelist to interact with Whitelist Users Contracts
- *
+ * @dev membershipPlan struct
+ * 
+ * @param membershipDuration uint256 length of time membership is good for
+ * @param costOfMembership uint256 cost in wei of gaining membership
+ * @param updatesPerYear uint256 how many updates can the membership be updated in a year by user
+ * @param nftCollection address pass as null address if it is not for creating specific
+ * membership plan for a specific NFT Collection
+ * @param membershipId uint256 id for the new membership to lookup by
+ * @param active bool status if the membership can be used to create new contracts
  */
-interface IWhitelist {
-    /**
-     * @dev getWhitelistUpdatesPerYear
-     * @return whiteListUpdatesPerYear uint256 for how many updates the whitelisted gets
-     *
-     */
-    function getWhitelistUpdatesPerYear() external view returns (uint256);
-
-    /**
-     * @dev getWhitelistDuration
-     * @return whiteListDuration uint256 of how long the membership is for whitelisted users
-     */
-    function getWhitelistDuration() external view returns (uint256);
-
-    /**
-     * @dev checkIfAddressIsWhitelisted
-     * @param _user address of the user to verify is on the list
-     * @return whitelisted boolean representing if the input is whitelisted
-     *
-     */
-    function checkIfAddressIsWhitelisted(address _user)
-        external
-        view
-        returns (bool whitelisted);
-
-    /**
-     * @dev Function to get whitelisted addresses
-     * @return list of addresses on the whitelist
-     *
-     */
-    function getWhitelistAddress() external view returns (address[] memory);
+struct membershipPlan {
+    uint256 membershipDuration;
+    uint256 costOfMembership;
+    uint256 updatesPerYear;
+    address nftCollection;
+    uint256 membershipId;
+    bool active;
 }
 
 // 
@@ -2838,6 +2838,7 @@ contract MembershipFactory is
                 UserToMembershipPlan[uid] = _membershipPlan.membershipId;
                 UserToMembershipContract[uid] = address(_membership);
                 membershipPlanAddresses.push(address(_membership));
+
                 emit MembershipContractCreated(
                     address(_membership),
                     _walletAddress,
@@ -2847,6 +2848,10 @@ contract MembershipFactory is
                     _membershipPlan.membershipId,
                     _membershipPlan.updatesPerYear,
                     _contractAddress
+                );
+                IMember(IMemberAddress).setIMembershipAddress(
+                    uid,
+                    address(_membership)
                 );
                 break;
             }
