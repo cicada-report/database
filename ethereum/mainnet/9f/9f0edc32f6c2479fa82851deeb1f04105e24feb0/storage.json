@@ -1,0 +1,274 @@
+{
+  "storage": [
+    {
+      "astId": 335,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_address"
+    },
+    {
+      "astId": 911,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "preUsd",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 913,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "minBuyUsd",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 915,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "tokenDecimals",
+      "offset": 0,
+      "slot": "3",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 917,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "tokenAddress",
+      "offset": 0,
+      "slot": "4",
+      "type": "t_address"
+    },
+    {
+      "astId": 919,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "usdAddress",
+      "offset": 0,
+      "slot": "5",
+      "type": "t_address"
+    },
+    {
+      "astId": 921,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "usdOrcaleAddress",
+      "offset": 0,
+      "slot": "6",
+      "type": "t_address"
+    },
+    {
+      "astId": 923,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "r1StartTime",
+      "offset": 0,
+      "slot": "7",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 925,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "r2StartTime",
+      "offset": 0,
+      "slot": "8",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 927,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "r3StartTime",
+      "offset": 0,
+      "slot": "9",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 929,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "endTime",
+      "offset": 0,
+      "slot": "10",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 931,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "totalToken",
+      "offset": 0,
+      "slot": "11",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 935,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "rTotalToken",
+      "offset": 0,
+      "slot": "12",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 937,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "saleToken",
+      "offset": 0,
+      "slot": "13",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 941,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "rSaleToken",
+      "offset": 0,
+      "slot": "14",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    },
+    {
+      "astId": 943,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "paused",
+      "offset": 0,
+      "slot": "15",
+      "type": "t_bool"
+    },
+    {
+      "astId": 945,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "releaseTime",
+      "offset": 0,
+      "slot": "16",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 967,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "userContributeList",
+      "offset": 0,
+      "slot": "17",
+      "type": "t_mapping(t_address,t_struct(UserContribute)962_storage)"
+    },
+    {
+      "astId": 969,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "locked",
+      "offset": 0,
+      "slot": "18",
+      "type": "t_bool"
+    },
+    {
+      "astId": 988,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "inited",
+      "offset": 1,
+      "slot": "18",
+      "type": "t_bool"
+    },
+    {
+      "astId": 990,
+      "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+      "label": "devAddress",
+      "offset": 2,
+      "slot": "18",
+      "type": "t_address"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_mapping(t_address,t_struct(UserContribute)962_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct PreSale.UserContribute)",
+      "numberOfBytes": "32",
+      "value": "t_struct(UserContribute)962_storage"
+    },
+    "t_mapping(t_uint256,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_struct(UserContribute)962_storage": {
+      "encoding": "inplace",
+      "label": "struct PreSale.UserContribute",
+      "members": [
+        {
+          "astId": 947,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "ethAmount",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 949,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "usdAmount",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 951,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "tokenAmount",
+          "offset": 0,
+          "slot": "2",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 953,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "preRawToken",
+          "offset": 0,
+          "slot": "3",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 955,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "tegToken",
+          "offset": 0,
+          "slot": "4",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 957,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "claimTotal",
+          "offset": 0,
+          "slot": "5",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 959,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "lastClaimTime",
+          "offset": 0,
+          "slot": "6",
+          "type": "t_uint256"
+        },
+        {
+          "astId": 961,
+          "contract": "/database/ethereum/mainnet/9f/9f0edc32f6c2479fa82851deeb1f04105e24feb0/logic.sol:PreSale",
+          "label": "hasClaim",
+          "offset": 0,
+          "slot": "7",
+          "type": "t_bool"
+        }
+      ],
+      "numberOfBytes": "256"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    }
+  }
+}
