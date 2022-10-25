@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 977,
+      "astId": 1026,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_royaltyFee",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint256"
     },
     {
-      "astId": 980,
+      "astId": 1029,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_royaltyRecipient",
       "offset": 0,
@@ -17,7 +17,7 @@
       "type": "t_address"
     },
     {
-      "astId": 984,
+      "astId": 1033,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_dropRoyaltyFee",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_mapping(t_uint128,t_uint256)"
     },
     {
-      "astId": 988,
+      "astId": 1037,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_dropRoyaltyRecipient",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_mapping(t_uint128,t_address)"
     },
     {
-      "astId": 1862,
+      "astId": 1913,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_initialized",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1865,
+      "astId": 1916,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_initializing",
       "offset": 1,
@@ -49,7 +49,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 1993,
+      "astId": 2044,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -57,7 +57,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 2406,
+      "astId": 2457,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_owner",
       "offset": 0,
@@ -65,7 +65,7 @@
       "type": "t_address"
     },
     {
-      "astId": 2518,
+      "astId": 2569,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -73,7 +73,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 2034,
+      "astId": 2085,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -81,15 +81,15 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 4417,
+      "astId": 4468,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_roles",
       "offset": 0,
       "slot": "155",
-      "type": "t_mapping(t_bytes32,t_struct(RoleData)4412_storage)"
+      "type": "t_mapping(t_bytes32,t_struct(RoleData)4463_storage)"
     },
     {
-      "astId": 4705,
+      "astId": 4756,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -97,15 +97,15 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 4867,
+      "astId": 4918,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_roleMembers",
       "offset": 0,
       "slot": "205",
-      "type": "t_mapping(t_bytes32,t_struct(AddressSet)460_storage)"
+      "type": "t_mapping(t_bytes32,t_struct(AddressSet)509_storage)"
     },
     {
-      "astId": 4977,
+      "astId": 5028,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -113,7 +113,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 4382,
+      "astId": 4433,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -121,7 +121,7 @@
       "type": "t_array(t_uint256)42_storage"
     },
     {
-      "astId": 2537,
+      "astId": 2588,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "_paused",
       "offset": 0,
@@ -129,7 +129,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 2626,
+      "astId": 2677,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -137,7 +137,7 @@
       "type": "t_array(t_uint256)49_storage"
     },
     {
-      "astId": 2397,
+      "astId": 2448,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -145,7 +145,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 4837,
+      "astId": 4888,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -153,7 +153,7 @@
       "type": "t_array(t_uint256)50_storage"
     },
     {
-      "astId": 6220,
+      "astId": 6668,
       "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
       "label": "__gap",
       "offset": 0,
@@ -208,19 +208,19 @@
       "numberOfBytes": "32",
       "value": "t_bool"
     },
-    "t_mapping(t_bytes32,t_struct(AddressSet)460_storage)": {
+    "t_mapping(t_bytes32,t_struct(AddressSet)509_storage)": {
       "encoding": "mapping",
       "key": "t_bytes32",
       "label": "mapping(bytes32 => struct EnumerableSetUpgradeable.AddressSet)",
       "numberOfBytes": "32",
-      "value": "t_struct(AddressSet)460_storage"
+      "value": "t_struct(AddressSet)509_storage"
     },
-    "t_mapping(t_bytes32,t_struct(RoleData)4412_storage)": {
+    "t_mapping(t_bytes32,t_struct(RoleData)4463_storage)": {
       "encoding": "mapping",
       "key": "t_bytes32",
       "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
       "numberOfBytes": "32",
-      "value": "t_struct(RoleData)4412_storage"
+      "value": "t_struct(RoleData)4463_storage"
     },
     "t_mapping(t_bytes32,t_uint256)": {
       "encoding": "mapping",
@@ -243,27 +243,27 @@
       "numberOfBytes": "32",
       "value": "t_uint256"
     },
-    "t_struct(AddressSet)460_storage": {
+    "t_struct(AddressSet)509_storage": {
       "encoding": "inplace",
       "label": "struct EnumerableSetUpgradeable.AddressSet",
       "members": [
         {
-          "astId": 459,
+          "astId": 508,
           "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
           "label": "_inner",
           "offset": 0,
           "slot": "0",
-          "type": "t_struct(Set)159_storage"
+          "type": "t_struct(Set)208_storage"
         }
       ],
       "numberOfBytes": "64"
     },
-    "t_struct(RoleData)4412_storage": {
+    "t_struct(RoleData)4463_storage": {
       "encoding": "inplace",
       "label": "struct AccessControlUpgradeable.RoleData",
       "members": [
         {
-          "astId": 4409,
+          "astId": 4460,
           "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
           "label": "members",
           "offset": 0,
@@ -271,7 +271,7 @@
           "type": "t_mapping(t_address,t_bool)"
         },
         {
-          "astId": 4411,
+          "astId": 4462,
           "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
           "label": "adminRole",
           "offset": 0,
@@ -281,12 +281,12 @@
       ],
       "numberOfBytes": "64"
     },
-    "t_struct(Set)159_storage": {
+    "t_struct(Set)208_storage": {
       "encoding": "inplace",
       "label": "struct EnumerableSetUpgradeable.Set",
       "members": [
         {
-          "astId": 154,
+          "astId": 203,
           "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
           "label": "_values",
           "offset": 0,
@@ -294,7 +294,7 @@
           "type": "t_array(t_bytes32)dyn_storage"
         },
         {
-          "astId": 158,
+          "astId": 207,
           "contract": "/database/ethereum/mainnet/4b/4b9e6ea8387b17573f7af897681286b4652230cd/logic.sol:QuantumSpaces",
           "label": "_indexes",
           "offset": 0,
