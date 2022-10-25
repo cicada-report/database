@@ -275,25 +275,6 @@ abstract contract Context {
 pragma solidity ^0.8.0;
 
 /**
- * @dev Structure to store different types of Beneficiary
- * (ERC721, ERC1155, ERC20)
- * @param beneficiaryAddress address for assets to go to
- * @param beneficiaryName name of entity recieveing the assets
- * @param isCharity boolean representing if Beneficiary is a charity
- * because charities will be a recieve only address and cannot be
- * expected to call a function to claim assets
- *
- */
-struct Beneficiary {
-    address beneficiaryAddress;
-    string beneficiaryName;
-    bool isCharity;
-}
-
-//
-pragma solidity ^0.8.0;
-
-/**
  * @dev Token struct
  * 
  * @param tokenId uint256 specific tokenId for the asset
@@ -313,6 +294,25 @@ struct Token {
 pragma solidity ^0.8.0;
 
 /**
+ * @dev Structure to store different types of Beneficiary
+ * (ERC721, ERC1155, ERC20)
+ * @param beneficiaryAddress address for assets to go to
+ * @param beneficiaryName name of entity recieveing the assets
+ * @param isCharity boolean representing if Beneficiary is a charity
+ * because charities will be a recieve only address and cannot be
+ * expected to call a function to claim assets
+ *
+ */
+struct Beneficiary {
+    address beneficiaryAddress;
+    string beneficiaryName;
+    bool isCharity;
+}
+
+//
+pragma solidity ^0.8.0;
+
+/**
  * @dev Member Structure stores all member information
  * @param uid string For storing UID that cross references UID from DB for loading off-chain data
  * @param dateCreated uint256 timestamp of creation of User
@@ -325,34 +325,6 @@ struct member {
     address[] wallets;
     address[] backUpWallets;
     uint256 primaryWallet;
-}
-
-//
-pragma solidity ^0.8.0;
-
-/**
- * @dev Membership Structure stores membership data of a member
- * @param user address of the user who has a membership
- * @param membershipStarted uint256 timestamp of when the membership began
- * @param membershipEnded uint256 timestamp of when membership expires
- * @param payedAmount uint256 amount in wei paid for the membership
- * @param active bool status of the user's membership
- * @param membershipId uint256 id of the membershipPlan this was created for
- * @param updatesPerYear uint256 how many updates per year left for the user
- * @param nftCollection address of the nft collection granting a membership or address(0)
- * @param uid string of the identifier of the user across the dApp
- * 
- */
-struct MembershipStruct {
-    address user;
-    uint256 membershipStarted;
-    uint256 membershipEnded;
-    uint256 payedAmount;
-    bool active;
-    uint256 membershipId;
-    uint256 updatesPerYear;
-    address nftCollection;
-    string uid;
 }
 
 //
@@ -382,40 +354,28 @@ interface IBlacklist {
 pragma solidity ^0.8.0;
 
 /**
- * @title Interface for IWhitelist to interact with Whitelist Users Contracts
- *
+ * @dev Membership Structure stores membership data of a member
+ * @param user address of the user who has a membership
+ * @param membershipStarted uint256 timestamp of when the membership began
+ * @param membershipEnded uint256 timestamp of when membership expires
+ * @param payedAmount uint256 amount in wei paid for the membership
+ * @param active bool status of the user's membership
+ * @param membershipId uint256 id of the membershipPlan this was created for
+ * @param updatesPerYear uint256 how many updates per year left for the user
+ * @param nftCollection address of the nft collection granting a membership or address(0)
+ * @param uid string of the identifier of the user across the dApp
+ * 
  */
-interface IWhitelist {
-    /**
-     * @dev getWhitelistUpdatesPerYear
-     * @return whiteListUpdatesPerYear uint256 for how many updates the whitelisted gets
-     *
-     */
-    function getWhitelistUpdatesPerYear() external view returns (uint256);
-
-    /**
-     * @dev getWhitelistDuration
-     * @return whiteListDuration uint256 of how long the membership is for whitelisted users
-     */
-    function getWhitelistDuration() external view returns (uint256);
-
-    /**
-     * @dev checkIfAddressIsWhitelisted
-     * @param _user address of the user to verify is on the list
-     * @return whitelisted boolean representing if the input is whitelisted
-     *
-     */
-    function checkIfAddressIsWhitelisted(address _user)
-        external
-        view
-        returns (bool whitelisted);
-
-    /**
-     * @dev Function to get whitelisted addresses
-     * @return list of addresses on the whitelist
-     *
-     */
-    function getWhitelistAddress() external view returns (address[] memory);
+struct MembershipStruct {
+    address user;
+    uint256 membershipStarted;
+    uint256 membershipEnded;
+    uint256 payedAmount;
+    bool active;
+    uint256 membershipId;
+    uint256 updatesPerYear;
+    address nftCollection;
+    string uid;
 }
 
 //
@@ -487,6 +447,69 @@ library Errors {
 
     // RelayerContract Errors
     string public constant RC_UNAUTHORIZED = "36"; // "Only relayer can invoke this function"
+}
+
+//
+pragma solidity ^0.8.0;
+
+/**
+ * @dev membershipPlan struct
+ * 
+ * @param membershipDuration uint256 length of time membership is good for
+ * @param costOfMembership uint256 cost in wei of gaining membership
+ * @param updatesPerYear uint256 how many updates can the membership be updated in a year by user
+ * @param nftCollection address pass as null address if it is not for creating specific
+ * membership plan for a specific NFT Collection
+ * @param membershipId uint256 id for the new membership to lookup by
+ * @param active bool status if the membership can be used to create new contracts
+ */
+struct membershipPlan {
+    uint256 membershipDuration;
+    uint256 costOfMembership;
+    uint256 updatesPerYear;
+    address nftCollection;
+    uint256 membershipId;
+    bool active;
+}
+
+//
+pragma solidity ^0.8.0;
+
+/**
+ * @title Interface for IWhitelist to interact with Whitelist Users Contracts
+ *
+ */
+interface IWhitelist {
+    /**
+     * @dev getWhitelistUpdatesPerYear
+     * @return whiteListUpdatesPerYear uint256 for how many updates the whitelisted gets
+     *
+     */
+    function getWhitelistUpdatesPerYear() external view returns (uint256);
+
+    /**
+     * @dev getWhitelistDuration
+     * @return whiteListDuration uint256 of how long the membership is for whitelisted users
+     */
+    function getWhitelistDuration() external view returns (uint256);
+
+    /**
+     * @dev checkIfAddressIsWhitelisted
+     * @param _user address of the user to verify is on the list
+     * @return whitelisted boolean representing if the input is whitelisted
+     *
+     */
+    function checkIfAddressIsWhitelisted(address _user)
+        external
+        view
+        returns (bool whitelisted);
+
+    /**
+     * @dev Function to get whitelisted addresses
+     * @return list of addresses on the whitelist
+     *
+     */
+    function getWhitelistAddress() external view returns (address[] memory);
 }
 
 //
@@ -659,29 +682,6 @@ interface IProtocolDirectory {
     function setChainlinkOperationsContract(address _contractLocation)
         external
         returns (address);
-}
-
-//
-pragma solidity ^0.8.0;
-
-/**
- * @dev membershipPlan struct
- * 
- * @param membershipDuration uint256 length of time membership is good for
- * @param costOfMembership uint256 cost in wei of gaining membership
- * @param updatesPerYear uint256 how many updates can the membership be updated in a year by user
- * @param nftCollection address pass as null address if it is not for creating specific
- * membership plan for a specific NFT Collection
- * @param membershipId uint256 id for the new membership to lookup by
- * @param active bool status if the membership can be used to create new contracts
- */
-struct membershipPlan {
-    uint256 membershipDuration;
-    uint256 costOfMembership;
-    uint256 updatesPerYear;
-    address nftCollection;
-    uint256 membershipId;
-    bool active;
 }
 
 // 
@@ -955,6 +955,132 @@ interface IERC1155 is IERC165 {
 }
 
 // 
+// OpenZeppelin Contracts (last updated v4.7.0) (token/ERC1155/IERC1155.sol)
+
+pragma solidity ^0.8.0;
+
+
+
+/**
+ * @dev Required interface of an ERC1155 compliant contract, as defined in the
+ * https://eips.ethereum.org/EIPS/eip-1155[EIP].
+ *
+ * _Available since v3.1._
+ */
+interface IERC1155Upgradeable is IERC165Upgradeable {
+    /**
+     * @dev Emitted when `value` tokens of token type `id` are transferred from `from` to `to` by `operator`.
+     */
+    event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value);
+
+    /**
+     * @dev Equivalent to multiple {TransferSingle} events, where `operator`, `from` and `to` are the same for all
+     * transfers.
+     */
+    event TransferBatch(
+        address indexed operator,
+        address indexed from,
+        address indexed to,
+        uint256[] ids,
+        uint256[] values
+    );
+
+    /**
+     * @dev Emitted when `account` grants or revokes permission to `operator` to transfer their tokens, according to
+     * `approved`.
+     */
+    event ApprovalForAll(address indexed account, address indexed operator, bool approved);
+
+    /**
+     * @dev Emitted when the URI for token type `id` changes to `value`, if it is a non-programmatic URI.
+     *
+     * If an {URI} event was emitted for `id`, the standard
+     * https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[guarantees] that `value` will equal the value
+     * returned by {IERC1155MetadataURI-uri}.
+     */
+    event URI(string value, uint256 indexed id);
+
+    /**
+     * @dev Returns the amount of tokens of token type `id` owned by `account`.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     */
+    function balanceOf(address account, uint256 id) external view returns (uint256);
+
+    /**
+     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}.
+     *
+     * Requirements:
+     *
+     * - `accounts` and `ids` must have the same length.
+     */
+    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
+        external
+        view
+        returns (uint256[] memory);
+
+    /**
+     * @dev Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`,
+     *
+     * Emits an {ApprovalForAll} event.
+     *
+     * Requirements:
+     *
+     * - `operator` cannot be the caller.
+     */
+    function setApprovalForAll(address operator, bool approved) external;
+
+    /**
+     * @dev Returns true if `operator` is approved to transfer ``account``'s tokens.
+     *
+     * See {setApprovalForAll}.
+     */
+    function isApprovedForAll(address account, address operator) external view returns (bool);
+
+    /**
+     * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
+     *
+     * Emits a {TransferSingle} event.
+     *
+     * Requirements:
+     *
+     * - `to` cannot be the zero address.
+     * - If the caller is not `from`, it must have been approved to spend ``from``'s tokens via {setApprovalForAll}.
+     * - `from` must have a balance of tokens of type `id` of at least `amount`.
+     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+     * acceptance magic value.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes calldata data
+    ) external;
+
+    /**
+     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}.
+     *
+     * Emits a {TransferBatch} event.
+     *
+     * Requirements:
+     *
+     * - `ids` and `amounts` must have the same length.
+     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
+     * acceptance magic value.
+     */
+    function safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] calldata ids,
+        uint256[] calldata amounts,
+        bytes calldata data
+    ) external;
+}
+
+// 
 // OpenZeppelin Contracts (last updated v4.7.0) (token/ERC721/IERC721.sol)
 
 pragma solidity ^0.8.0;
@@ -1096,132 +1222,6 @@ interface IERC721Upgradeable is IERC165Upgradeable {
      * See {setApprovalForAll}
      */
     function isApprovedForAll(address owner, address operator) external view returns (bool);
-}
-
-// 
-// OpenZeppelin Contracts (last updated v4.7.0) (token/ERC1155/IERC1155.sol)
-
-pragma solidity ^0.8.0;
-
-
-
-/**
- * @dev Required interface of an ERC1155 compliant contract, as defined in the
- * https://eips.ethereum.org/EIPS/eip-1155[EIP].
- *
- * _Available since v3.1._
- */
-interface IERC1155Upgradeable is IERC165Upgradeable {
-    /**
-     * @dev Emitted when `value` tokens of token type `id` are transferred from `from` to `to` by `operator`.
-     */
-    event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value);
-
-    /**
-     * @dev Equivalent to multiple {TransferSingle} events, where `operator`, `from` and `to` are the same for all
-     * transfers.
-     */
-    event TransferBatch(
-        address indexed operator,
-        address indexed from,
-        address indexed to,
-        uint256[] ids,
-        uint256[] values
-    );
-
-    /**
-     * @dev Emitted when `account` grants or revokes permission to `operator` to transfer their tokens, according to
-     * `approved`.
-     */
-    event ApprovalForAll(address indexed account, address indexed operator, bool approved);
-
-    /**
-     * @dev Emitted when the URI for token type `id` changes to `value`, if it is a non-programmatic URI.
-     *
-     * If an {URI} event was emitted for `id`, the standard
-     * https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[guarantees] that `value` will equal the value
-     * returned by {IERC1155MetadataURI-uri}.
-     */
-    event URI(string value, uint256 indexed id);
-
-    /**
-     * @dev Returns the amount of tokens of token type `id` owned by `account`.
-     *
-     * Requirements:
-     *
-     * - `account` cannot be the zero address.
-     */
-    function balanceOf(address account, uint256 id) external view returns (uint256);
-
-    /**
-     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {balanceOf}.
-     *
-     * Requirements:
-     *
-     * - `accounts` and `ids` must have the same length.
-     */
-    function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
-        external
-        view
-        returns (uint256[] memory);
-
-    /**
-     * @dev Grants or revokes permission to `operator` to transfer the caller's tokens, according to `approved`,
-     *
-     * Emits an {ApprovalForAll} event.
-     *
-     * Requirements:
-     *
-     * - `operator` cannot be the caller.
-     */
-    function setApprovalForAll(address operator, bool approved) external;
-
-    /**
-     * @dev Returns true if `operator` is approved to transfer ``account``'s tokens.
-     *
-     * See {setApprovalForAll}.
-     */
-    function isApprovedForAll(address account, address operator) external view returns (bool);
-
-    /**
-     * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
-     *
-     * Emits a {TransferSingle} event.
-     *
-     * Requirements:
-     *
-     * - `to` cannot be the zero address.
-     * - If the caller is not `from`, it must have been approved to spend ``from``'s tokens via {setApprovalForAll}.
-     * - `from` must have a balance of tokens of type `id` of at least `amount`.
-     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
-     * acceptance magic value.
-     */
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 id,
-        uint256 amount,
-        bytes calldata data
-    ) external;
-
-    /**
-     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {safeTransferFrom}.
-     *
-     * Emits a {TransferBatch} event.
-     *
-     * Requirements:
-     *
-     * - `ids` and `amounts` must have the same length.
-     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
-     * acceptance magic value.
-     */
-    function safeBatchTransferFrom(
-        address from,
-        address to,
-        uint256[] calldata ids,
-        uint256[] calldata amounts,
-        bytes calldata data
-    ) external;
 }
 
 // 
@@ -1505,6 +1505,7 @@ interface IMembershipFactory {
      * @param _NFTType string type of NFT for granting membership i.e. ERC721 | ERC1155
      * @param tokenId uint256 tokenId of the owned nft to verify ownership
      * @param _walletAddress address of the user creating a membership with their nft
+     * @param _membershipId membershipId of the plan
      *
      */
     function createMembershipSupportingNFT(
@@ -1512,7 +1513,8 @@ interface IMembershipFactory {
         address _contractAddress,
         string memory _NFTType,
         uint256 tokenId,
-        address _walletAddress
+        address _walletAddress,
+        uint256 _membershipId
     ) external payable;
 
     /**
@@ -2775,6 +2777,7 @@ contract MembershipFactory is
      * @param _NFTType string type of NFT for granting membership i.e. ERC721 | ERC1155
      * @param tokenId uint256 tokenId of the owned nft to verify ownership
      * @param _walletAddress address of the user creating a membership with their nft
+     * @param _membershipId membershipId of the plan
      *
      */
     function createMembershipSupportingNFT(
@@ -2782,7 +2785,8 @@ contract MembershipFactory is
         address _contractAddress,
         string memory _NFTType,
         uint256 tokenId,
-        address _walletAddress
+        address _walletAddress,
+        uint256 _membershipId
     ) external payable {
         address IMemberAddress = IProtocolDirectory(directoryContract)
             .getMemberContract();
@@ -2797,7 +2801,10 @@ contract MembershipFactory is
         }
 
         for (uint256 i = 0; i < membershipPlans.length; i++) {
-            if (membershipPlans[i].nftCollection == _contractAddress) {
+            if (
+                membershipPlans[i].nftCollection == _contractAddress &&
+                membershipPlans[i].membershipId == _membershipId
+            ) {
                 IMember(IMemberAddress).checkIfWalletHasNFT(
                     _contractAddress,
                     _NFTType,
@@ -2911,6 +2918,7 @@ contract MembershipFactory is
         for (uint256 i = 0; i < membershipPlans.length; i++) {
             if (membershipPlans[i].membershipId == _membershipId) {
                 membershipPlans[i].active = _active;
+                membershipIdtoPlan[_membershipId].active = _active;
             }
         }
     }
