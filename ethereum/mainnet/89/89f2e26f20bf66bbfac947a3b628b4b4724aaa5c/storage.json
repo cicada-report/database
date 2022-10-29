@@ -1,0 +1,186 @@
+{
+  "storage": [
+    {
+      "astId": 325,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 328,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1265,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "uni",
+      "offset": 2,
+      "slot": "0",
+      "type": "t_contract(IERC20Upgradeable)320"
+    },
+    {
+      "astId": 1267,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "_totalSupply",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1271,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "_balances",
+      "offset": 0,
+      "slot": "2",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 1123,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "3",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1132,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "53",
+      "type": "t_address"
+    },
+    {
+      "astId": 1251,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "54",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1391,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "tokenDistro",
+      "offset": 0,
+      "slot": "103",
+      "type": "t_contract(IDistro)477"
+    },
+    {
+      "astId": 1393,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "duration",
+      "offset": 0,
+      "slot": "104",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1395,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "rewardDistribution",
+      "offset": 0,
+      "slot": "105",
+      "type": "t_address"
+    },
+    {
+      "astId": 1397,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "periodFinish",
+      "offset": 0,
+      "slot": "106",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1399,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "rewardRate",
+      "offset": 0,
+      "slot": "107",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1401,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "lastUpdateTime",
+      "offset": 0,
+      "slot": "108",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1403,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "rewardPerTokenStored",
+      "offset": 0,
+      "slot": "109",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 1407,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "userRewardPerTokenPaid",
+      "offset": 0,
+      "slot": "110",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 1411,
+      "contract": "/database/ethereum/mainnet/89/89f2e26f20bf66bbfac947a3b628b4b4724aaa5c/logic.sol:UnipoolTokenDistributor",
+      "label": "rewards",
+      "offset": 0,
+      "slot": "111",
+      "type": "t_mapping(t_address,t_uint256)"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_contract(IDistro)477": {
+      "encoding": "inplace",
+      "label": "contract IDistro",
+      "numberOfBytes": "20"
+    },
+    "t_contract(IERC20Upgradeable)320": {
+      "encoding": "inplace",
+      "label": "contract IERC20Upgradeable",
+      "numberOfBytes": "20"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    }
+  }
+}
