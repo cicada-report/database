@@ -1,0 +1,109 @@
+{
+  "storage": [
+    {
+      "astId": 165,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 168,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 394,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 403,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_address"
+    },
+    {
+      "astId": 522,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 532,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "token",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_address"
+    },
+    {
+      "astId": 535,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "merkleRoot",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 539,
+      "contract": "/database/ethereum/mainnet/87/87d6180b65ad76a9443064dcd1596388fcc3ee2a/logic.sol:MerkleDrop",
+      "label": "claimedBitMap",
+      "offset": 0,
+      "slot": "103",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_uint256,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    }
+  }
+}
