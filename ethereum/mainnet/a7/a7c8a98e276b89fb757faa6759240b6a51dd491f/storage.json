@@ -1,0 +1,94 @@
+{
+  "storage": [
+    {
+      "astId": 937,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 940,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1177,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 1196,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "_paused",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_bool"
+    },
+    {
+      "astId": 1301,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 1310,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_address"
+    },
+    {
+      "astId": 1430,
+      "contract": "/database/ethereum/mainnet/a7/a7c8a98e276b89fb757faa6759240b6a51dd491f/logic.sol:Init",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_array(t_uint256)49_storage"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
