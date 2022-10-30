@@ -347,6 +347,49 @@ abstract contract Initializable {
 
 // 
 
+pragma solidity ^0.8.0;
+
+/**
+ * @dev Standard math utilities missing in the Solidity language.
+ */
+library Math {
+  /**
+   * @dev Returns the largest of two numbers.
+   */
+  function max(uint256 a, uint256 b) internal pure returns (uint256) {
+    return a >= b ? a : b;
+  }
+
+  /**
+   * @dev Returns the smallest of two numbers.
+   */
+  function min(uint256 a, uint256 b) internal pure returns (uint256) {
+    return a < b ? a : b;
+  }
+
+  /**
+   * @dev Returns the average of two numbers. The result is rounded towards
+   * zero.
+   */
+  function average(uint256 a, uint256 b) internal pure returns (uint256) {
+    // (a + b) / 2 can overflow.
+    return (a & b) + (a ^ b) / 2;
+  }
+
+  /**
+   * @dev Returns the ceiling of the division of two numbers.
+   *
+   * This differs from standard division with `/` in that it rounds up instead
+   * of rounding down.
+   */
+  function ceilDiv(uint256 a, uint256 b) internal pure returns (uint256) {
+    // (a + b - 1) / b can overflow on addition, so we distribute.
+    return a / b + (a % b == 0 ? 0 : 1);
+  }
+}
+
+// 
+
 pragma solidity 0.8.4;
 
 interface IDystopiaPair {
@@ -850,6 +893,259 @@ interface IFireBirdPair {
   function sync() external;
 
   function initialize(address, address, uint32, uint32) external;
+}
+
+// 
+pragma solidity 0.8.4;
+
+interface IUniFactoryV3 {
+  event FeeAmountEnabled(uint24 indexed fee, int24 indexed tickSpacing);
+  event OwnerChanged(address indexed oldOwner, address indexed newOwner);
+  event PoolCreated(
+    address indexed token0,
+    address indexed token1,
+    uint24 indexed fee,
+    int24 tickSpacing,
+    address pool
+  );
+
+  function createPool(
+    address tokenA,
+    address tokenB,
+    uint24 fee
+  ) external returns (address pool);
+
+  function enableFeeAmount(uint24 fee, int24 tickSpacing) external;
+
+  function feeAmountTickSpacing(uint24) external view returns (int24);
+
+  function getPool(
+    address,
+    address,
+    uint24
+  ) external view returns (address);
+
+  function owner() external view returns (address);
+
+  function parameters()
+  external
+  view
+  returns (
+    address factory,
+    address token0,
+    address token1,
+    uint24 fee,
+    int24 tickSpacing
+  );
+
+  function setOwner(address _owner) external;
+}
+
+// 
+pragma solidity 0.8.4;
+
+
+interface IUniPoolV3 {
+  event Burn(
+    address indexed owner,
+    int24 indexed tickLower,
+    int24 indexed tickUpper,
+    uint128 amount,
+    uint256 amount0,
+    uint256 amount1
+  );
+  event Collect(
+    address indexed owner,
+    address recipient,
+    int24 indexed tickLower,
+    int24 indexed tickUpper,
+    uint128 amount0,
+    uint128 amount1
+  );
+  event CollectProtocol(
+    address indexed sender,
+    address indexed recipient,
+    uint128 amount0,
+    uint128 amount1
+  );
+  event Flash(
+    address indexed sender,
+    address indexed recipient,
+    uint256 amount0,
+    uint256 amount1,
+    uint256 paid0,
+    uint256 paid1
+  );
+  event IncreaseObservationCardinalityNext(
+    uint16 observationCardinalityNextOld,
+    uint16 observationCardinalityNextNew
+  );
+  event Initialize(uint160 sqrtPriceX96, int24 tick);
+  event Mint(
+    address sender,
+    address indexed owner,
+    int24 indexed tickLower,
+    int24 indexed tickUpper,
+    uint128 amount,
+    uint256 amount0,
+    uint256 amount1
+  );
+  event SetFeeProtocol(
+    uint8 feeProtocol0Old,
+    uint8 feeProtocol1Old,
+    uint8 feeProtocol0New,
+    uint8 feeProtocol1New
+  );
+  event Swap(
+    address indexed sender,
+    address indexed recipient,
+    int256 amount0,
+    int256 amount1,
+    uint160 sqrtPriceX96,
+    uint128 liquidity,
+    int24 tick
+  );
+
+  function burn(
+    int24 tickLower,
+    int24 tickUpper,
+    uint128 amount
+  ) external returns (uint256 amount0, uint256 amount1);
+
+  function collect(
+    address recipient,
+    int24 tickLower,
+    int24 tickUpper,
+    uint128 amount0Requested,
+    uint128 amount1Requested
+  ) external returns (uint128 amount0, uint128 amount1);
+
+  function collectProtocol(
+    address recipient,
+    uint128 amount0Requested,
+    uint128 amount1Requested
+  ) external returns (uint128 amount0, uint128 amount1);
+
+  function factory() external view returns (address);
+
+  function fee() external view returns (uint24);
+
+  function feeGrowthGlobal0X128() external view returns (uint256);
+
+  function feeGrowthGlobal1X128() external view returns (uint256);
+
+  function flash(
+    address recipient,
+    uint256 amount0,
+    uint256 amount1,
+    bytes memory data
+  ) external;
+
+  function increaseObservationCardinalityNext(
+    uint16 observationCardinalityNext
+  ) external;
+
+  function initialize(uint160 sqrtPriceX96) external;
+
+  function liquidity() external view returns (uint128);
+
+  function maxLiquidityPerTick() external view returns (uint128);
+
+  function mint(
+    address recipient,
+    int24 tickLower,
+    int24 tickUpper,
+    uint128 amount,
+    bytes memory data
+  ) external returns (uint256 amount0, uint256 amount1);
+
+  function observations(uint256)
+  external
+  view
+  returns (
+    uint32 blockTimestamp,
+    int56 tickCumulative,
+    uint160 secondsPerLiquidityCumulativeX128,
+    bool initialized
+  );
+
+  function observe(uint32[] memory secondsAgos)
+  external
+  view
+  returns (
+    int56[] memory tickCumulatives,
+    uint160[] memory secondsPerLiquidityCumulativeX128s
+  );
+
+  function positions(bytes32)
+  external
+  view
+  returns (
+    uint128 _liquidity,
+    uint256 feeGrowthInside0LastX128,
+    uint256 feeGrowthInside1LastX128,
+    uint128 tokensOwed0,
+    uint128 tokensOwed1
+  );
+
+  function protocolFees()
+  external
+  view
+  returns (uint128 _token0, uint128 _token1);
+
+  function setFeeProtocol(uint8 feeProtocol0, uint8 feeProtocol1) external;
+
+  function slot0()
+  external
+  view
+  returns (
+    uint160 sqrtPriceX96,
+    int24 tick,
+    uint16 observationIndex,
+    uint16 observationCardinality,
+    uint16 observationCardinalityNext,
+    uint8 feeProtocol,
+    bool unlocked
+  );
+
+  function snapshotCumulativesInside(int24 tickLower, int24 tickUpper)
+  external
+  view
+  returns (
+    int56 tickCumulativeInside,
+    uint160 secondsPerLiquidityInsideX128,
+    uint32 secondsInside
+  );
+
+  function swap(
+    address recipient,
+    bool zeroForOne,
+    int256 amountSpecified,
+    uint160 sqrtPriceLimitX96,
+    bytes memory data
+  ) external returns (int256 amount0, int256 amount1);
+
+  function tickBitmap(int16) external view returns (uint256);
+
+  function tickSpacing() external view returns (int24);
+
+  function ticks(int24)
+  external
+  view
+  returns (
+    uint128 liquidityGross,
+    int128 liquidityNet,
+    uint256 feeGrowthOutside0X128,
+    uint256 feeGrowthOutside1X128,
+    int56 tickCumulativeOutside,
+    uint160 secondsPerLiquidityOutsideX128,
+    uint32 secondsOutside,
+    bool initialized
+  );
+
+  function token0() external view returns (address);
+
+  function token1() external view returns (address);
 }
 
 // 
@@ -1834,6 +2130,9 @@ abstract contract ControllableV2 is Initializable, IControllable, IControllableE
 
 
 
+
+
+
 pragma solidity 0.8.4;
 
 /// @title Calculate current price for token using data from swap platforms
@@ -1842,12 +2141,13 @@ contract PriceCalculator is Initializable, ControllableV2, IPriceCalculator {
 
   // ************ CONSTANTS **********************
 
-  string public constant VERSION = "1.5.4";
+  string public constant VERSION = "1.6.0";
   string public constant IS3USD = "IRON Stableswap 3USD";
   string public constant IRON_IS3USD = "IronSwap IRON-IS3USD LP";
   address public constant FIREBIRD_FACTORY = 0x5De74546d3B86C8Df7FEEc30253865e1149818C8;
   address public constant DYSTOPIA_FACTORY = 0x1d21Db6cde1b18c7E47B0F7F42f4b3F68b9beeC9;
   address public constant CONE_FACTORY = 0x0EFc2D2D054383462F2cD72eA2526Ef7687E1016;
+  address public constant UNIV3_FACTORY_ETHEREUM = 0x1F98431c8aD98523631AE4a59f267346ea31F984;
   bytes32 internal constant _DEFAULT_TOKEN_SLOT = 0x3787EA0F228E63B6CF40FE5DE521CE164615FC0FBC5CF167A7EC3CDBC2D38D8F;
   uint256 constant public PRECISION_DECIMALS = 18;
   uint256 constant public DEPTH = 20;
@@ -2072,10 +2372,10 @@ contract PriceCalculator is Initializable, ControllableV2, IPriceCalculator {
     address lpAddress = address(0);
     address[] memory _keyTokens = keyTokens;
     for (uint256 i = 0; i < _keyTokens.length; i++) {
+      if (token == _keyTokens[i]) {
+        continue;
+      }
       for (uint256 j = 0; j < swapFactories.length; j++) {
-        if (token == _keyTokens[i]) {
-          continue;
-        }
         (uint256 poolSize, address lp) = getLpForFactory(swapFactories[j], token, _keyTokens[i]);
 
         if (arrayContains(usedLps, lp)) {
@@ -2090,6 +2390,30 @@ contract PriceCalculator is Initializable, ControllableV2, IPriceCalculator {
         }
       }
     }
+
+    // try to find in UNIv3
+    if (lpAddress == address(0) && block.chainid == 1) {
+      for (uint256 i = 0; i < _keyTokens.length; i++) {
+        if (token == _keyTokens[i]) {
+          continue;
+        }
+
+        (uint256 poolSize, address lp) = findLpInUniV3(token, _keyTokens[i]);
+
+        if (arrayContains(usedLps, lp)) {
+          continue;
+        }
+
+        if (poolSize > largestLpSize) {
+          largestLpSize = poolSize;
+          largestKeyToken = _keyTokens[i];
+          largestPlatformIdx = type(uint).max;
+          lpAddress = lp;
+        }
+
+      }
+    }
+
     return (largestKeyToken, largestPlatformIdx, lpAddress);
   }
 
@@ -2118,6 +2442,33 @@ contract PriceCalculator is Initializable, ControllableV2, IPriceCalculator {
     return (0, address(0));
   }
 
+  function findLpInUniV3(address token, address tokenOpposite)
+  public view returns (uint256, address){
+
+    address pairAddress;
+    uint reserve;
+    uint[] memory fees = new uint[](4);
+    fees[0] = 100;
+    fees[1] = 500;
+    fees[2] = 3000;
+    fees[3] = 10000;
+    for (uint i; i < fees.length; ++i) {
+      address pairAddressTmp = IUniFactoryV3(UNIV3_FACTORY_ETHEREUM).getPool(token, tokenOpposite, uint24(fees[i]));
+      if (pairAddressTmp != address(0)) {
+        uint reserveTmp = getUniV3Reserve(pairAddressTmp, token);
+        if (reserveTmp > reserve) {
+          pairAddress = pairAddressTmp;
+          reserve = reserveTmp;
+        }
+      }
+    }
+    return (reserve, pairAddress);
+  }
+
+  function getUniV3Reserve(address pairAddress, address token) public view returns (uint) {
+    return IERC20(token).balanceOf(pairAddress);
+  }
+
   function getLpSize(address pairAddress, address token) public view returns (uint256) {
     if (pairAddress == address(0)) {
       return 0;
@@ -2138,6 +2489,20 @@ contract PriceCalculator is Initializable, ControllableV2, IPriceCalculator {
       uint256 tokenOutDecimals = token == token1 ? IERC20Extended(token0).decimals() : IERC20Extended(token1).decimals();
       uint out = IDystopiaPair(lpAddress).getAmountOut(10 ** tokenInDecimals, token);
       return out * (10 ** PRECISION_DECIMALS) / (10 ** tokenOutDecimals);
+    } else if (_factory == UNIV3_FACTORY_ETHEREUM) {
+      address token0 = IUniPoolV3(lpAddress).token0();
+      address token1 = IUniPoolV3(lpAddress).token1();
+
+      uint256 tokenInDecimals = token == token0 ? IERC20Extended(token0).decimals() : IERC20Extended(token1).decimals();
+      uint256 tokenOutDecimals = token == token1 ? IERC20Extended(token0).decimals() : IERC20Extended(token1).decimals();
+      (uint160 sqrtPriceX96,,,,,,) = IUniPoolV3(lpAddress).slot0();
+
+      uint divider = Math.max(10 ** tokenOutDecimals / 10 ** tokenInDecimals, 1);
+      if (token == token0) {
+        return uint(sqrtPriceX96) ** 2 / 2 ** 96 * 1e18 / 2 ** 96 / divider * 1e18 / (10 ** tokenOutDecimals);
+      } else {
+        return 2 ** 192 * 1e18 / uint(sqrtPriceX96) ** 2 / divider * 1e18 / (10 ** tokenOutDecimals);
+      }
     } else {
       IUniswapV2Pair pair = IUniswapV2Pair(lpAddress);
       address token0 = pair.token0();

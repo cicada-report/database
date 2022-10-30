@@ -17,7 +17,7 @@
       "type": "t_bool"
     },
     {
-      "astId": 3014,
+      "astId": 3552,
       "contract": "/database/ethereum/mainnet/3e/3e75231c1cc0e6d30d03346b3b87b92bb3a1f856/logic.sol:PriceCalculator",
       "label": "swapFactories",
       "offset": 0,
@@ -25,7 +25,7 @@
       "type": "t_array(t_address)dyn_storage"
     },
     {
-      "astId": 3017,
+      "astId": 3555,
       "contract": "/database/ethereum/mainnet/3e/3e75231c1cc0e6d30d03346b3b87b92bb3a1f856/logic.sol:PriceCalculator",
       "label": "swapLpNames",
       "offset": 0,
@@ -33,7 +33,7 @@
       "type": "t_array(t_string_storage)dyn_storage"
     },
     {
-      "astId": 3020,
+      "astId": 3558,
       "contract": "/database/ethereum/mainnet/3e/3e75231c1cc0e6d30d03346b3b87b92bb3a1f856/logic.sol:PriceCalculator",
       "label": "keyTokens",
       "offset": 0,
@@ -41,7 +41,7 @@
       "type": "t_array(t_address)dyn_storage"
     },
     {
-      "astId": 3024,
+      "astId": 3562,
       "contract": "/database/ethereum/mainnet/3e/3e75231c1cc0e6d30d03346b3b87b92bb3a1f856/logic.sol:PriceCalculator",
       "label": "replacementTokens",
       "offset": 0,
@@ -49,7 +49,7 @@
       "type": "t_mapping(t_address,t_address)"
     },
     {
-      "astId": 3028,
+      "astId": 3566,
       "contract": "/database/ethereum/mainnet/3e/3e75231c1cc0e6d30d03346b3b87b92bb3a1f856/logic.sol:PriceCalculator",
       "label": "allowedFactories",
       "offset": 0,
