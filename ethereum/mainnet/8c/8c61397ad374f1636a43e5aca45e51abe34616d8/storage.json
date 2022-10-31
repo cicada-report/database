@@ -1,0 +1,411 @@
+{
+  "storage": [
+    {
+      "astId": 3799,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 3802,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 4141,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 4329,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 5790,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_balances",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))"
+    },
+    {
+      "astId": 5796,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_operatorApprovals",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_mapping(t_address,t_mapping(t_address,t_bool))"
+    },
+    {
+      "astId": 5798,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_uri",
+      "offset": 0,
+      "slot": "103",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 7005,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "104",
+      "type": "t_array(t_uint256)47_storage"
+    },
+    {
+      "astId": 4148,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_HASHED_NAME",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 4150,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_HASHED_VERSION",
+      "offset": 0,
+      "slot": "152",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 4288,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "153",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 4778,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_delegation",
+      "offset": 0,
+      "slot": "203",
+      "type": "t_mapping(t_address,t_address)"
+    },
+    {
+      "astId": 4785,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_delegateCheckpoints",
+      "offset": 0,
+      "slot": "204",
+      "type": "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage))"
+    },
+    {
+      "astId": 4788,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_totalCheckpoints",
+      "offset": 0,
+      "slot": "205",
+      "type": "t_struct(History)3575_storage"
+    },
+    {
+      "astId": 4793,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_nonces",
+      "offset": 0,
+      "slot": "206",
+      "type": "t_mapping(t_address,t_struct(Counter)2985_storage)"
+    },
+    {
+      "astId": 5302,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "207",
+      "type": "t_array(t_uint256)46_storage"
+    },
+    {
+      "astId": 7151,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "253",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 5337,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_roles",
+      "offset": 0,
+      "slot": "303",
+      "type": "t_mapping(t_bytes32,t_struct(RoleData)5332_storage)"
+    },
+    {
+      "astId": 5636,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "304",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 4692,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "353",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 5768,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "403",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 7175,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "symbol",
+      "offset": 0,
+      "slot": "453",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 7179,
+      "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+      "label": "_totalSupply",
+      "offset": 0,
+      "slot": "454",
+      "type": "t_mapping(t_uint256,t_uint256)"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_struct(Checkpoint)3570_storage)dyn_storage": {
+      "base": "t_struct(Checkpoint)3570_storage",
+      "encoding": "dynamic_array",
+      "label": "struct CheckpointsUpgradeable.Checkpoint[]",
+      "numberOfBytes": "32"
+    },
+    "t_array(t_uint256)46_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[46]",
+      "numberOfBytes": "1472"
+    },
+    "t_array(t_uint256)47_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[47]",
+      "numberOfBytes": "1504"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_bytes_memory_ptr": {
+      "encoding": "bytes",
+      "label": "bytes",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_address,t_address)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => address)",
+      "numberOfBytes": "32",
+      "value": "t_address"
+    },
+    "t_mapping(t_address,t_bool)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => bool)",
+      "numberOfBytes": "32",
+      "value": "t_bool"
+    },
+    "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(address => bool))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_bool)"
+    },
+    "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(bytes => struct CheckpointsUpgradeable.History))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage)"
+    },
+    "t_mapping(t_address,t_struct(Counter)2985_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct CountersUpgradeable.Counter)",
+      "numberOfBytes": "32",
+      "value": "t_struct(Counter)2985_storage"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_mapping(t_bytes32,t_struct(RoleData)5332_storage)": {
+      "encoding": "mapping",
+      "key": "t_bytes32",
+      "label": "mapping(bytes32 => struct AccessControlUpgradeable.RoleData)",
+      "numberOfBytes": "32",
+      "value": "t_struct(RoleData)5332_storage"
+    },
+    "t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage)": {
+      "encoding": "mapping",
+      "key": "t_bytes_memory_ptr",
+      "label": "mapping(bytes => struct CheckpointsUpgradeable.History)",
+      "numberOfBytes": "32",
+      "value": "t_struct(History)3575_storage"
+    },
+    "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => mapping(address => uint256))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_uint256)"
+    },
+    "t_mapping(t_uint256,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_uint256",
+      "label": "mapping(uint256 => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_string_storage": {
+      "encoding": "bytes",
+      "label": "string",
+      "numberOfBytes": "32"
+    },
+    "t_struct(Checkpoint)3570_storage": {
+      "encoding": "inplace",
+      "label": "struct CheckpointsUpgradeable.Checkpoint",
+      "members": [
+        {
+          "astId": 3567,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "_blockNumber",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint32"
+        },
+        {
+          "astId": 3569,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "_value",
+          "offset": 4,
+          "slot": "0",
+          "type": "t_uint224"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_struct(Counter)2985_storage": {
+      "encoding": "inplace",
+      "label": "struct CountersUpgradeable.Counter",
+      "members": [
+        {
+          "astId": 2984,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "_value",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint256"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_struct(History)3575_storage": {
+      "encoding": "inplace",
+      "label": "struct CheckpointsUpgradeable.History",
+      "members": [
+        {
+          "astId": 3574,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "_checkpoints",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_array(t_struct(Checkpoint)3570_storage)dyn_storage"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_struct(RoleData)5332_storage": {
+      "encoding": "inplace",
+      "label": "struct AccessControlUpgradeable.RoleData",
+      "members": [
+        {
+          "astId": 5329,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "members",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_mapping(t_address,t_bool)"
+        },
+        {
+          "astId": 5331,
+          "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
+          "label": "adminRole",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_bytes32"
+        }
+      ],
+      "numberOfBytes": "64"
+    },
+    "t_uint224": {
+      "encoding": "inplace",
+      "label": "uint224",
+      "numberOfBytes": "28"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint32": {
+      "encoding": "inplace",
+      "label": "uint32",
+      "numberOfBytes": "4"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
