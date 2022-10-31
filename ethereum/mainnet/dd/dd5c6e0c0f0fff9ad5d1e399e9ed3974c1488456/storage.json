@@ -1,0 +1,316 @@
+{
+  "storage": [
+    {
+      "astId": 2000,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_initialized",
+      "offset": 0,
+      "slot": "0",
+      "type": "t_uint8"
+    },
+    {
+      "astId": 2003,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_initializing",
+      "offset": 1,
+      "slot": "0",
+      "type": "t_bool"
+    },
+    {
+      "astId": 2519,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "1",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 2794,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_balances",
+      "offset": 0,
+      "slot": "51",
+      "type": "t_mapping(t_address,t_uint256)"
+    },
+    {
+      "astId": 2800,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_allowances",
+      "offset": 0,
+      "slot": "52",
+      "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+    },
+    {
+      "astId": 2802,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_totalSupply",
+      "offset": 0,
+      "slot": "53",
+      "type": "t_uint256"
+    },
+    {
+      "astId": 2804,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_name",
+      "offset": 0,
+      "slot": "54",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 2806,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_symbol",
+      "offset": 0,
+      "slot": "55",
+      "type": "t_string_storage"
+    },
+    {
+      "astId": 3385,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "56",
+      "type": "t_array(t_uint256)45_storage"
+    },
+    {
+      "astId": 3677,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_accountBalanceSnapshots",
+      "offset": 0,
+      "slot": "101",
+      "type": "t_mapping(t_address,t_struct(Snapshots)3672_storage)"
+    },
+    {
+      "astId": 3680,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_totalSupplySnapshots",
+      "offset": 0,
+      "slot": "102",
+      "type": "t_struct(Snapshots)3672_storage"
+    },
+    {
+      "astId": 3683,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_currentSnapshotId",
+      "offset": 0,
+      "slot": "104",
+      "type": "t_struct(Counter)845_storage"
+    },
+    {
+      "astId": 3981,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "105",
+      "type": "t_array(t_uint256)46_storage"
+    },
+    {
+      "astId": 2526,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_HASHED_NAME",
+      "offset": 0,
+      "slot": "151",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 2528,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_HASHED_VERSION",
+      "offset": 0,
+      "slot": "152",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 2666,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "153",
+      "type": "t_array(t_uint256)50_storage"
+    },
+    {
+      "astId": 4001,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_nonces",
+      "offset": 0,
+      "slot": "203",
+      "type": "t_mapping(t_address,t_struct(Counter)845_storage)"
+    },
+    {
+      "astId": 4009,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_PERMIT_TYPEHASH_DEPRECATED_SLOT",
+      "offset": 0,
+      "slot": "204",
+      "type": "t_bytes32"
+    },
+    {
+      "astId": 4165,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "205",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 3404,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_paused",
+      "offset": 0,
+      "slot": "254",
+      "type": "t_bool"
+    },
+    {
+      "astId": 3509,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "255",
+      "type": "t_array(t_uint256)49_storage"
+    },
+    {
+      "astId": 3518,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "_owner",
+      "offset": 0,
+      "slot": "304",
+      "type": "t_address"
+    },
+    {
+      "astId": 3638,
+      "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+      "label": "__gap",
+      "offset": 0,
+      "slot": "305",
+      "type": "t_array(t_uint256)49_storage"
+    }
+  ],
+  "types": {
+    "t_address": {
+      "encoding": "inplace",
+      "label": "address",
+      "numberOfBytes": "20"
+    },
+    "t_array(t_uint256)45_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[45]",
+      "numberOfBytes": "1440"
+    },
+    "t_array(t_uint256)46_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[46]",
+      "numberOfBytes": "1472"
+    },
+    "t_array(t_uint256)49_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[49]",
+      "numberOfBytes": "1568"
+    },
+    "t_array(t_uint256)50_storage": {
+      "base": "t_uint256",
+      "encoding": "inplace",
+      "label": "uint256[50]",
+      "numberOfBytes": "1600"
+    },
+    "t_array(t_uint256)dyn_storage": {
+      "base": "t_uint256",
+      "encoding": "dynamic_array",
+      "label": "uint256[]",
+      "numberOfBytes": "32"
+    },
+    "t_bool": {
+      "encoding": "inplace",
+      "label": "bool",
+      "numberOfBytes": "1"
+    },
+    "t_bytes32": {
+      "encoding": "inplace",
+      "label": "bytes32",
+      "numberOfBytes": "32"
+    },
+    "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => mapping(address => uint256))",
+      "numberOfBytes": "32",
+      "value": "t_mapping(t_address,t_uint256)"
+    },
+    "t_mapping(t_address,t_struct(Counter)845_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct CountersUpgradeable.Counter)",
+      "numberOfBytes": "32",
+      "value": "t_struct(Counter)845_storage"
+    },
+    "t_mapping(t_address,t_struct(Snapshots)3672_storage)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => struct ERC20SnapshotUpgradeable.Snapshots)",
+      "numberOfBytes": "32",
+      "value": "t_struct(Snapshots)3672_storage"
+    },
+    "t_mapping(t_address,t_uint256)": {
+      "encoding": "mapping",
+      "key": "t_address",
+      "label": "mapping(address => uint256)",
+      "numberOfBytes": "32",
+      "value": "t_uint256"
+    },
+    "t_string_storage": {
+      "encoding": "bytes",
+      "label": "string",
+      "numberOfBytes": "32"
+    },
+    "t_struct(Counter)845_storage": {
+      "encoding": "inplace",
+      "label": "struct CountersUpgradeable.Counter",
+      "members": [
+        {
+          "astId": 844,
+          "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+          "label": "_value",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_uint256"
+        }
+      ],
+      "numberOfBytes": "32"
+    },
+    "t_struct(Snapshots)3672_storage": {
+      "encoding": "inplace",
+      "label": "struct ERC20SnapshotUpgradeable.Snapshots",
+      "members": [
+        {
+          "astId": 3668,
+          "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+          "label": "ids",
+          "offset": 0,
+          "slot": "0",
+          "type": "t_array(t_uint256)dyn_storage"
+        },
+        {
+          "astId": 3671,
+          "contract": "/database/ethereum/mainnet/dd/dd5c6e0c0f0fff9ad5d1e399e9ed3974c1488456/logic.sol:Loot",
+          "label": "values",
+          "offset": 0,
+          "slot": "1",
+          "type": "t_array(t_uint256)dyn_storage"
+        }
+      ],
+      "numberOfBytes": "64"
+    },
+    "t_uint256": {
+      "encoding": "inplace",
+      "label": "uint256",
+      "numberOfBytes": "32"
+    },
+    "t_uint8": {
+      "encoding": "inplace",
+      "label": "uint8",
+      "numberOfBytes": "1"
+    }
+  }
+}
