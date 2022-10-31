@@ -1,7 +1,7 @@
 {
   "storage": [
     {
-      "astId": 3799,
+      "astId": 3568,
       "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
       "label": "_initialized",
       "offset": 0,
@@ -9,7 +9,7 @@
       "type": "t_uint8"
     },
     {
-      "astId": 3802,
+      "astId": 3571,
       "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
       "label": "_initializing",
       "offset": 1,
@@ -102,7 +102,7 @@
       "label": "_delegateCheckpoints",
       "offset": 0,
       "slot": "204",
-      "type": "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage))"
+      "type": "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3724_storage))"
     },
     {
       "astId": 4788,
@@ -110,7 +110,7 @@
       "label": "_totalCheckpoints",
       "offset": 0,
       "slot": "205",
-      "type": "t_struct(History)3575_storage"
+      "type": "t_struct(History)3724_storage"
     },
     {
       "astId": 4793,
@@ -191,8 +191,8 @@
       "label": "address",
       "numberOfBytes": "20"
     },
-    "t_array(t_struct(Checkpoint)3570_storage)dyn_storage": {
-      "base": "t_struct(Checkpoint)3570_storage",
+    "t_array(t_struct(Checkpoint)3719_storage)dyn_storage": {
+      "base": "t_struct(Checkpoint)3719_storage",
       "encoding": "dynamic_array",
       "label": "struct CheckpointsUpgradeable.Checkpoint[]",
       "numberOfBytes": "32"
@@ -257,12 +257,12 @@
       "numberOfBytes": "32",
       "value": "t_mapping(t_address,t_bool)"
     },
-    "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage))": {
+    "t_mapping(t_address,t_mapping(t_bytes_memory_ptr,t_struct(History)3724_storage))": {
       "encoding": "mapping",
       "key": "t_address",
       "label": "mapping(address => mapping(bytes => struct CheckpointsUpgradeable.History))",
       "numberOfBytes": "32",
-      "value": "t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage)"
+      "value": "t_mapping(t_bytes_memory_ptr,t_struct(History)3724_storage)"
     },
     "t_mapping(t_address,t_struct(Counter)2985_storage)": {
       "encoding": "mapping",
@@ -285,12 +285,12 @@
       "numberOfBytes": "32",
       "value": "t_struct(RoleData)5332_storage"
     },
-    "t_mapping(t_bytes_memory_ptr,t_struct(History)3575_storage)": {
+    "t_mapping(t_bytes_memory_ptr,t_struct(History)3724_storage)": {
       "encoding": "mapping",
       "key": "t_bytes_memory_ptr",
       "label": "mapping(bytes => struct CheckpointsUpgradeable.History)",
       "numberOfBytes": "32",
-      "value": "t_struct(History)3575_storage"
+      "value": "t_struct(History)3724_storage"
     },
     "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
       "encoding": "mapping",
@@ -311,12 +311,12 @@
       "label": "string",
       "numberOfBytes": "32"
     },
-    "t_struct(Checkpoint)3570_storage": {
+    "t_struct(Checkpoint)3719_storage": {
       "encoding": "inplace",
       "label": "struct CheckpointsUpgradeable.Checkpoint",
       "members": [
         {
-          "astId": 3567,
+          "astId": 3716,
           "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
           "label": "_blockNumber",
           "offset": 0,
@@ -324,7 +324,7 @@
           "type": "t_uint32"
         },
         {
-          "astId": 3569,
+          "astId": 3718,
           "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
           "label": "_value",
           "offset": 4,
@@ -349,17 +349,17 @@
       ],
       "numberOfBytes": "32"
     },
-    "t_struct(History)3575_storage": {
+    "t_struct(History)3724_storage": {
       "encoding": "inplace",
       "label": "struct CheckpointsUpgradeable.History",
       "members": [
         {
-          "astId": 3574,
+          "astId": 3723,
           "contract": "/database/ethereum/mainnet/8c/8c61397ad374f1636a43e5aca45e51abe34616d8/logic.sol:EquityBadge",
           "label": "_checkpoints",
           "offset": 0,
           "slot": "0",
-          "type": "t_array(t_struct(Checkpoint)3570_storage)dyn_storage"
+          "type": "t_array(t_struct(Checkpoint)3719_storage)dyn_storage"
         }
       ],
       "numberOfBytes": "32"
